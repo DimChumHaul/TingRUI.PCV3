@@ -8,9 +8,8 @@
     
     <Application.Resources>
         <ResourceDictionary>
-            <vm:ViewModelLocator x:Key="Locator" 
-                           d:IsDataSource="True" 
-                           xmlns:vm="clr-namespace:PCChageTermialV3.TingRUI.ViewModel" />
+            <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" 
+                                 xmlns:vm="clr-namespace:PCChageTermialV3.TingRUI.ViewModel" />
         </ResourceDictionary>
     </Application.Resources>
     

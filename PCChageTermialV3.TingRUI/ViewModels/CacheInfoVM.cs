@@ -9,5 +9,11 @@ namespace PCChageTermialV3.TingRUI.ViewModels
 {
     class CacheInfoVM :ViewModelBase
     {
+        // CacheInfoVM的调用放到 主页视图中
+        // 硬件VM的调用放到App视图中
+        public CacheInfoVM()
+        {
+
+        }
     }
 }

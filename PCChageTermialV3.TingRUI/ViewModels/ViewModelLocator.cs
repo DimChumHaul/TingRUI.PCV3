@@ -34,11 +34,15 @@ namespace PCChageTermialV3.TingRUI.ViewModel
             // 注入类型到IoC容器 首页VM-ViewModel
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<ParkingInfoVM>();
+            SimpleIoc.Default.Register<CacheInfoVM>();
+            SimpleIoc.Default.Register<HardWareControlVM>();
         }
 
         public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
         public ParkingInfoVM SettingVM => ServiceLocator.Current.GetInstance<ParkingInfoVM>();
-        
+        public CacheInfoVM CacheVM => ServiceLocator.Current.GetInstance<CacheInfoVM>();
+        public HardWareControlVM HardwareVM => ServiceLocator.Current.GetInstance<HardWareControlVM>();
+
         public static void Cleanup()
         {
             // 应该在这里清理内存 VM和VM绑定的数据源 以防止内存泄漏

@@ -9,6 +9,10 @@ namespace PCChageTermialV3.TingRUI.ViewModels
 {
     internal class HardWareControlVM :ViewModelBase
     {
-
+        // 要被 ServiceLocator捕获 必须要有一个无参构造方法
+        public HardWareControlVM()
+        {
+            Console.WriteLine("*");
+        }
     }
 }
