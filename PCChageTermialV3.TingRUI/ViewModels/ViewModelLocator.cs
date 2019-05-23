@@ -14,6 +14,7 @@
 
 using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
+using PCChageTermialV3.TingRUI.ViewModels;
 
 namespace PCChageTermialV3.TingRUI.ViewModel
 {
@@ -21,7 +22,7 @@ namespace PCChageTermialV3.TingRUI.ViewModel
     /// This class contains static references to all the view models in the
     /// application and provides an entry point for the bindings.
     /// </summary>
-    public class ViewModelLocator
+    internal class ViewModelLocator
     {
         /// <summary>
         /// 初始化IoC容器类 ViewModelLocator 
@@ -32,9 +33,11 @@ namespace PCChageTermialV3.TingRUI.ViewModel
 
             // 注入类型到IoC容器 首页VM-ViewModel
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<ParkingInfoVM>();
         }
 
         public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
+        public ParkingInfoVM SettingVM => ServiceLocator.Current.GetInstance<ParkingInfoVM>();
         
         public static void Cleanup()
         {

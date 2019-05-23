@@ -15,7 +15,7 @@ namespace PCChageTermialV3.TingRUI.ViewModel
     /// See http://www.galasoft.ch/mvvm
     /// </para>
     /// </summary>
-    public class MainViewModel : ViewModelBase
+    internal class MainViewModel : ViewModelBase
     {
         public string AppInfo { get; set; } = string.Format(
             "1.{0} App开发始于{1}",

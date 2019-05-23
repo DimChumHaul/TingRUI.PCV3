@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Data.OfflineAPI.TingRUI
+namespace Offline.Data.TingRUI
 {
     public class OfflineDataHandler
     {

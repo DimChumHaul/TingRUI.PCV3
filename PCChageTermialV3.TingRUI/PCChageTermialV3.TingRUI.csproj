@@ -76,7 +76,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\CacheInfoVM.cs" />
+    <Compile Include="ViewModels\HardWareControlVM.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\ParkingInfoVM.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Page Include="ModelViews\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -119,9 +122,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Data.OfflineAPI.TingRUI\Data.OfflineAPI.TingRUI.csproj">
+    <ProjectReference Include="..\Data.OfflineAPI.TingRUI\Offline.Data.TingRUI.csproj">
       <Project>{447ea98b-3faa-412d-8e30-d31477599800}</Project>
-      <Name>Data.OfflineAPI.TingRUI</Name>
+      <Name>Offline.Data.TingRUI</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

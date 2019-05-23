@@ -7,8 +7,8 @@
     <ProjectGuid>{447EA98B-3FAA-412D-8E30-D31477599800}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Data.OfflineAPI.TingRUI</RootNamespace>
-    <AssemblyName>Data.OfflineAPI.TingRUI</AssemblyName>
+    <RootNamespace>Offline.Data.TingRUI</RootNamespace>
+    <AssemblyName>Offline.Data.TingRUI</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
