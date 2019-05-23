@@ -116,5 +116,10 @@
     <Folder Include="Models\" />
     <Folder Include="ModelViews\" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\IMG_9610.JPG" />
+    <Resource Include="Resources\《剑桥简明金庸武侠史》.jpg" />
+    <Resource Include="Resources\黑客&amp;画家1.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
