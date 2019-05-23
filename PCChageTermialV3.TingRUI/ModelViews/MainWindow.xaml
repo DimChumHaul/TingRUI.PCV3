@@ -18,14 +18,14 @@
         </Grid.RowDefinitions>
 
         <StackPanel x:Name="TopFuncSView" Orientation="Horizontal" 
-                    Grid.Row="0" Background="Snow"
+                    Grid.Row="0" Background="DarkCyan" Margin="0 1 0 2.5"
                     Height="Auto" Width="auto" />
         <!--计费+监控...功能模块-->
-        <ListBox Grid.Row="1" Background="Wheat"
+        <ListBox Grid.Row="1" Background="Wheat" Margin="0 1 0 2.5"
             ItemsSource="{Binding Path=AcceptModuels}" x:Name="FunctionListView">
         </ListBox>
 
-        <Grid Grid.Row="2" x:Name="DataDynamicView">
+        <Grid Grid.Row="2" x:Name="DataDynamicView" Margin="0 1 0 2.5">
             <Grid.Background>
                 <ImageBrush ImageSource="../Resources/黑客&amp;画家1.jpg" Stretch="UniformToFill"/>
             </Grid.Background>
@@ -34,7 +34,7 @@
                 <ColumnDefinition Width="8*" />
             </Grid.ColumnDefinitions>
 
-            <TreeView ItemsSource="{Binding Path=AcceptMenus}" Grid.Column="0">
+            <TreeView ItemsSource="{Binding Path=AcceptMenus}" Grid.Column="0" Background="IndianRed">
 
             </TreeView>
 

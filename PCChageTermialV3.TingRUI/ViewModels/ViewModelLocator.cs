@@ -24,13 +24,13 @@ namespace PCChageTermialV3.TingRUI.ViewModel
     public class ViewModelLocator
     {
         /// <summary>
-        /// Initializes a new instance of the ViewModelLocator class.
+        /// 初始化IoC容器类 ViewModelLocator 
         /// </summary>
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            // 注册首页 ViewModel
+            // 注入类型到IoC容器 首页VM-ViewModel
             SimpleIoc.Default.Register<MainViewModel>();
         }
 
