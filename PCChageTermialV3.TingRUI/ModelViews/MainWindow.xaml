@@ -10,7 +10,7 @@
         xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
         Title="{Binding Path=AppInfo}" Height="768" Width="1024" 
         WindowStartupLocation="CenterScreen" WindowState="Maximized" 
-        Cursor="Cross" AllowDrop="True" Tag="1000" Visibility="Visible" 
+        Cursor="Arrow" AllowDrop="True" Tag="1000" Visibility="Visible" 
         BorderThickness="2.5" Background="{x:Null}">
     
     <Grid x:Name="MainWinGView">

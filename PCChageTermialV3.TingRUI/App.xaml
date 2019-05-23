@@ -9,7 +9,7 @@
         <ResourceDictionary>
             <!-- MV* Register IoC Container -->
             <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:PCChageTermialV3.TingRUI.ViewModel" />
-            
+
             <!-- Metro merge the style files in *.xaml -->
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
@@ -18,9 +18,8 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            
+
         </ResourceDictionary>
-        
     </Application.Resources>
     
 </Application>
