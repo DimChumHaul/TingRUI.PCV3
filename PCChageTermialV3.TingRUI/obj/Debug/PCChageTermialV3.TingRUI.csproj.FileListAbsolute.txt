@@ -29,3 +29,8 @@ C:\Users\dingkang3\Desktop\PCChageTermialV3.TingRUI\PCChageTermialV3.TingRUI\obj
 C:\Users\dingkang3\Desktop\PCChageTermialV3.TingRUI\PCChageTermialV3.TingRUI\obj\Debug\PCChageTermialV3.TingRUI.pdb
 C:\Users\dingkang3\Desktop\PCChageTermialV3.TingRUI\PCChageTermialV3.TingRUI\bin\Debug\Offline.Data.TingRUI.dll
 C:\Users\dingkang3\Desktop\PCChageTermialV3.TingRUI\PCChageTermialV3.TingRUI\bin\Debug\Offline.Data.TingRUI.pdb
+C:\Users\dingkang3\Desktop\PCChageTermialV3.TingRUI\PCChageTermialV3.TingRUI\bin\Debug\ControlzEx.dll
+C:\Users\dingkang3\Desktop\PCChageTermialV3.TingRUI\PCChageTermialV3.TingRUI\bin\Debug\MahApps.Metro.dll
+C:\Users\dingkang3\Desktop\PCChageTermialV3.TingRUI\PCChageTermialV3.TingRUI\bin\Debug\ControlzEx.pdb
+C:\Users\dingkang3\Desktop\PCChageTermialV3.TingRUI\PCChageTermialV3.TingRUI\bin\Debug\MahApps.Metro.pdb
+C:\Users\dingkang3\Desktop\PCChageTermialV3.TingRUI\PCChageTermialV3.TingRUI\bin\Debug\MahApps.Metro.xml
