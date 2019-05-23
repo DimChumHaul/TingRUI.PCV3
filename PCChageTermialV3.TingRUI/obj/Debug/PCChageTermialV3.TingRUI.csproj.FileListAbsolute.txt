@@ -2,11 +2,9 @@ C:\Users\dingkang3\Desktop\PCChageTermialV3.TingRUI\PCChageTermialV3.TingRUI\bin
 C:\Users\dingkang3\Desktop\PCChageTermialV3.TingRUI\PCChageTermialV3.TingRUI\bin\Debug\PCChageTermialV3.TingRUI.exe
 C:\Users\dingkang3\Desktop\PCChageTermialV3.TingRUI\PCChageTermialV3.TingRUI\bin\Debug\PCChageTermialV3.TingRUI.pdb
 C:\Users\dingkang3\Desktop\PCChageTermialV3.TingRUI\PCChageTermialV3.TingRUI\obj\Debug\PCChageTermialV3.TingRUI.csprojAssemblyReference.cache
-C:\Users\dingkang3\Desktop\PCChageTermialV3.TingRUI\PCChageTermialV3.TingRUI\obj\Debug\MainWindow.g.cs
 C:\Users\dingkang3\Desktop\PCChageTermialV3.TingRUI\PCChageTermialV3.TingRUI\obj\Debug\App.g.cs
 C:\Users\dingkang3\Desktop\PCChageTermialV3.TingRUI\PCChageTermialV3.TingRUI\obj\Debug\PCChageTermialV3.TingRUI_MarkupCompile.cache
 C:\Users\dingkang3\Desktop\PCChageTermialV3.TingRUI\PCChageTermialV3.TingRUI\obj\Debug\PCChageTermialV3.TingRUI_MarkupCompile.lref
-C:\Users\dingkang3\Desktop\PCChageTermialV3.TingRUI\PCChageTermialV3.TingRUI\obj\Debug\MainWindow.baml
 C:\Users\dingkang3\Desktop\PCChageTermialV3.TingRUI\PCChageTermialV3.TingRUI\obj\Debug\PCChageTermialV3.TingRUI.g.resources
 C:\Users\dingkang3\Desktop\PCChageTermialV3.TingRUI\PCChageTermialV3.TingRUI\obj\Debug\PCChageTermialV3.TingRUI.Properties.Resources.resources
 C:\Users\dingkang3\Desktop\PCChageTermialV3.TingRUI\PCChageTermialV3.TingRUI\obj\Debug\PCChageTermialV3.TingRUI.csproj.GenerateResource.cache
@@ -27,3 +25,7 @@ C:\Users\dingkang3\Desktop\PCChageTermialV3.TingRUI\PCChageTermialV3.TingRUI\bin
 C:\Users\dingkang3\Desktop\PCChageTermialV3.TingRUI\PCChageTermialV3.TingRUI\bin\Debug\GalaSoft.MvvmLight.Platform.xml
 C:\Users\dingkang3\Desktop\PCChageTermialV3.TingRUI\PCChageTermialV3.TingRUI\obj\Debug\App.baml
 C:\Users\dingkang3\Desktop\PCChageTermialV3.TingRUI\PCChageTermialV3.TingRUI\obj\Debug\PCChageTermialV3.TingRUI.csproj.CopyComplete
+C:\Users\dingkang3\Desktop\PCChageTermialV3.TingRUI\PCChageTermialV3.TingRUI\obj\Debug\ModelViews\MainWindow.g.cs
+C:\Users\dingkang3\Desktop\PCChageTermialV3.TingRUI\PCChageTermialV3.TingRUI\obj\Debug\ModelViews\MainWindow.baml
+C:\Users\dingkang3\Desktop\PCChageTermialV3.TingRUI\PCChageTermialV3.TingRUI\bin\Debug\Data.OfflineAPI.TingRUI.dll
+C:\Users\dingkang3\Desktop\PCChageTermialV3.TingRUI\PCChageTermialV3.TingRUI\bin\Debug\Data.OfflineAPI.TingRUI.pdb

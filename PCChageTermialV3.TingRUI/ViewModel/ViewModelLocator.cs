@@ -30,20 +30,15 @@ namespace PCChageTermialV3.TingRUI.ViewModel
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
+            // 注册首页 ViewModel
             SimpleIoc.Default.Register<MainViewModel>();
         }
 
-        public MainViewModel Main
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<MainViewModel>();
-            }
-        }
+        public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
         
         public static void Cleanup()
         {
-
+            // 应该在这里清理内存 VM和VM绑定的数据源 以防止内存泄漏
         }
     }
 }

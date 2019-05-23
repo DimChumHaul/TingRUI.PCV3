@@ -1,0 +1,48 @@
+﻿<Window x:Class="PCChageTermialV3.TingRUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PCChageTermialV3.TingRUI"
+        mc:Ignorable="d" x:Name="WinMain"
+        DataContext="{Binding Source={StaticResource Locator},Path=Main}"
+        Title="{Binding Path=AppInfo}" Height="768" Width="1024" WindowStartupLocation="CenterScreen" WindowState="Maximized" Cursor="Cross" AllowDrop="True" Tag="1000" Visibility="Visible" BorderThickness="2.5" Background="{x:Null}">
+    
+    <Grid x:Name="MainWinGView">
+        <!--首页不设置列定义 全部用1列N行 行内再嵌入复杂布局-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="8*" />
+            <RowDefinition Height="32" />
+        </Grid.RowDefinitions>
+
+        <StackPanel x:Name="TopFuncSView" Orientation="Horizontal" 
+                    Grid.Row="0" Background="Snow"
+                    Height="Auto" Width="auto" />
+        <!--计费+监控...功能模块-->
+        <ListBox Grid.Row="1" Background="Wheat"
+            ItemsSource="{Binding Path=AcceptModuels}" x:Name="FunctionListView">
+        </ListBox>
+
+        <Grid Grid.Row="2" x:Name="DataDynamicView">
+            <Grid.Background>
+                <ImageBrush ImageSource="../Resources/黑客&amp;画家1.jpg" Stretch="UniformToFill"/>
+            </Grid.Background>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="8*" />
+            </Grid.ColumnDefinitions>
+
+            <TreeView ItemsSource="{Binding Path=AcceptMenus}" Grid.Column="0">
+
+            </TreeView>
+
+            <Label Grid.Column="1" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Content="{Binding Path=AppInfo}" />
+        </Grid>
+
+        <Label Background="CornflowerBlue" Grid.Row="3" 
+               Width="{Binding ElementName=WinMain,Path=Width}"
+               Content="底部实时状态栏" HorizontalAlignment="Left" />
+    </Grid>
+</Window>
