@@ -49,11 +49,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="OfflineDataHandler.cs" />
+    <Compile Include="Models\DataTemplate\FuncBtnModel.cs" />
+    <Compile Include="Models\DataTemplate\FuncMenuModel.cs" />
+    <Compile Include="Models\WpfCtrlBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
+    <ProjectReference Include="..\Lib\Utils\ServiceStack.Text\ServiceStack.Text.csproj">
+      <Project>{5c735fb3-5458-45cd-b065-bb188877d4f9}</Project>
+      <Name>ServiceStack.Text</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AppSetting.json" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -4,7 +4,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PCChageTermialV3.TingRUI"
+        xmlns:Data="clr-namespace:Offline.Data.TingRUI.Models.DataTemplate;assembly=Offline.Data.TingRUI"
+        xmlns:SVG ="http://metro.mahapps.com/winfx/xaml/iconpacks"    
         mc:Ignorable="d" x:Name="WinMain"
         DataContext="{Binding Source={StaticResource Locator},Path=Main}"
         xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
@@ -13,41 +14,63 @@
         Cursor="Arrow" AllowDrop="True" Tag="1000" Visibility="Visible" 
         BorderThickness="2.5" Background="{x:Null}">
     
+    <Controls:MetroWindow.Resources>
+        <Thickness x:Key="InnerBannerMargin">2.5 1 2.5 5</Thickness>
+        <Style x:Key="ListFuncBtnStyle" TargetType="ListBox">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <StackPanel Orientation="Horizontal" IsItemsHost="True" Margin="2.5 0 5 0" Background="Snow"
+                                   CanVerticallyScroll="True" CanHorizontallyScroll="False" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="LightGray" />
+            <Setter Property="FontSize" Value="18"/>
+        </Style>
+        <DataTemplate DataType="{x:Type Data:FuncBtnModel}">
+            <Controls:DropDownButton Name="Setting" Margin="5"
+                                     Content="{Binding Path=Title}"
+                                     DisplayMemberPath="{Binding Path=OrderIndex}"
+                                     Orientation="Vertical">
+                <Controls:DropDownButton.Icon>
+                    <SVG:PackIconModern Margin="5" Kind="{Binding Path=SVGImage}" MinWidth="32" MinHeight="32"/>
+                </Controls:DropDownButton.Icon>
+            </Controls:DropDownButton>
+        </DataTemplate>
+    </Controls:MetroWindow.Resources>
+    
     <Grid x:Name="MainWinGView">
         <!--首页不设置列定义 全部用1列N行 行内再嵌入复杂布局-->
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.5*" />
-            <RowDefinition Height="1*" />
+            <RowDefinition Height="1.25*" />
             <RowDefinition Height="8*" />
             <RowDefinition Height="32" />
         </Grid.RowDefinitions>
-
-        <StackPanel x:Name="TopFuncSView" Orientation="Horizontal" 
-                    Grid.Row="0" Background="DarkCyan" Margin="0 1 0 2.5"
-                    Height="Auto" Width="auto" />
+        
         <!--计费+监控...功能模块-->
-        <ListBox Grid.Row="1" Background="Wheat" Margin="0 1 0 2.5"
-            ItemsSource="{Binding Path=AcceptModuels}" x:Name="FunctionListView">
-        </ListBox>
+        <ListBox x:Name="FunctionListView" Grid.Row="0" Style="{StaticResource ListFuncBtnStyle}"
+                 Background="Wheat" Margin="{StaticResource InnerBannerMargin}" 
+                 ItemsSource="{Binding Path=AcceptModuels}" />
 
-        <Grid Grid.Row="2" x:Name="DataDynamicView" Margin="0 1 0 2.5">
+        <Grid Grid.Row="1" x:Name="DataDynamicView" Margin="{StaticResource InnerBannerMargin}">
             <Grid.Background>
                 <ImageBrush ImageSource="../Resources/黑客&amp;画家1.jpg" Stretch="UniformToFill"/>
             </Grid.Background>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1.75*" />
                 <ColumnDefinition Width="8*" />
             </Grid.ColumnDefinitions>
-
-            <TreeView ItemsSource="{Binding Path=AcceptMenus}" Grid.Column="0" Background="IndianRed">
-
-            </TreeView>
-
+            <TreeView ItemsSource="{Binding Path=AcceptMenus}" Grid.Column="0" Background="Crimson" />
             <Label Grid.Column="1" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Content="{Binding Path=AppInfo}" />
         </Grid>
 
-        <Label Background="CornflowerBlue" Grid.Row="3" 
-               Width="{Binding ElementName=WinMain,Path=Width}"
-               Content="底部实时状态栏" HorizontalAlignment="Left" />
+        <StatusBar Grid.Row="2">
+            <StatusBarItem>底部实时状态栏</StatusBarItem>
+            <Separator Style="{StaticResource MetroStatusBarSeparator}" />
+            <StatusBarItem>Selected Tab:</StatusBarItem>
+            <StatusBarItem Content="{Binding ElementName=MainTabControl, Path=SelectedItem.Header, Mode=OneWay}" />
+        </StatusBar>
+        
     </Grid>
 </Controls:MetroWindow>

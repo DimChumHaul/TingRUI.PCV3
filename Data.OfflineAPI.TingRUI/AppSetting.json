@@ -1,0 +1,14 @@
+{
+  "exclude": [
+    "**/bin",
+    "**/bower_components",
+    "**/jspm_packages",
+    "**/node_modules",
+    "**/obj",
+    "**/platforms"
+  ],
+  "InitialInfo": {
+    "ICONImages_Prefix_Name": "AcceptModuels-",
+    "Resources_Version": "0.2.3.1"
+  }
+}
