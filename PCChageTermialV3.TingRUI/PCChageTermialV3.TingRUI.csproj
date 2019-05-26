@@ -141,9 +141,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\IMG_9610.JPG" />
-    <Resource Include="Resources\《剑桥简明金庸武侠史》.jpg" />
-    <Resource Include="Resources\黑客&amp;画家1.jpg" />
+    <Resource Include="Resources\MainBg2-TonyStark.JPG" />
+    <Resource Include="Resources\MainBg1.jpg" />
+    <Resource Include="Resources\MainBg3-Programer.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

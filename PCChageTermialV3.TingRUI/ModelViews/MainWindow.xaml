@@ -13,26 +13,25 @@
         WindowStartupLocation="CenterScreen" WindowState="Maximized" 
         Cursor="Arrow" AllowDrop="True" Tag="1000" Visibility="Visible" 
         BorderThickness="2.5" Background="{x:Null}">
-    
     <Controls:MetroWindow.Resources>
         <Thickness x:Key="InnerBannerMargin">2.5 1 2.5 5</Thickness>
-        <Style x:Key="ListFuncBtnStyle" TargetType="ListBox">
+        <Style TargetType="ListBox" x:Key="TopListStyle">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate>
-                        <StackPanel Orientation="Horizontal" IsItemsHost="True" Margin="2.5 0 5 0" Background="Snow"
-                                   CanVerticallyScroll="True" CanHorizontallyScroll="False" />
+                        <WrapPanel Orientation="Horizontal" FlowDirection="LeftToRight" 
+                                   IsItemsHost="True" Margin="1" Background="Snow">
+                        </WrapPanel>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
             <Setter Property="Background" Value="LightGray" />
             <Setter Property="FontSize" Value="18"/>
         </Style>
-        <DataTemplate DataType="{x:Type Data:FuncBtnModel}">
-            <Controls:DropDownButton Name="Setting" Margin="5"
-                                     Content="{Binding Path=Title}"
-                                     DisplayMemberPath="{Binding Path=OrderIndex}"
-                                     Orientation="Vertical">
+        
+        <DataTemplate DataType="{x:Type Data:FuncBtnModel}"> 
+            <Controls:DropDownButton Name="Setting" Margin="5" Content="{Binding Path=Title}" 
+                                     Orientation="Vertical" DisplayMemberPath="{Binding Path=OrderIndex}">
                 <Controls:DropDownButton.Icon>
                     <SVG:PackIconModern Margin="5" Kind="{Binding Path=SVGImage}" MinWidth="32" MinHeight="32"/>
                 </Controls:DropDownButton.Icon>
@@ -43,26 +42,24 @@
     <Grid x:Name="MainWinGView">
         <!--首页不设置列定义 全部用1列N行 行内再嵌入复杂布局-->
         <Grid.RowDefinitions>
-            <RowDefinition Height="1.25*" />
-            <RowDefinition Height="8*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="6.18*" />
             <RowDefinition Height="32" />
         </Grid.RowDefinitions>
         
         <!--计费+监控...功能模块-->
-        <ListBox x:Name="FunctionListView" Grid.Row="0" Style="{StaticResource ListFuncBtnStyle}"
-                 Background="Wheat" Margin="{StaticResource InnerBannerMargin}" 
-                 ItemsSource="{Binding Path=AcceptModuels}" />
+        <ListBox Style="{StaticResource TopListStyle}" ItemsSource="{Binding Path=AcceptModuels}" />
 
         <Grid Grid.Row="1" x:Name="DataDynamicView" Margin="{StaticResource InnerBannerMargin}">
             <Grid.Background>
-                <ImageBrush ImageSource="../Resources/黑客&amp;画家1.jpg" Stretch="UniformToFill"/>
+                <ImageBrush ImageSource="{Binding Path=TodaysBackImage,Mode=OneWay}" Stretch="UniformToFill"/>
             </Grid.Background>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1.75*" />
                 <ColumnDefinition Width="8*" />
             </Grid.ColumnDefinitions>
             <TreeView ItemsSource="{Binding Path=AcceptMenus}" Grid.Column="0" Background="Crimson" />
-            <Label Grid.Column="1" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Content="{Binding Path=AppInfo}" />
+            <Label Grid.Column="1" Content="{Binding Path=AppInfo}" Foreground="Snow" />
         </Grid>
 
         <StatusBar Grid.Row="2">

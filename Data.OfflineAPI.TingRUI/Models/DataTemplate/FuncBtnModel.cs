@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Offline.Data.TingRUI.Models.DataTemplate
 {
     // 功能按钮抽象出来的底层数据模型
-    public class FuncBtnModel :WpfUI
+    public class FuncBtnModel : WpfUI
     {
         public bool IsOfflineSupport { get; } = false;
         public string RemoteImage { get; set; }
@@ -33,7 +33,7 @@ namespace Offline.Data.TingRUI.Models.DataTemplate
                 new { Name = "部门管理", SvgIcon = "BatteryCharging"  },
                 new { Name = "用户管理", SvgIcon = "BookContact"  },
                 new { Name = "车辆管理", SvgIcon = "BrowserChrome"  },
-                new { Name ="|",SvgIcon = "." },
+                //new { Name ="|",SvgIcon = "." },
                 new { Name = "操作员管理", SvgIcon = "CalendarYear"  },
                 new { Name = "实时监控", SvgIcon = "Camera"  },
                 new { Name = "数据库备份", SvgIcon = "ConnectionWifiVariant"  },
