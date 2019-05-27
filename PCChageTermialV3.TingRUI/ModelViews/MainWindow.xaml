@@ -12,9 +12,14 @@
         Title="{Binding Path=AppInfo}" Height="768" Width="1024" 
         WindowStartupLocation="CenterScreen" WindowState="Maximized" 
         Cursor="Arrow" AllowDrop="True" Tag="1000" Visibility="Visible" 
+        xmlns:MvvmLight="http://www.galasoft.ch/mvvmlight"
+        xmlns:I="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         BorderThickness="2.5" Background="{x:Null}">
+<!--为了使用MVVMLight中 EventToCommand-[事件转命令] 功能。-->
+    
     <Controls:MetroWindow.Resources>
         <Thickness x:Key="InnerBannerMargin">2.5 1 2.5 5</Thickness>
+        
         <Style TargetType="ListBox" x:Key="TopListStyle">
             <Setter Property="Template">
                 <Setter.Value>
@@ -30,11 +35,33 @@
         </Style>
         
         <DataTemplate DataType="{x:Type Data:FuncBtnModel}"> 
-            <Controls:DropDownButton Name="Setting" Margin="5" Content="{Binding Path=Title}" 
-                                     Orientation="Vertical" DisplayMemberPath="{Binding Path=OrderIndex}">
+            <Controls:DropDownButton Name="Setting" 
+                                     Margin="5" 
+                                     Content="{Binding Path=Title}"
+                                     Orientation="Vertical" 
+                                     DisplayMemberPath="{Binding Path=OrderIndex}">
+                <!--命令的ICON图标-->
                 <Controls:DropDownButton.Icon>
                     <SVG:PackIconModern Margin="5" Kind="{Binding Path=SVGImage}" MinWidth="32" MinHeight="32"/>
                 </Controls:DropDownButton.Icon>
+
+                <I:Interaction.Triggers>
+                    <I:EventTrigger EventName="Click">
+                        <MvvmLight:EventToCommand 
+                            Command="{Binding DataContext.FuncModuleCMD,
+                            RelativeSource=
+                            {RelativeSource Mode=FindAncestor,AncestorType=ListBox}}" />
+                    </I:EventTrigger>
+                    
+                    <!-- 1.多触发器 2.参数的传递 是底层DataModel -->
+                    <I:EventTrigger EventName="MouseEnter">
+                        <MvvmLight:EventToCommand 
+                            Command="{Binding ChangeBgColorCMD,
+                            RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=ListBox}}" 
+                            CommandParameter="{Binding ElementName=TopView,Path=SelectedItem}" />
+                    </I:EventTrigger>
+                </I:Interaction.Triggers>
+                
             </Controls:DropDownButton>
         </DataTemplate>
     </Controls:MetroWindow.Resources>
@@ -42,13 +69,15 @@
     <Grid x:Name="MainWinGView">
         <!--首页不设置列定义 全部用1列N行 行内再嵌入复杂布局-->
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="6.18*" />
             <RowDefinition Height="32" />
         </Grid.RowDefinitions>
-        
+
         <!--计费+监控...功能模块-->
-        <ListBox Style="{StaticResource TopListStyle}" ItemsSource="{Binding Path=AcceptModuels}" />
+        <ListBox Style="{StaticResource TopListStyle}"
+                 ItemsSource="{Binding Path=AcceptModuels}"
+                 Name="TopView" />
 
         <Grid Grid.Row="1" x:Name="DataDynamicView" Margin="{StaticResource InnerBannerMargin}">
             <Grid.Background>
@@ -58,8 +87,15 @@
                 <ColumnDefinition Width="1.75*" />
                 <ColumnDefinition Width="8*" />
             </Grid.ColumnDefinitions>
-            <TreeView ItemsSource="{Binding Path=AcceptMenus}" Grid.Column="0" Background="Crimson" />
-            <Label Grid.Column="1" Content="{Binding Path=AppInfo}" Foreground="Snow" />
+            
+            <TreeView ItemsSource="{Binding Path=AcceptMenus}" Grid.Column="0" Background="#FF16773D" />
+            
+            <Label Grid.Column="1" VerticalAlignment="Top" Content="{
+                Binding AppInfo, Mode=TwoWay,ValidatesOnDataErrors=True,
+                          UpdateSourceTrigger=PropertyChanged,
+                          NotifyOnValidationError=True}"
+                     Controls:TextBoxHelper.Watermark="Number smaller than 18" Width="Auto" Height="84">
+            </Label>
         </Grid>
 
         <StatusBar Grid.Row="2">
@@ -70,4 +106,5 @@
         </StatusBar>
         
     </Grid>
+    
 </Controls:MetroWindow>

@@ -44,6 +44,7 @@ namespace Offline.Data.TingRUI.Models.DataTemplate
         public static IEnumerable<FuncBtnModel> FakeData()
         {
             var data = new List<FuncBtnModel>();
+
             // <iconPacks:PackIconModern Kind="Marketplace" />
             /* 动态配置主界面顶部【操作员功能模块】 */
             var AcceptModuels = new List<dynamic> {
@@ -53,7 +54,7 @@ namespace Offline.Data.TingRUI.Models.DataTemplate
                 new { Name = "部门管理", SvgIcon = "BatteryCharging"  },
                 new { Name = "用户管理", SvgIcon = "BookContact"  },
                 new { Name = "车辆管理", SvgIcon = "BrowserChrome"  },
-                //new { Name ="|",SvgIcon = "." },
+                new { Name ="|",SvgIcon = "." },
                 new { Name = "操作员管理", SvgIcon = "CalendarYear"  },
                 new { Name = "实时监控", SvgIcon = "Camera"  },
                 new { Name = "数据库备份", SvgIcon = "ConnectionWifiVariant"  },

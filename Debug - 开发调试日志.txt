@@ -1,0 +1,5 @@
+【WPF】Listbox模板内button点击选中当前listboxItem按钮不能点击的问题
+
+源：stackoverflow
+--Listbox模板内按钮点击命令指定到挡墙vm内命令
+Command="{Binding DataContext.PlusCmd,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}}"

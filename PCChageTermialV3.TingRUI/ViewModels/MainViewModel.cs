@@ -4,12 +4,16 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using GalaSoft.MvvmLight.Command;
+using MahApps.Metro.Controls;
+using ServiceStack;
+using System;
+using System.Windows;
+using System.Windows.Input;
+using System.Windows.Media;
 
 namespace PCChageTermialV3.TingRUI.ViewModel
 {
-    using ServiceStack;
-    using System;
-
     /// <summary>
     /// This class contains properties that the main View can data bind to.
     /// <para>
@@ -24,15 +28,18 @@ namespace PCChageTermialV3.TingRUI.ViewModel
     /// </summary>
     internal class MainViewModel : ViewModelBase
     {
-        public string AppInfo { get; set; } = string.Format(
-            "1.{0} App开发始于{1}",  App.AppDescription, App.StartAt.ToLongDateString()
+        public string AppInfo { get; set; } = string.Format("1.{0} App开发始于{1}",
+            App.AppDescription,
+            App.StartAt.ToLongDateString()
         );
+
         public string TodaysBackImage { get; } = AutoImageSelector();
 
         public ObservableCollection<FuncBtnModel> AcceptModuels { get; set; }
 
         /* 动态配置主界面左边系 【统菜单栏】 */
-        public ObservableCollection<FuncMenuModel> AcceptMenus { get; set; } = new ObservableCollection<FuncMenuModel>();
+        public ObservableCollection<FuncMenuModel> AcceptMenus { get; set; }
+            = new ObservableCollection<FuncMenuModel>();
 
         /// <summary>
         /// 初始化一个 VM实体 继承自 ViewModelBase MvvmLight框架基类
@@ -48,11 +55,20 @@ namespace PCChageTermialV3.TingRUI.ViewModel
                 menus.ToList().ForEach(item => AcceptMenus.Add(item));
                 return AcceptModuels.Count + AcceptMenus.Count;
             }
+
             // 初始化功能按钮 从配置读取支持的功能按钮
             Initial_App_Moduels();
+
+            FuncModuleCMD = new RelayCommand(() =>
+            {
+                MessageBox.Show("测试【事件转命令】成功...");
+            });
+
+            ChangeBgColorCMD = new RelayCommand<Object>( Idx => {
+                App.Current.MainWindow.Background = Brushes.Yellow;
+            });
         }
 
-        // 
         private static string AutoImageSelector()
         {
             var JpgFile = string.Empty;
@@ -76,5 +92,10 @@ namespace PCChageTermialV3.TingRUI.ViewModel
             var Resource_Dir_File = Path.Combine("~/".MapProjectPath(),$"/Resources/{JpgFile}");
             return Resource_Dir_File;
         }
+
+        #region  WPF事件转命令
+        public RelayCommand FuncModuleCMD { get; set; }
+        public RelayCommand<Object> ChangeBgColorCMD { get; set; }
+        #endregion
     }
 }
