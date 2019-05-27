@@ -78,3 +78,11 @@ C:\Users\DimChumHaul\Desktop\PCChageTermialV3.TingRUI\PCChageTermialV3.TingRUI\b
 C:\Users\DimChumHaul\Desktop\PCChageTermialV3.TingRUI\PCChageTermialV3.TingRUI\bin\Debug\MahApps.Metro.IconPacks.dll
 C:\Users\DimChumHaul\Desktop\PCChageTermialV3.TingRUI\PCChageTermialV3.TingRUI\bin\Debug\MahApps.Metro.IconPacks.pdb
 C:\Users\DimChumHaul\Desktop\PCChageTermialV3.TingRUI\PCChageTermialV3.TingRUI\bin\Debug\MahApps.Metro.IconPacks.xml
+C:\Users\dingkang3\Desktop\PCChageTermialV3.TingRUI\PCChageTermialV3.TingRUI\bin\Debug\MahApps.Metro.IconPacks.dll
+C:\Users\dingkang3\Desktop\PCChageTermialV3.TingRUI\PCChageTermialV3.TingRUI\bin\Debug\ServiceStack.Text.dll
+C:\Users\dingkang3\Desktop\PCChageTermialV3.TingRUI\PCChageTermialV3.TingRUI\bin\Debug\System.Memory.dll
+C:\Users\dingkang3\Desktop\PCChageTermialV3.TingRUI\PCChageTermialV3.TingRUI\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\dingkang3\Desktop\PCChageTermialV3.TingRUI\PCChageTermialV3.TingRUI\bin\Debug\System.Buffers.dll
+C:\Users\dingkang3\Desktop\PCChageTermialV3.TingRUI\PCChageTermialV3.TingRUI\bin\Debug\ServiceStack.Text.pdb
+C:\Users\dingkang3\Desktop\PCChageTermialV3.TingRUI\PCChageTermialV3.TingRUI\bin\Debug\MahApps.Metro.IconPacks.pdb
+C:\Users\dingkang3\Desktop\PCChageTermialV3.TingRUI\PCChageTermialV3.TingRUI\bin\Debug\MahApps.Metro.IconPacks.xml

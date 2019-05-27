@@ -10,15 +10,35 @@ namespace Offline.Data.TingRUI.Models.DataTemplate
     // 功能按钮抽象出来的底层数据模型
     public class FuncBtnModel : WpfUI
     {
-        public bool IsOfflineSupport { get; } = false;
+        public Int32 OrderIndex { get; set; } = -1;
         public string RemoteImage { get; set; }
-        public int OrderIndex { get; set; } = 0;
-        public string URILocator { get; set; } = "/WPF/V1/MvvMLight/Page/2/CreateOrder/New";
-        public bool IsSizeSharedScope = true;
+        public string URILocator { get; set; } = "/TingRUI/PCWin32/WSAPI/V1/MvvMLight/Button4";
+        public bool IsOfflineSupport { get; } = false;
 
         public override string ToString()
         {
             return this.ToSafeJson();
+        }
+
+        public FuncBtnModel(string ModuleName , int orderIndex = -1)
+        {
+            URILocator = URILocator.TrimEnd('/');
+            ModuleName = ModuleName.TrimEnd('/',';');
+
+            if (!string.IsNullOrEmpty(this.ToJson()))
+            {
+                var commandURI = $"{URILocator}/{ModuleName}";
+
+                // 判断 模块功能URI是否格式正确
+                var code = commandURI.LastRightPart('/');
+                if (string.IsNullOrWhiteSpace(code))
+                    throw new NotImplementedException("模块Uri格式错误或功能缺失");
+                else
+                {
+                    OrderIndex = orderIndex;
+                    URILocator = commandURI;
+                }
+            }
         }
 
         public static IEnumerable<FuncBtnModel> FakeData()
@@ -43,12 +63,10 @@ namespace Offline.Data.TingRUI.Models.DataTemplate
             };
             for (int i = 0; i < AcceptModuels.Count; i++)
             {
-                var row = new FuncBtnModel
+                var row = new FuncBtnModel(AcceptModuels[i].Name, i+1)
                 {
                     Title = AcceptModuels.ElementAt(i).Name,
-                    OrderIndex = i,
                     SVGImage = AcceptModuels[i].SvgIcon,
-                    IsSizeSharedScope = i % 2 == 0,
                 };
                 data.Add(row);
             }
