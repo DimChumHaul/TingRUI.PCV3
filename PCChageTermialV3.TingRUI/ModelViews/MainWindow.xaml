@@ -78,11 +78,11 @@
         </Grid.RowDefinitions>
 
         <!--计费+监控...功能模块-->
-        <ListBox Style="{StaticResource TopListStyle}"
+        <ListBox Grid.Row="1" Style="{StaticResource TopListStyle}"
                  ItemsSource="{Binding Path=AcceptModuels}"
                  Name="TopView" />
-
-        <Grid Grid.Row="1" x:Name="DataDynamicView" Margin="{StaticResource InnerBannerMargin}">
+          
+        <Grid x:Name="DataDynamicView" Grid.Row="0" Margin="{StaticResource InnerBannerMargin}">
             <Grid.Background>
                 <ImageBrush ImageSource="{Binding Path=TodaysBackImage,Mode=OneWay}" Stretch="UniformToFill"/>
             </Grid.Background>
@@ -91,8 +91,8 @@
                 <ColumnDefinition Width="8*" />
             </Grid.ColumnDefinitions>
 
-
-            <TreeView BorderThickness="5" BorderBrush="Red" FontSize="24" Foreground="Red" Margin="10"
+            <TreeView Name="ViewX" 
+                      BorderThickness="5" BorderBrush="Red" FontSize="24" Foreground="Red" Margin="10"
                       ItemsSource="{Binding AcceptMenus}"
                       Style="{StaticResource VirtualisedMetroTreeView}">
                 <TreeView.ItemTemplate>
