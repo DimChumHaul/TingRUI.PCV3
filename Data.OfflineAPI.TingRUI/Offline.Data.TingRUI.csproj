@@ -55,9 +55,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lib\Utils\ServiceStack.Text\ServiceStack.Text.csproj">
+    <ProjectReference Include="..\Lib\Utils\ServiceStack.Text\Text-V5.5.0.csproj">
       <Project>{5c735fb3-5458-45cd-b065-bb188877d4f9}</Project>
-      <Name>ServiceStack.Text</Name>
+      <Name>Text-V5.5.0</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

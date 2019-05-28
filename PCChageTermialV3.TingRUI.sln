@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28917.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PCChageTermialV3.TingRUI", "PCChageTermialV3.TingRUI\PCChageTermialV3.TingRUI.csproj", "{2BDA1800-82A7-4E30-BB1E-364E5E67994D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PCChargeTermialV3.TingRUI", "PCChageTermialV3.TingRUI\PCChargeTermialV3.TingRUI.csproj", "{2BDA1800-82A7-4E30-BB1E-364E5E67994D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Offline.Data.TingRUI", "Data.OfflineAPI.TingRUI\Offline.Data.TingRUI.csproj", "{447EA98B-3FAA-412D-8E30-D31477599800}"
 EndProject
@@ -15,9 +15,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utils", "Utils", "{A49A1CC3
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{A7DE640B-254A-4742-8F0E-E0E929361CB0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceStack.Text", "Lib\Utils\ServiceStack.Text\ServiceStack.Text.csproj", "{5C735FB3-5458-45CD-B065-BB188877D4F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Text-V5.5.0", "Lib\Utils\ServiceStack.Text\Text-V5.5.0.csproj", "{5C735FB3-5458-45CD-B065-BB188877D4F9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{E86DAA9E-C29E-477E-B0D0-BBCAD36B1F52}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E71BBFF0-DFF1-483B-B1E5-5ADB69B4904F}"
+	ProjectSection(SolutionItems) = preProject
+		README.Text-v5.4.zh-CN.md = README.Text-v5.4.zh-CN.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrmLite-V5.5.0", "Lib\Orm\ServiceStack.OrmLite-V5.5\OrmLite-V5.5.0.csproj", "{3F3D7F2F-6FF9-4277-8B2B-3AB0E327750F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +44,10 @@ Global
 		{5C735FB3-5458-45CD-B065-BB188877D4F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C735FB3-5458-45CD-B065-BB188877D4F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C735FB3-5458-45CD-B065-BB188877D4F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F3D7F2F-6FF9-4277-8B2B-3AB0E327750F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F3D7F2F-6FF9-4277-8B2B-3AB0E327750F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F3D7F2F-6FF9-4277-8B2B-3AB0E327750F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F3D7F2F-6FF9-4277-8B2B-3AB0E327750F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -47,6 +58,7 @@ Global
 		{A7DE640B-254A-4742-8F0E-E0E929361CB0} = {3F026776-9E7A-41CA-A128-D24EB80644FC}
 		{5C735FB3-5458-45CD-B065-BB188877D4F9} = {A49A1CC3-8FBE-4CA9-883A-7A2AE630EBD7}
 		{E86DAA9E-C29E-477E-B0D0-BBCAD36B1F52} = {3F026776-9E7A-41CA-A128-D24EB80644FC}
+		{3F3D7F2F-6FF9-4277-8B2B-3AB0E327750F} = {A7DE640B-254A-4742-8F0E-E0E929361CB0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7B6FDBE9-5258-441A-A555-4D0306997B46}
