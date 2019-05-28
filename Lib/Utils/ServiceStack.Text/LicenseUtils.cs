@@ -494,7 +494,7 @@ namespace ServiceStack
 
         public static LicenseKey VerifyLicenseKeyText(string licenseKeyText)
         {
-#if NET45 || NETCORE2_1
+#if NET461 || NETCORE2_1
             LicenseKey key;
             try
             {
@@ -514,7 +514,7 @@ namespace ServiceStack
         
         private static void FromXml(this System.Security.Cryptography.RSA rsa, string xml)
         {
-#if NET45
+#if NET461
             rsa.FromXmlString(xml);
 #else
             //throws PlatformNotSupportedException

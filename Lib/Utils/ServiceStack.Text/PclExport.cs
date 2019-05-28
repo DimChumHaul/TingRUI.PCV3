@@ -27,7 +27,7 @@ namespace ServiceStack
         }
 
         public static PclExport Instance
-#if NET45
+#if NET461
           = new Net45PclExport()
 #elif NETCORE2_1
           = new NetCorePclExport()

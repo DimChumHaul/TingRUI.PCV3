@@ -6,7 +6,7 @@ using ServiceStack.Text;
 
 using System.Linq.Expressions;
 
-#if NET45 || NETSTANDARD2_0
+#if NET461 || NETSTANDARD2_0
 using System.Reflection.Emit;
 #endif
 
