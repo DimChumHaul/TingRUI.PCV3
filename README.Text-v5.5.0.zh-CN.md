@@ -25,11 +25,11 @@ run and explore all ServiceStack.Text features from the comfort of your browser 
 
 [![](https://raw.githubusercontent.com/ServiceStack/Assets/master/img/livedemos/gistlyn/home-screenshot.png)](http://gistlyn.com/text)
 
-## Simple API
+## 基础API
 
 Like most of the interfaces in ServiceStack, the API is simple. Methods that you would commonly use include:
 
-### Convenience Serialization Extension Methods
+### 快速序列化扩展函数
 
 ```csharp
 string ToJson(T)
@@ -45,7 +45,7 @@ string ToXml(T)
 T FromXml()
 ```
 
-### Explicit API
+### 隐式API
 
 #### JSON
 
@@ -90,14 +90,14 @@ T PrintDump()
 string Fmt(args)
 ```
 
-### Dynamic JSON parsing API
+### 序列化(动态类型)
 
 ```csharp
 JsonObject.Parse()
 JsonArrayObjects.Parse()
 ```
 
-### Pretty Print JSON
+### Pretty-JSON 美化
 
 You an format JSON into a more readable format with the `IndentJson()` extension method, e.g: 
 
@@ -118,7 +118,7 @@ string AddQueryParam() / SetQueryParam() AddHashParam() / SetHashParam()
 string WithoutExtension() / ParentDirectory() / ReadAllText()
 ```
     
-#### Stream Extensions:
+#### Stream 流媒体扩展函数:
 
 ```csharp
 Stream WriteTo(Stream) / CopyTo()
@@ -126,7 +126,7 @@ Stream ReadLines()
 Stream ReadFully() / ReadExactly()
 ```
     
-#### String Utils:
+#### 字符串工具类:
 
 ```csharp
 string SplitOnFirst() / SplitOnLast()
@@ -139,7 +139,7 @@ string LeftPart() / LastLeftPart() / RightPart() / LastRightPart()
     
 more String, Reflection, List, Dictionary, DateTime extensions...    
 
-### Supports Dynamic JSON
+### Text支持动态类型序列化 .NET Dynamic类
 
 Although usually used to (de)serialize C#/.NET POCO types, it also includes a flexible API allowing you to deserialize any 
 JSON payload without it's concrete type, see these real-world examples:
@@ -298,15 +298,15 @@ new []{ 1, 2, 3 }.ToJson()   //= [1,2,3]
 
 JSON is a lightweight text serialization format with a spec that's so simple that it fits on one page: [http://www.json.org](json.org).
 
-The only valid values in JSON are:
+标准Json等号右边的真值包含以下类型: 
 
-  * string
-  * number
-  * object
-  * array
-  * true
-  * false
-  * null
+  * 字符串：string
+  * 数值：number
+  * 对象：object
+  * 序列：array
+  * 布尔：true
+  * 布尔：false
+  * 空  ：null
 
 Where most allowed values are scalar and the only complex types available are objects and arrays. Although limited, the above set of types make a good fit and can express most programming data structures.
 

@@ -145,9 +145,6 @@
     <Resource Include="Resources\MainBg1.jpg" />
     <Resource Include="Resources\MainBg3-Programer.jpg" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ModelViews\Pages\" />
-    <Folder Include="ModelViews\UserCtrls\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -22,6 +22,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "文档", "文档", "{E71BBFF0-DFF1-483B-B1E5-5ADB69B4904F}"
 	ProjectSection(SolutionItems) = preProject
 		README.Text-v5.4.zh-CN.md = README.Text-v5.4.zh-CN.md
+		README.Text-v5.5.0.zh-CN.md = README.Text-v5.5.0.zh-CN.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrmLite-V5.5.0", "Lib\Orm\ServiceStack.OrmLite-V5.5\OrmLite-V5.5.0.csproj", "{3F3D7F2F-6FF9-4277-8B2B-3AB0E327750F}"

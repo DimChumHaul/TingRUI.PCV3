@@ -78,11 +78,11 @@
         </Grid.RowDefinitions>
 
         <!--计费+监控...功能模块-->
-        <ListBox Grid.Row="1" Style="{StaticResource TopListStyle}"
+        <ListBox Grid.Row="0" Style="{StaticResource TopListStyle}"
                  ItemsSource="{Binding Path=AcceptModuels}"
                  Name="TopView" />
           
-        <Grid x:Name="DataDynamicView" Grid.Row="0" Margin="{StaticResource InnerBannerMargin}">
+        <Grid x:Name="DataDynamicView" Grid.Row="1" Margin="{StaticResource InnerBannerMargin}">
             <Grid.Background>
                 <ImageBrush ImageSource="{Binding Path=TodaysBackImage,Mode=OneWay}" Stretch="UniformToFill"/>
             </Grid.Background>
