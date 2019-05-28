@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Offline.Data.TingRUI.Models.DataTemplate
+namespace TingRUI.Data.Models.DataTemplate
 {
     // 功能按钮抽象出来的底层数据模型
-    public class FuncBtnModel : WpfUI
+    public class FuncBtnModel : UIBase
     {
         public Int32 OrderIndex { get; set; } = -1;
         public string RemoteImage { get; set; }

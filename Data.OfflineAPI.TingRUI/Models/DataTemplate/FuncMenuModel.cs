@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Offline.Data.TingRUI.Models.DataTemplate
+namespace TingRUI.Data.Models.DataTemplate
 {
     public enum LeftBarUIType
     {
         SystemAdmin,UserAdmin,ParkingFactory,LiveMonitor,CrystalReports
     }
-    public class FuncMenuModel : WpfUI
+    public class FuncMenuModel : UIBase
     {
         public List<FuncBtnModel> MenuSublines { get; set; } = new List<FuncBtnModel>();
         public int SubCount { get; }

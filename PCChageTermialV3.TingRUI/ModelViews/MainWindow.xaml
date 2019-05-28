@@ -4,7 +4,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:Data="clr-namespace:Offline.Data.TingRUI.Models.DataTemplate;assembly=Offline.Data.TingRUI"
+        xmlns:Data="clr-namespace:TingRUI.Data.Models.DataTemplate;assembly=TingRUI.Data"
         xmlns:SVG ="http://metro.mahapps.com/winfx/xaml/iconpacks"    
         mc:Ignorable="d" x:Name="WinMain"
         DataContext="{Binding Source={StaticResource Locator},Path=Main}"

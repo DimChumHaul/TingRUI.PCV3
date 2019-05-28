@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.28917.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PCChargeTermialV3.TingRUI", "PCChageTermialV3.TingRUI\PCChargeTermialV3.TingRUI.csproj", "{2BDA1800-82A7-4E30-BB1E-364E5E67994D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Offline.Data.TingRUI", "Data.OfflineAPI.TingRUI\Offline.Data.TingRUI.csproj", "{447EA98B-3FAA-412D-8E30-D31477599800}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TingRUI.Data", "Data.OfflineAPI.TingRUI\TingRUI.Data.csproj", "{447EA98B-3FAA-412D-8E30-D31477599800}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{3F026776-9E7A-41CA-A128-D24EB80644FC}"
 EndProject
@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Text-V5.5.0", "Lib\Utils\Se
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{E86DAA9E-C29E-477E-B0D0-BBCAD36B1F52}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E71BBFF0-DFF1-483B-B1E5-5ADB69B4904F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "文档", "文档", "{E71BBFF0-DFF1-483B-B1E5-5ADB69B4904F}"
 	ProjectSection(SolutionItems) = preProject
 		README.Text-v5.4.zh-CN.md = README.Text-v5.4.zh-CN.md
 	EndProjectSection

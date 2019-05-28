@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Offline.Data.TingRUI.Models
+namespace TingRUI.Data.Models.DataTemplate
 {
-    public class WpfUI
+    public class UIBase
     {
         public string Title { get; set; } = "WpfCtrlBase空间标题";
         public string SubTitle { get; set; } = "子标题";

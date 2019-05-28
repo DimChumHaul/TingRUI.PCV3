@@ -1,16 +1,13 @@
 using GalaSoft.MvvmLight;
-using Offline.Data.TingRUI.Models.DataTemplate;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using GalaSoft.MvvmLight.Command;
-using MahApps.Metro.Controls;
 using ServiceStack;
 using System;
 using System.Windows;
-using System.Windows.Input;
 using System.Windows.Media;
+using TingRUI.Data.Models.DataTemplate;
 
 namespace PCChageTermialV3.TingRUI.ViewModel
 {
@@ -51,12 +48,14 @@ namespace PCChageTermialV3.TingRUI.ViewModel
                 // 添加首页顶部菜单栏
                 AcceptModuels = new ObservableCollection<FuncBtnModel>();
                 var data = FuncBtnModel.FakeData();
+
                 data.ToList().ForEach(item => AcceptModuels.Add(item));
 
                 // 添加左边侧边栏下拉子菜单
                 var menus = FuncMenuModel.FakeData();
 
-                menus.ToList().ForEach(item => {
+                menus.ToList().ForEach( item => {
+
                     // 添加1级主菜单 绑定到Title字段作为标题
                     AcceptMenus.Add(item);
 
