@@ -15,11 +15,12 @@
         xmlns:MvvmLight="http://www.galasoft.ch/mvvmlight"
         xmlns:I="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         BorderThickness="2.5" Background="{x:Null}">
-<!--为了使用MVVMLight中 EventToCommand-[事件转命令] 功能。-->
-    
+    <!--为了使用MVVMLight中 EventToCommand-[事件转命令] 功能。-->
+
     <Controls:MetroWindow.Resources>
-        <Thickness x:Key="InnerBannerMargin">2.5 1 2.5 5</Thickness>
-        
+        <Thickness x:Key="InnerBannerMargin">2.5</Thickness>
+        <Thickness x:Key="ItemViewsMargin">2.5</Thickness>
+
         <Style TargetType="ListBox" x:Key="TopListStyle">
             <Setter Property="Template">
                 <Setter.Value>
@@ -32,11 +33,13 @@
             </Setter>
             <Setter Property="Background" Value="LightGray" />
             <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Margin" Value="2.5 0 2.5 0"/>
+            <Setter Property="SelectedIndex" Value="7" />
         </Style>
-        
-        <DataTemplate DataType="{x:Type Data:FuncBtnModel}"> 
+
+        <DataTemplate DataType="{x:Type Data:FuncBtnModel}">
             <Controls:DropDownButton Name="Setting" 
-                                     Margin="5" 
+                                     Margin="{StaticResource ItemViewsMargin}" MinWidth="64"
                                      Content="{Binding Path=Title}"
                                      Orientation="Vertical" 
                                      DisplayMemberPath="{Binding Path=OrderIndex}">
@@ -52,7 +55,7 @@
                             RelativeSource=
                             {RelativeSource Mode=FindAncestor,AncestorType=ListBox}}" />
                     </I:EventTrigger>
-                    
+
                     <!-- 1.多触发器 2.参数的传递 是底层DataModel -->
                     <I:EventTrigger EventName="MouseEnter">
                         <MvvmLight:EventToCommand 
@@ -61,11 +64,11 @@
                             CommandParameter="{Binding ElementName=TopView,Path=SelectedItem}" />
                     </I:EventTrigger>
                 </I:Interaction.Triggers>
-                
+
             </Controls:DropDownButton>
         </DataTemplate>
     </Controls:MetroWindow.Resources>
-    
+
     <Grid x:Name="MainWinGView">
         <!--首页不设置列定义 全部用1列N行 行内再嵌入复杂布局-->
         <Grid.RowDefinitions>
@@ -87,9 +90,27 @@
                 <ColumnDefinition Width="1.75*" />
                 <ColumnDefinition Width="8*" />
             </Grid.ColumnDefinitions>
-            
-            <TreeView ItemsSource="{Binding Path=AcceptMenus}" Grid.Column="0" Background="#FF16773D" />
-            
+
+
+            <TreeView BorderThickness="5" BorderBrush="Red" FontSize="24" Foreground="Red" Margin="10"
+                      ItemsSource="{Binding AcceptMenus}"
+                      Style="{StaticResource VirtualisedMetroTreeView}">
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate ItemsSource="{Binding MenuSublines}">
+                        
+                        <TextBlock Text="{Binding Title}" Margin="2.5" />
+                        
+                        <HierarchicalDataTemplate.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Title}" />
+                            </DataTemplate>
+                        </HierarchicalDataTemplate.ItemTemplate>
+                        
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+            </TreeView>
+
+
             <Label Grid.Column="1" VerticalAlignment="Top" Content="{
                 Binding AppInfo, Mode=TwoWay,ValidatesOnDataErrors=True,
                           UpdateSourceTrigger=PropertyChanged,
@@ -104,7 +125,7 @@
             <StatusBarItem>Selected Tab:</StatusBarItem>
             <StatusBarItem Content="{Binding ElementName=MainTabControl, Path=SelectedItem.Header, Mode=OneWay}" />
         </StatusBar>
-        
+
     </Grid>
-    
+
 </Controls:MetroWindow>

@@ -48,11 +48,36 @@ namespace PCChageTermialV3.TingRUI.ViewModel
         {
             int Initial_App_Moduels()
             {
+                // 添加首页顶部菜单栏
                 AcceptModuels = new ObservableCollection<FuncBtnModel>();
                 var data = FuncBtnModel.FakeData();
                 data.ToList().ForEach(item => AcceptModuels.Add(item));
+
+                // 添加左边侧边栏下拉子菜单
                 var menus = FuncMenuModel.FakeData();
-                menus.ToList().ForEach(item => AcceptMenus.Add(item));
+
+                menus.ToList().ForEach(item => {
+                    // 添加1级主菜单 绑定到Title字段作为标题
+                    AcceptMenus.Add(item);
+
+                    // 添加2级子菜单 绑定到子类Title或者SubTitle字段
+                    switch (item.NodeTag)
+                    {
+                        case LeftBarUIType.ParkingFactory:
+                            var sub1 = AcceptModuels.Take(3);
+                            item.MenuSublines.AddRange(sub1);
+                            break;
+                        case LeftBarUIType.SystemAdmin:
+                            item.MenuSublines.AddRange(AcceptModuels.Skip(3).Take(2));
+                            break;
+                        case LeftBarUIType.CrystalReports:
+                            item.MenuSublines.AddRange(AcceptModuels.Skip(5).Take(1));
+                            break;
+                        case LeftBarUIType.UserAdmin:
+                            item.MenuSublines.AddRange(AcceptModuels);
+                            break;
+                    }
+                });
                 return AcceptModuels.Count + AcceptMenus.Count;
             }
 
