@@ -17,9 +17,9 @@ OrmLite 解决的核心需求(矛盾):
   * High performance - with support for indexes, text blobs, etc.
     * Amongst the [fastest Micro ORMs](http://mono.servicestack.net/benchmarks/) for .NET.
   * Expressive power and flexibility - with access to IDbCommand and raw SQL
-  * Cross platform - supports multiple dbs (currently: Sql Server, Sqlite, MySql, PostgreSQL, Firebird) running on both .NET and Mono platforms.
+  * 跨平台 - 支持市面上几乎所有主流的数据库(主要支持类型: Sql Server, Sqlite, MySql, PostgreSQL, Firebird) 同时运行在 .NET 和Mono 平台下.
 
-在 OrmLite 中: **1个Class(类) == 1张表(Table)**. There should be no surprising or hidden behaviour, the Typed API
+在 OrmLite 中: **1个Class(类) == 1张表(Table)**. 哲学上实体模型不应该有任何私有API, the Typed API
 that produces the Query 
 [doesn't impact how results get intuitively mapped](http://stackoverflow.com/a/37443162/85785)
 to the returned POCO's which could be different to the POCO used to create the query, e.g. containing only 

@@ -4,23 +4,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TingRUI.Data.JustEnum;
 
 namespace TingRUI.Data.Models.DataTemplate
 {
     // 功能按钮抽象出来的底层数据模型
-    public class FuncBtnModel : UIBase
+    // 名词解释 DM Data Model Modulized 模块化可配置数据模板
+    public class ModulizedBtn : UIBase
     {
-        public Int32 OrderIndex { get; set; } = -1;
         public string RemoteImage { get; set; }
         public string URILocator { get; set; } = "/TingRUI/PCWin32/WSAPI/V1/MvvMLight/Button4";
         public bool IsOfflineSupport { get; } = false;
+
+        // v0.1.2 增加一些属性用于为菜单按钮分组
+        public LeftBarUIType GroupingType { get; private set; }
 
         public override string ToString()
         {
             return this.ToSafeJson();
         }
 
-        public FuncBtnModel(string ModuleName , int orderIndex = -1)
+        public ModulizedBtn(string ModuleName, LeftBarUIType gType)
         {
             URILocator = URILocator.TrimEnd('/');
             ModuleName = ModuleName.TrimEnd('/',';');
@@ -31,19 +35,16 @@ namespace TingRUI.Data.Models.DataTemplate
 
                 // 判断 模块功能URI是否格式正确
                 var code = commandURI.LastRightPart('/');
-                if (string.IsNullOrWhiteSpace(code))
-                    throw new NotImplementedException("模块Uri格式错误或功能缺失");
-                else
-                {
-                    OrderIndex = orderIndex;
-                    URILocator = commandURI;
-                }
+                if (string.IsNullOrWhiteSpace(code)) throw new NotImplementedException("模块Uri格式错误或功能缺失");
+
+                URILocator = commandURI;
+                GroupingType = gType;
             }
         }
 
-        public static IEnumerable<FuncBtnModel> FakeData()
+        public static IEnumerable<ModulizedBtn> FakeData()
         {
-            var data = new List<FuncBtnModel>();
+            var data = new List<ModulizedBtn>();
 
             // <iconPacks:PackIconModern Kind="Marketplace" />
             /* 动态配置主界面顶部【操作员功能模块】 */
@@ -63,7 +64,7 @@ namespace TingRUI.Data.Models.DataTemplate
             };
             for (int i = 0; i < AcceptModuels.Count; i++)
             {
-                var row = new FuncBtnModel(AcceptModuels[i].Name, i+1)
+                var row = new ModulizedBtn(AcceptModuels[i].Name,(LeftBarUIType)(i+1))
                 {
                     Title = AcceptModuels.ElementAt(i).Name,
                     SVGImage = AcceptModuels[i].SvgIcon,

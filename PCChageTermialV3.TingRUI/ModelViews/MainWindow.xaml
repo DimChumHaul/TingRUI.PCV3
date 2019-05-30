@@ -21,6 +21,7 @@
         <Thickness x:Key="InnerBannerMargin">2.5</Thickness>
         <Thickness x:Key="ItemViewsMargin">2.5</Thickness>
 
+        <!-- 顶部菜单栏核心布局 这种UI在WPF的实现中以`样式Style`的方式实现 -->
         <Style TargetType="ListBox" x:Key="TopListStyle">
             <Setter Property="Template">
                 <Setter.Value>
@@ -37,7 +38,7 @@
             <Setter Property="SelectedIndex" Value="7" />
         </Style>
 
-        <DataTemplate DataType="{x:Type Data:FuncBtnModel}">
+        <DataTemplate DataType="{x:Type Data:ModulizedBtn}">
             <Controls:DropDownButton Name="Setting" 
                                      Margin="{StaticResource ItemViewsMargin}" MinWidth="64"
                                      Content="{Binding Path=Title}"
@@ -97,15 +98,12 @@
                       Style="{StaticResource VirtualisedMetroTreeView}">
                 <TreeView.ItemTemplate>
                     <HierarchicalDataTemplate ItemsSource="{Binding MenuSublines}">
-                        
-                        <TextBlock Text="{Binding Title}" Margin="2.5" />
-                        
                         <HierarchicalDataTemplate.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Title}" />
                             </DataTemplate>
                         </HierarchicalDataTemplate.ItemTemplate>
-                        
+                        <TextBlock Text="{Binding Title}" Margin="2.5" />
                     </HierarchicalDataTemplate>
                 </TreeView.ItemTemplate>
             </TreeView>

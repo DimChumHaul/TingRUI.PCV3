@@ -49,8 +49,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\DataTemplate\FuncBtnModel.cs" />
-    <Compile Include="Models\DataTemplate\FuncMenuModel.cs" />
+    <Compile Include="JustEnum\LeftBarUIType.cs" />
+    <Compile Include="Models\DataTemplate\ModulizedBtn.cs" />
+    <Compile Include="Models\DataTemplate\ModualizedMenu.cs" />
     <Compile Include="Models\DataTemplate\UIBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

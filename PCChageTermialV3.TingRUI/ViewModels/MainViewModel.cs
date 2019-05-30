@@ -8,6 +8,7 @@ using System;
 using System.Windows;
 using System.Windows.Media;
 using TingRUI.Data.Models.DataTemplate;
+using TingRUI.Data.JustEnum;
 
 namespace PCChageTermialV3.TingRUI.ViewModel
 {
@@ -32,11 +33,11 @@ namespace PCChageTermialV3.TingRUI.ViewModel
 
         public string TodaysBackImage { get; } = AutoImageSelector();
 
-        public ObservableCollection<FuncBtnModel> AcceptModuels { get; set; }
+        public ObservableCollection<ModulizedBtn> AcceptModuels { get; set; }
 
         /* 动态配置主界面左边系 【统菜单栏】 */
-        public ObservableCollection<FuncMenuModel> AcceptMenus { get; set; }
-            = new ObservableCollection<FuncMenuModel>();
+        public ObservableCollection<ModualizedMenu> AcceptMenus { get; set; }
+            = new ObservableCollection<ModualizedMenu>();
 
         /// <summary>
         /// 初始化一个 VM实体 继承自 ViewModelBase MvvmLight框架基类
@@ -46,35 +47,25 @@ namespace PCChageTermialV3.TingRUI.ViewModel
             int Initial_App_Moduels()
             {
                 // 添加首页顶部菜单栏
-                AcceptModuels = new ObservableCollection<FuncBtnModel>();
-                var data = FuncBtnModel.FakeData();
+                AcceptModuels = new ObservableCollection<ModulizedBtn>();
+                var data = ModulizedBtn.FakeData();
 
                 data.ToList().ForEach(item => AcceptModuels.Add(item));
 
+
                 // 添加左边侧边栏下拉子菜单
-                var menus = FuncMenuModel.FakeData();
-
+                var menus = ModualizedMenu.FakeData();
                 menus.ToList().ForEach( item => {
-
                     // 添加1级主菜单 绑定到Title字段作为标题
                     AcceptMenus.Add(item);
 
+                    Int32 NodeToValue = (Int32)item.NodeTag;
+
                     // 添加2级子菜单 绑定到子类Title或者SubTitle字段
-                    switch (item.NodeTag)
+                    for (int i = 0; i < (Int32)(item.NodeTag); i++)
                     {
-                        case LeftBarUIType.ParkingFactory:
-                            var sub1 = AcceptModuels.Take(3);
-                            item.MenuSublines.AddRange(sub1);
-                            break;
-                        case LeftBarUIType.SystemAdmin:
-                            item.MenuSublines.AddRange(AcceptModuels.Skip(3).Take(2));
-                            break;
-                        case LeftBarUIType.CrystalReports:
-                            item.MenuSublines.AddRange(AcceptModuels.Skip(5).Take(1));
-                            break;
-                        case LeftBarUIType.UserAdmin:
-                            item.MenuSublines.AddRange(AcceptModuels);
-                            break;
+                        Int32 lastIndex = -1;
+                        item.MenuSublines.AddRange(AcceptModuels.Skip(lastIndex).Take(NodeToValue - lastIndex));
                     }
                 });
                 return AcceptModuels.Count + AcceptMenus.Count;
