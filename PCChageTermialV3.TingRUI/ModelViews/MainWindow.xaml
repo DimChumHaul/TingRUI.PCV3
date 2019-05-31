@@ -92,12 +92,14 @@
                 <ColumnDefinition Width="8*" />
             </Grid.ColumnDefinitions>
 
-            <TreeView Name="ViewX" 
-                      BorderThickness="5" BorderBrush="Red" FontSize="24" Foreground="Red" Margin="10"
-                      ItemsSource="{Binding AcceptMenus}"
-                      Style="{StaticResource VirtualisedMetroTreeView}">
-                <TreeView.ItemTemplate>
-                    <HierarchicalDataTemplate ItemsSource="{Binding MenuSublines}">
+            <!--树状菜单控件的第二种写法-->
+            <TreeView ItemsSource="{Binding AcceptMenus}" 
+                      Name="ViewX" BorderThickness="5" 
+                      BorderBrush="Red" FontSize="24" Foreground="Red" 
+                      Margin="10" Style="{StaticResource VirtualisedMetroTreeView}">
+                <TreeView.Resources>
+                    <HierarchicalDataTemplate DataType="{x:Type Data:ModualizedMenu}"  
+                                              ItemsSource="{Binding MenuSublines}">
                         <HierarchicalDataTemplate.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Title}" />
@@ -105,15 +107,15 @@
                         </HierarchicalDataTemplate.ItemTemplate>
                         <TextBlock Text="{Binding Title}" Margin="2.5" />
                     </HierarchicalDataTemplate>
-                </TreeView.ItemTemplate>
+                </TreeView.Resources>
             </TreeView>
 
-
             <Label Grid.Column="1" VerticalAlignment="Top" Content="{
-                Binding AppInfo, Mode=TwoWay,ValidatesOnDataErrors=True,
-                          UpdateSourceTrigger=PropertyChanged,
-                          NotifyOnValidationError=True}"
-                     Controls:TextBoxHelper.Watermark="Number smaller than 18" Width="Auto" Height="84">
+                Binding AppInfo, 
+                Mode=TwoWay,ValidatesOnDataErrors=True,
+                UpdateSourceTrigger=PropertyChanged,
+                NotifyOnValidationError=True}" 
+                   Controls:TextBoxHelper.Watermark="Number smaller than 18" Width="Auto" Height="84">
             </Label>
         </Grid>
 

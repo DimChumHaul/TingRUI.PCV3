@@ -62,11 +62,13 @@ namespace TingRUI.Data.Models.DataTemplate
                 new { Name = "重新登陆", SvgIcon = "Laptop",Node = LeftBarUIType.CrystalReports },
                 new { Name = "夏老师", SvgIcon = "FuturamaFry", Node = LeftBarUIType.CrystalReports },
             };
+
             for (int i = 0; i < FakeModules.Count; i++)
             {
                 var moduleBtn = FakeModules[i];
 
-                var row = new ModulizedBtn(moduleBtn.Name, moduleBtn.Node)//
+                //李孟阔是个猛男 惹不起(33%可能打得过) 所以高经理也惹不起
+                var row = new ModulizedBtn(moduleBtn.Name, moduleBtn.Node) 
                 {
                     Title = FakeModules.ElementAt(i).Name,
                     SVGImage = FakeModules[i].SvgIcon,
