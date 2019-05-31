@@ -11,6 +11,6 @@ namespace TingRUI.Data.JustEnum
     /// </summary>
     public enum LeftBarUIType
     {
-        SystemAdmin = 1, UserAdmin = 3, ParkingFactory = 7, LiveMonitor = 11, CrystalReports = 12
+        SystemAdmin = 3, UserAdmin = 5, ParkingFactory = 8, LiveMonitor = 11, CrystalReports = 12
     }
 }

@@ -17,7 +17,7 @@ namespace TingRUI.Data.Models.DataTemplate
         public bool IsOfflineSupport { get; } = false;
 
         // v0.1.2 增加一些属性用于为菜单按钮分组
-        public LeftBarUIType GroupingType { get; private set; }
+        public LeftBarUIType gType { get; private set; }
 
         public override string ToString()
         {
@@ -38,7 +38,7 @@ namespace TingRUI.Data.Models.DataTemplate
                 if (string.IsNullOrWhiteSpace(code)) throw new NotImplementedException("模块Uri格式错误或功能缺失");
 
                 URILocator = commandURI;
-                GroupingType = gType;
+                this.gType = gType;
             }
         }
 
@@ -48,26 +48,29 @@ namespace TingRUI.Data.Models.DataTemplate
 
             // <iconPacks:PackIconModern Kind="Marketplace" />
             /* 动态配置主界面顶部【操作员功能模块】 */
-            var AcceptModuels = new List<dynamic> {
-                new { Name = "收费设置" , SvgIcon = "BarCode" },
-                new { Name = "车场设置", SvgIcon = "Marketplace" },
-                new { Name = "车道设置", SvgIcon = "AdobePhotoshop"  },
-                new { Name = "部门管理", SvgIcon = "BatteryCharging"  },
-                new { Name = "用户管理", SvgIcon = "BookContact"  },
-                new { Name = "车辆管理", SvgIcon = "BrowserChrome"  },
-                new { Name = "操作员管理", SvgIcon = "CalendarYear"  },
-                new { Name = "实时监控", SvgIcon = "Camera"  },
-                new { Name = "数据库备份", SvgIcon = "ConnectionWifiVariant"  },
-                new { Name = "数据库还原", SvgIcon = "DrawPenReflection"  },
-                new { Name = "重新登陆", SvgIcon = "Laptop"  },
-                new { Name = "夏老师", SvgIcon = "FuturamaFry"  },
+            var FakeModules = new List<dynamic> {
+                new { Name = "收费设置" , SvgIcon = "BarCode" ,Node = LeftBarUIType.SystemAdmin },
+                new { Name = "车场设置", SvgIcon = "Marketplace",Node = LeftBarUIType.SystemAdmin },
+                new { Name = "车道设置", SvgIcon = "AdobePhotoshop",Node = LeftBarUIType.SystemAdmin },
+                new { Name = "部门管理", SvgIcon = "BatteryCharging",Node = LeftBarUIType.UserAdmin },
+                new { Name = "用户管理", SvgIcon = "BookContact",Node = LeftBarUIType.UserAdmin },
+                new { Name = "车辆管理", SvgIcon = "BrowserChrome",Node = LeftBarUIType.UserAdmin },
+                new { Name = "操作员管理", SvgIcon = "CalendarYear",Node = LeftBarUIType.ParkingFactory },
+                new { Name = "实时监控", SvgIcon = "Camera",Node = LeftBarUIType.ParkingFactory },
+                new { Name = "数据库备份", SvgIcon = "ConnectionWifiVariant",Node = LeftBarUIType.LiveMonitor },
+                new { Name = "数据库还原", SvgIcon = "DrawPenReflection",Node = LeftBarUIType.CrystalReports },
+                new { Name = "重新登陆", SvgIcon = "Laptop",Node = LeftBarUIType.CrystalReports },
+                new { Name = "夏老师", SvgIcon = "FuturamaFry", Node = LeftBarUIType.CrystalReports },
             };
-            for (int i = 0; i < AcceptModuels.Count; i++)
+            for (int i = 0; i < FakeModules.Count; i++)
             {
-                var row = new ModulizedBtn(AcceptModuels[i].Name,(LeftBarUIType)(i+1))
+                var moduleBtn = FakeModules[i];
+
+                var row = new ModulizedBtn(moduleBtn.Name, moduleBtn.Node)//
                 {
-                    Title = AcceptModuels.ElementAt(i).Name,
-                    SVGImage = AcceptModuels[i].SvgIcon,
+                    Title = FakeModules.ElementAt(i).Name,
+                    SVGImage = FakeModules[i].SvgIcon,
+                    gType = moduleBtn.Node,
                 };
                 data.Add(row);
             }

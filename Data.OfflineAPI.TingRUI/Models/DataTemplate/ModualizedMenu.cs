@@ -15,7 +15,7 @@ namespace TingRUI.Data.Models.DataTemplate
     {
         public List<ModulizedBtn> MenuSublines { get; set; } = new List<ModulizedBtn>();
         public int SubCount { get; }
-        public LeftBarUIType NodeTag { get; set; }
+        public LeftBarUIType gTypeL1 { get; set; }
 
         public ModualizedMenu()
         {
@@ -35,9 +35,11 @@ namespace TingRUI.Data.Models.DataTemplate
             var result = new List<ModualizedMenu>();
             for (int i = 0; i < data.Count; i++)
             {
-                result.Add(new ModualizedMenu {
-                    NodeTag = data[i].Type,
-                    Title = data[i].MenuTitle });
+                result.Add(new ModualizedMenu
+                {
+                    gTypeL1 = data[i].Type,
+                    Title = data[i].MenuTitle
+                });
             }
             return result;
         }

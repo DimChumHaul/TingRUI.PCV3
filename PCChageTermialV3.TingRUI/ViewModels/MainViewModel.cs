@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Media;
 using TingRUI.Data.Models.DataTemplate;
 using TingRUI.Data.JustEnum;
+using System.Collections.Generic;
 
 namespace PCChageTermialV3.TingRUI.ViewModel
 {
@@ -34,6 +35,7 @@ namespace PCChageTermialV3.TingRUI.ViewModel
         public string TodaysBackImage { get; } = AutoImageSelector();
 
         public ObservableCollection<ModulizedBtn> AcceptModuels { get; set; }
+            = new ObservableCollection<ModulizedBtn>();
 
         /* 动态配置主界面左边系 【统菜单栏】 */
         public ObservableCollection<ModualizedMenu> AcceptMenus { get; set; }
@@ -44,35 +46,8 @@ namespace PCChageTermialV3.TingRUI.ViewModel
         /// </summary>
         public MainViewModel()
         {
-            int Initial_App_Moduels()
-            {
-                // 添加首页顶部菜单栏
-                AcceptModuels = new ObservableCollection<ModulizedBtn>();
-                var data = ModulizedBtn.FakeData();
-
-                data.ToList().ForEach(item => AcceptModuels.Add(item));
-
-
-                // 添加左边侧边栏下拉子菜单
-                var menus = ModualizedMenu.FakeData();
-                menus.ToList().ForEach( item => {
-                    // 添加1级主菜单 绑定到Title字段作为标题
-                    AcceptMenus.Add(item);
-
-                    Int32 NodeToValue = (Int32)item.NodeTag;
-
-                    // 添加2级子菜单 绑定到子类Title或者SubTitle字段
-                    for (int i = 0; i < (Int32)(item.NodeTag); i++)
-                    {
-                        Int32 lastIndex = -1;
-                        item.MenuSublines.AddRange(AcceptModuels.Skip(lastIndex).Take(NodeToValue - lastIndex));
-                    }
-                });
-                return AcceptModuels.Count + AcceptMenus.Count;
-            }
-
-            // 初始化功能按钮 从配置读取支持的功能按钮
-            Initial_App_Moduels();
+            // 一次性初始化所有UI模块
+            InitialAllFuckingModules();
 
             FuncModuleCMD = new RelayCommand(() =>
             {
@@ -103,9 +78,42 @@ namespace PCChageTermialV3.TingRUI.ViewModel
                     JpgFile = "MainBg2-TonyStark.JPG";
                     break;
             }
-
             var Resource_Dir_File = Path.Combine("~/".MapProjectPath(),$"/Resources/{JpgFile}");
             return Resource_Dir_File;
+        }
+
+        /* 添加左边侧边栏下拉子菜单: 添加2级子菜单绑定到子类Title或者SubTitle字段 */
+        private void InitialMenuSubNodes()
+        {
+            // LINQ: 内存分页添加
+            ModualizedMenu DockerLast = this.AcceptMenus.LastOrDefault();
+            if (DockerLast == null) return;
+            var range2Add = AcceptModuels
+                    .Where(o => o.gType == DockerLast.gTypeL1)
+                    .ToList();
+            DockerLast.MenuSublines.AddRange(range2Add);
+        }
+
+        /// <summary>
+        /// 一次性初始化所有UI模块
+        /// </summary>
+        void InitialAllFuckingModules()
+        {
+            IEnumerable<ModulizedBtn> data = ModulizedBtn.FakeData();
+            foreach (var item in data)
+            {
+                /* 添加顶部【***所有基础功能***】菜单栏 */
+                AcceptModuels.Add(item);
+            }
+            
+            var menus = ModualizedMenu.FakeData();
+            for (int i = 0; i < menus.Count; i++)
+            {
+                // 先把菜单添加到 UI
+                AcceptMenus.Add(menus[i]);
+                // 再添加2级子节点 SubNodes
+                InitialMenuSubNodes();
+            }
         }
 
         #region  WPF事件转命令
