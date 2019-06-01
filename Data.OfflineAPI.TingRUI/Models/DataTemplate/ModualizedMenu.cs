@@ -19,7 +19,7 @@ namespace TingRUI.Data.Models.DataTemplate
 
         public ModualizedMenu()
         {
-            SubCount = this.MenuSublines.Count();
+            SubCount = MenuSublines.Count();
         }
 
         public static List<ModualizedMenu> FakeData()

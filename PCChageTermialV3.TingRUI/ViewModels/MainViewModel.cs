@@ -33,6 +33,7 @@ namespace PCChageTermialV3.TingRUI.ViewModel
         );
 
         public string TodaysBackImage { get; } = AutoImageSelector();
+        public static bool IsHoliday = false;
 
         public ObservableCollection<ModulizedBtn> AcceptModuels { get; set; }
             = new ObservableCollection<ModulizedBtn>();
@@ -62,22 +63,7 @@ namespace PCChageTermialV3.TingRUI.ViewModel
         private static string AutoImageSelector()
         {
             var JpgFile = string.Empty;
-            DayOfWeek NowDay = DateTime.Now.DayOfWeek;
-            switch (NowDay)
-            {
-                case DayOfWeek.Friday:
-                case DayOfWeek.Monday:
-                case DayOfWeek.Thursday:
-                case DayOfWeek.Tuesday:
-                case DayOfWeek.Wednesday:
-                    JpgFile = "MainBg3-Programer.Jpg";
-                    break;
-                case DayOfWeek.Saturday:
-                case DayOfWeek.Sunday:
-                default:
-                    JpgFile = "MainBg2-TonyStark.JPG";
-                    break;
-            }
+            JpgFile = UIBase.isHoliday()?"MainBg3-Programer.Jpg":"MainBg2-TonyStark.JPG";
             var Resource_Dir_File = Path.Combine("~/".MapProjectPath(),$"/Resources/{JpgFile}");
             return Resource_Dir_File;
         }
