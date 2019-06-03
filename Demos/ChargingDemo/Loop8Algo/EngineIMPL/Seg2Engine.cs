@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+#region 死门 :1/(x*y + x^2*y^2 + x^3*y^3 + ....)    :生还可能为0
+#endregion
+#region 生门 :1/∞ == 0.001 离心机能切割的最小时间单元 :以太
+#endregion
 
 namespace ChargingDemo.Loop8Algo.EngineIMPL
 {
@@ -20,10 +24,10 @@ namespace ChargingDemo.Loop8Algo.EngineIMPL
         public Tuple<DateTime, DateTime> Segment1 { get; set; }
         public Tuple<DateTime, DateTime> Segment2 { get; set; }
         // 后续所有单元默认使用第二段收费规则 如果用户勾选则选择第一段
-        public bool UseSeg2 = true;
+        public bool EnableLoop = false;
 
         ///【离心机】时间轴切片Tuple说明 1.计费规则 2.计费单元 3.单元价格
-        public void Centrifuge(double TTM, 太极 TaiJi)
+        public void Work4Money(double TTM, 太极 TaiJi)
         {
             // 1.阴阳合和
             var CUBE = TaiJi == 太极.阳 ? CubeSun : CubeMoon;
@@ -33,7 +37,8 @@ namespace ChargingDemo.Loop8Algo.EngineIMPL
             // 3.辗转相除
             for (int i = 0; i < divides; i++)
             {
-                TotalResult += CUBE.Item1; Tailer.Add(new Tuple<int, string, float>(CUBE.Item2, EngineToken, CUBE.Item1));
+                TotalResult += CUBE.Item1;
+                Tailer.Add(new Tuple<int, string, float>(CUBE.Item2, EngineToken, CUBE.Item1));
             }
             // 4.虚位以待
             Tailer.Add(new Tuple<int, string, float>((int)tailer, EngineToken + $"尾巴时间[{tailer}]分钟", CUBE.Item1));
@@ -61,32 +66,33 @@ namespace ChargingDemo.Loop8Algo.EngineIMPL
             OutTimme = t1 < t2 ? t1 : t2;
             if ((int)TTM <= F1) return;
 
-            #region 八阵图中枢枢纽层: 时钟自旋(1分钟) > 地球自转(1天) > 地球公转(1年) > 太阳公转(酒神代) > 银河公转(谷雨代) 
-            // 阳
+            #region 八阵图中枢神经层 :时钟自旋(1分钟) > 地球自转(1天) > 地球公转(1年) > 太阳公转(酒神代) > 银河公转(谷雨代) 
+            // &升维: 地球自转(1天)：第二天
+            var TomorrowBegin = Segment1.Item1.AddDays(1);
+            // 阳面
             if (t1 >= Segment1.Item1 && t1 <= Segment1.Item2)
             {
-                if (t2 <= Segment2.Item1) // 不跨时段
-                {
-                    Centrifuge(TTM, 太极.阳);
-                }
+                // 不跨时段
+                if (t2 <= Segment2.Item1) Work4Money(TTM, 太极.阳);
                 else // 跨时段 
                 {
-                    /* 划断一个[中轴线] :左边分钟数*带入阳面指针 + 右边分钟数 * 带入阴面指针 */
-
+                    var TTML1 = (Segment1.Item2 - t1).TotalMinutes;
+                    Work4Money(TTML1, 太极.阳);
+                    // 递归划断一个[中轴线] :左边分钟数*带入阳面指针 + 右边分钟数 * 带入阴面指针
+                    var TTMR1 = (t2 - Segment2.Item1).TotalMinutes;
+                    Work4Money(TTMR1, 太极.阴);
                 }
             }
-            // 阴
-            if (t1 >= Segment2.Item1 && t1 <= Segment2.Item2)
+            // 阴面 & 不跨时段
+            else if (t1 >= Segment2.Item1 && t2 <= TomorrowBegin) Work4Money(TTM, 太极.阴); 
+            else // 跨时段
             {
-                if (t2 <= Segment1.Item1.AddDays(1)) // 不跨时段(升级维度：第二天) 
-                {
-                    Centrifuge(TTM, 太极.阴);
-                }
+                var TTMLeft = (t2 - TomorrowBegin).TotalMinutes;
+                Work4Money(TTMLeft, EnableLoop ? 太极.阳 :太极.阴);
+                // 递归划断一个[中轴线] :左边分钟数*带入阳面指针 + 右边分钟数 * 带入阴面指针
+                var TTMRight = (TomorrowBegin - t1).TotalMinutes;
+                Work4Money(TTMRight, 太极.阴);
             }
-            #endregion
-
-            #region 八阵图外环层 - 1 / ∞ == 0.001 离心机能切割的最小时间单元 : 以太
-
             #endregion
         }
     }
