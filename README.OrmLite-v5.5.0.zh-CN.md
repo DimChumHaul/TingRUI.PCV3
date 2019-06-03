@@ -19,7 +19,7 @@ OrmLite 解决的核心需求(矛盾):
   * Expressive power and flexibility - with access to IDbCommand and raw SQL
   * 跨平台 - 支持市面上几乎所有主流的数据库(主要支持类型: Sql Server, Sqlite, MySql, PostgreSQL, Firebird) 同时运行在 .NET 和Mono 平台下.
 
-在 OrmLite 中: **1个Class(类) == 1张表(Table)**. 哲学上实体模型不应该有任何私有API, *** API将强类型作为参数 ***
+在 OrmLite 中: **1个Class(类) == 1张表(Table)**. 哲学上实体模型不应该有任何私有API, API将强类型作为参数
 [doesn't impact how results get intuitively mapped](http://stackoverflow.com/a/37443162/85785)
 to the returned POCO's which could be different to the POCO used to create the query, e.g. containing only 
 a subset of the fields you want populated.
