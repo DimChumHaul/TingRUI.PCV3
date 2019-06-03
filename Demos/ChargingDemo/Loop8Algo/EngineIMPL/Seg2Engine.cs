@@ -13,93 +13,81 @@ namespace ChargingDemo.Loop8Algo.EngineIMPL
      */
     public class Seg2Engine : Engine
     {
-        public Seg2Engine(string RuleName) : base(RuleName) { }
+        //public Seg2Engine(string RuleName) : base(RuleName) { }
         /// 一天中的时间段 精确到秒 但这里就用整形 .NET SDK可以完成全自动转化  
         /// 0.5天 = 720分 = 43200秒
         /// 1天   = 1440分 = 86400秒
-        public Tuple<int, int> Seg1 { get; set; }
-        public Tuple<int, int> Seg2 { get; set; }
-
+        public Tuple<DateTime, DateTime> Segment1 { get; set; }
+        public Tuple<DateTime, DateTime> Segment2 { get; set; }
         // 后续所有单元默认使用第二段收费规则 如果用户勾选则选择第一段
         public bool UseSeg2 = true;
 
-        public void Time2Money(double TTM , 太极 SunSet = 太极.阳) 
+        ///【离心机】时间轴切片Tuple说明 1.计费规则 2.计费单元 3.单元价格
+        public void Centrifuge(double TTM, 太极 TaiJi)
         {
-            // 1.阴阳画断
-            var CUBE = SunSet == 太极.阳 ? CubeSun : CubeMoon;
+            // 1.阴阳合和
+            var CUBE = TaiJi == 太极.阳 ? CubeSun : CubeMoon;
             // 2.矩阵平方
             int divides = (int)TTM / CUBE.Item2;
             double tailer = TTM % CUBE.Item2;
             // 3.辗转相除
             for (int i = 0; i < divides; i++)
             {
-                TotalResult += CUBE.Item1;
-                /// 参数列表 1.计费单元 2.计费规则 3.单元价格
-                Tailer.Add(new Tuple<int, string, float>(CUBE.Item2, EngineToken,CUBE.Item1));
+                TotalResult += CUBE.Item1; Tailer.Add(new Tuple<int, string, float>(CUBE.Item2, EngineToken, CUBE.Item1));
             }
-            // 处理【尾巴算法】只记录 不计价
+            // 4.虚位以待
             Tailer.Add(new Tuple<int, string, float>((int)tailer, EngineToken + $"尾巴时间[{tailer}]分钟", CUBE.Item1));
         }
 
-        public override double CalculationIMPL(DateTime t1, DateTime t2, bool LetGo = false)
+        /// <summary>
+        /// 如果超过当日让用户选择 超出第一天的部分 按照何种规则计价: 第一天夜间规则还是第一(二)天白天规则 
+        /// v1版本的两段式算法的逻辑为 (x / y * (times1 - 1)) + tailer1 + (z / c * (times2 - 1)) + tailer2
+        /// </summary>
+        /// <param name="t1">入场时间</param>
+        /// <param name="t2">出场</param>
+        /// <param name="LetGo">是否直接放行 转为按次计费</param>
+        /// <returns></returns>
+        public override void CalculationIMPL(DateTime t1, DateTime t2, bool LetGo = false)
         {
             // 以下算法的逻辑 建立在 `最小计费单元是分钟`的基础上 不代表不可以继续切割分钟为更小的时间单元
+
             if (t1.Year != t2.Year) throw new NotImplementedException("跨年算法暂时不公开...");
             if (t1 > t2) throw new InvalidOperationException("出场时间必须大于入场时间");
-            if (Seg1.Item2 >= Seg2.Item1) throw new ArgumentException("两段式设置不允许有时间轴交集");
+            if (Segment1.Item2 >= Segment2.Item1) throw new InvalidOperationException("两段式设置不允许有时间轴交集");
 
+            // 免费停车
             double TTM = Math.Abs((t2 - t1).TotalMinutes);
-            bool isFree2Go = (int)TTM <= base.F1;
-            TotalResult = -0.0f;
             InTime = t1 > t2 ? t2 : t1;
             OutTimme = t1 < t2 ? t1 : t2;
-            // v1版本的两段式算法的逻辑为 (x / y * (times1 - 1)) + tailer1 + (z / c * (times2 - 1)) + tailer2
+            if ((int)TTM <= F1) return;
 
-            // 开始计费 1.寻找起始点 
-            if (isFree2Go) return TotalResult;
-            // 白天停车
-            if (t1.Hour >= Seg1.Item1 && t1.Hour <= Seg1.Item2)
+            #region 八阵图中枢枢纽层: 时钟自旋(1分钟) > 地球自转(1天) > 地球公转(1年) > 太阳公转(酒神代) > 银河公转(谷雨代) 
+            // 阳
+            if (t1 >= Segment1.Item1 && t1 <= Segment1.Item2)
             {
-                // 不跨时段
-                if (t2 <= DateTime.Today.AddHours(Seg1.Item2))
+                if (t2 <= Segment2.Item1) // 不跨时段
                 {
-                    Time2Money(TTM, 太极.阳);
-                    return TotalResult ;
+                    Centrifuge(TTM, 太极.阳);
                 }
-                // 跨时段
-                if (UseSeg2)
+                else // 跨时段 
                 {
-                    /* 如果超过当日让用户选择 超出第一天的部分 按照何种规则计价: 第一天夜间规则还是第一(二)天白天规则 */
-                }
-                else
-                {
-                    // type == 3(1---2---1---)
+                    /* 划断一个[中轴线] :左边分钟数*带入阳面指针 + 右边分钟数 * 带入阴面指针 */
+
                 }
             }
-            // 夜间停车 
-            else if (t1.Hour >= Seg2.Item1 && t1.Hour <= Seg2.Item2)
+            // 阴
+            if (t1 >= Segment2.Item1 && t1 <= Segment2.Item2)
             {
-                // 不跨时段
-                if (t2 <= DateTime.Today.AddHours(Seg2.Item2))
+                if (t2 <= Segment1.Item1.AddDays(1)) // 不跨时段(升级维度：第二天) 
                 {
-                    Time2Money(TTM, 太极.阴);
-                    return TotalResult;
-                }
-                // 跨时段
-                if (UseSeg2)
-                {
-                    /* 如果超过当日让用户选择 超出第一天的部分 按照何种规则计价: 第一天夜间规则还是第一(二)天白天规则 */
-                }
-                else
-                {
-                    // type == 3(1---2---1---)
+                    Centrifuge(TTM, 太极.阴);
                 }
             }
-            else
-            {
-                TotalResult = 0.0d; // 白天和晚上各有1分钟的缓冲区
-            }
-            return TotalResult;
+            #endregion
+
+            #region 八阵图外环层 - 1 / ∞ == 0.001 离心机能切割的最小时间单元 : 以太
+
+            #endregion
         }
     }
 }

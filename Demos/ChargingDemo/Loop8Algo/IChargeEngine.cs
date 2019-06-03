@@ -25,7 +25,7 @@ namespace ChargingDemo.Loop8Algo
         /// <param name="OutTime">出场时间</param>
         /// <param name="OKToLetGo">是否放行通过(完成支付)</param>
         /// <returns>浮点数:订单合计价</returns>
-        double CalculationIMPL(DateTime t1, DateTime t2, bool letGo = false);
+        void CalculationIMPL(DateTime t1, DateTime t2, bool letGo = false);
 
         /// <summary>
         /// 输出规则明细(停车消费的所有流水清单和合计价格) 优惠卷+减免 应该再增加一个API单独计算

@@ -57,10 +57,7 @@ namespace ChargingDemo.Loop8Algo
         }
 
         /* IMPL = implementation 算法的实现 */
-        public virtual double CalculationIMPL(DateTime t1, DateTime t2, bool LetGo = false)
-        {
-            return -0.0d;
-        }
+        public virtual void CalculationIMPL(DateTime t1, DateTime t2, bool LetGo = false) { }
 
         /* IMPL = implementation 算法的实现 */
         public virtual string OrderDetailIMPL(string orderToken)
