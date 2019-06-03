@@ -8,14 +8,16 @@ namespace ChargingDemo.Loop8Algo.EngineIMPL
 {
     class SingleTimesEngine : Engine
     {
-        public SingleTimesEngine(string RuleName, DateTime ValidDtime) : base(RuleName, ValidDtime)
-        {
+        public SingleTimesEngine(string RuleName, DateTime ValidDtime) : base(RuleName, ValidDtime) { }
 
+        public override double CalculationPrice(bool OKToLetGo = true)
+        {
+            return base.CalculationPrice(OKToLetGo);
         }
 
-        public override double CalculationPrice(DateTime InTime, DateTime OutTime, bool OKToLetGo = true)
+        public override string GenerateOrderDetail()
         {
-            return base.CalculationPrice(InTime, OutTime, OKToLetGo);
+            return base.GenerateOrderDetail();
         }
     }
 }

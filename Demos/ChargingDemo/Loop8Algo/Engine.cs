@@ -7,11 +7,15 @@ using System.Threading.Tasks;
 
 namespace ChargingDemo.Loop8Algo
 {
+    // 内核碎片函数指针 交给应用层调用者注入 设计模式：函数式编程+依赖注入
+    public delegate double CalcSegFunc(IEnumerable<Tuple<DateTime,DateTime>> tParams, bool okTogo = false);
+
     /// <summary>
     /// 算法状态机 ：八阵图 底层用到的算法逻辑封装类
     /// </summary>
     public class Engine : IChargeEngine
     {
+
         public string EngineName { get; } = $"[没有规则] - 请继承自这个类并提交你需要的规则代码在子类的方法重写中";
         protected internal byte[] RuleCode { get; set; }
         protected internal DateTime RuleValideUntil { get; set; }
@@ -32,6 +36,12 @@ namespace ChargingDemo.Loop8Algo
         public DateTime EndTime { get; set; }
         #endregion
 
+        #region 算法引擎内核
+        internal protected List<Tuple<DateTime, DateTime, string>> TimeSlice;
+        private Int32 CurrentTPivot { get; set; }
+        internal protected double AmoutTotal { get; private set; }
+        #endregion
+
         public Engine(string RuleName , DateTime ValidDtime)
         {
             RuleValideUntil = ValidDtime == 
@@ -43,12 +53,12 @@ namespace ChargingDemo.Loop8Algo
             }
         }
 
-        public virtual double CalculationPrice(DateTime InTime, DateTime OutTime, bool OKToLetGo = true)
+        public virtual double CalculationPrice(bool OKToLetGo = true)
         {
             return -0.0d;
         }
 
-        public virtual string GenerateOrderDetail(List<Tuple<DateTime, DateTime, string>> TimeSlice)
+        public virtual string GenerateOrderDetail()
         {
             var result = this.ToSafeJson();
             var code = Encoding.UTF8.GetBytes(result);

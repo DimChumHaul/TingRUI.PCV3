@@ -15,14 +15,14 @@ namespace ChargingDemo.Loop8Algo.EngineIMPL
     {
         public Seg2Engine(string RuleName, DateTime ValidDtime) : base(RuleName, ValidDtime) { }
 
-        public override double CalculationPrice(DateTime InTime, DateTime OutTime, bool OKToLetGo = true)
+        public override double CalculationPrice(bool OKToLetGo = true)
         {
-            return base.CalculationPrice(InTime, OutTime, OKToLetGo);
+            return base.CalculationPrice(OKToLetGo);
         }
 
-        public override string GenerateOrderDetail(List<Tuple<DateTime, DateTime, string>> TimeSlice)
+        public override string GenerateOrderDetail()
         {
-            return base.GenerateOrderDetail(TimeSlice);
+            return base.GenerateOrderDetail();
         }
     }
 }

@@ -30,6 +30,7 @@ namespace ChargingDemo
                 F1 = 10,T1 = 20, T1Price = 5.0d, ANUnit = 120, ANUPrice = 2,
                 StartTime = DateTime.Now, EndTime = EndTime
             };
+            double price = instance.CalculationPrice();
             instance.PrintDump();
         }
     }
