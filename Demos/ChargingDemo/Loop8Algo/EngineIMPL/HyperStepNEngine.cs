@@ -7,20 +7,12 @@ using System.Threading.Tasks;
 namespace ChargingDemo.Loop8Algo.EngineIMPL
 {
     // 多段式收费
-    public class HyperStepNEngine : Engine
+    public sealed class HyperStepNEngine : Engine
     {
-        public HyperStepNEngine(string RuleName, DateTime ValidDtime) : base(RuleName, ValidDtime)
+        public HyperStepNEngine(string RuleName, DateTime ValidDtime) : base(RuleName) { }
+        public override double CalculationIMPL(DateTime t1, DateTime t2, bool LetGo = false)
         {
-
-        }
-
-        public override double CalculateIMPL(bool OKToLetGo = true)
-        {
-            return base.CalculateIMPL(OKToLetGo);
-        }
-        public override string GenerateOrderIMPL()
-        {
-            return base.GenerateOrderIMPL();
+            return -0.0d;
         }
     }
 }

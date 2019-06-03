@@ -20,17 +20,16 @@ namespace ChargingDemo
         static void Main(string[] args)
         {
             var random = new Random();
-            var NMinutes = random.Next(1000);
+            var NMinutes = random.Next(300,1440);
             var T1 = DateTime.Now;
             var EndTime = T1.AddMinutes(NMinutes);
+            $"停车总时长[{NMinutes}]分钟 起始时间[{T1}],结束时间[{EndTime}]".PrintDump();
 
-            IChargeEngine instance = new Seg2Engine("二段式收费", DateTime.MinValue)
+            IChargeEngine instance = new Seg2Engine("二段式收费")
             {
                 // 模拟`二段式收费`
-                F1 = 10,T1 = 20, T1Price = 5.0d, AFNUnit = 120, AFNUPrice = 2,
-                StartTime = DateTime.Now, EndTime = EndTime
             };
-            double price = instance.CalculateIMPL();
+            instance.CalculationIMPL(T1,EndTime);
             instance.PrintDump();
         }
     }

@@ -15,16 +15,11 @@ namespace ChargingDemo.Loop8Algo.EngineIMPL
         /// </summary>
         /// <param name="RuleName">规则名称</param>
         /// <param name="ValidDtime">规则有效期</param>
-        public TidalEngine(string RuleName, DateTime ValidDtime) : base(RuleName, ValidDtime) { }
+        public TidalEngine(string RuleName) : base(RuleName) { }
 
-        public override double CalculateIMPL(bool OKToLetGo = true)
+        public override double CalculationIMPL(DateTime t1, DateTime t2, bool LetGo = false)
         {
-            return base.CalculateIMPL(OKToLetGo);
-        }
-
-        public override string GenerateOrderIMPL()
-        {
-            return base.GenerateOrderIMPL();
+            return -0.0d;
         }
     }
 }

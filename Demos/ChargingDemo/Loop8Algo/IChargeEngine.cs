@@ -14,7 +14,7 @@ namespace ChargingDemo.Loop8Algo
         /// <summary>
         /// 计费规则名称
         /// </summary>
-        string EngineName { get; }
+        string EngineToken { get; }
 
         /// <summary>
         /// 计费规则引擎 必须提供一种核心算法 规则算法 与 应用层行业 是一对多的关系 
@@ -25,7 +25,7 @@ namespace ChargingDemo.Loop8Algo
         /// <param name="OutTime">出场时间</param>
         /// <param name="OKToLetGo">是否放行通过(完成支付)</param>
         /// <returns>浮点数:订单合计价</returns>
-        double CalculateIMPL(bool OKToLetGo = false);
+        double CalculationIMPL(DateTime t1, DateTime t2, bool letGo = false);
 
         /// <summary>
         /// 输出规则明细(停车消费的所有流水清单和合计价格) 优惠卷+减免 应该再增加一个API单独计算
@@ -33,6 +33,6 @@ namespace ChargingDemo.Loop8Algo
         /// <param name="TimeSlice">时间轴切片(切片+RuleName)</param>
         /// <param name="CharingRuleName">计费规则列表 与时间轴切片应该是一对一的关系</param>
         /// <returns>输出每一种计费规则:`消费清单 + 合计金额 + 消费优惠` </returns>
-        string GenerateOrderIMPL();
+        string OrderDetailIMPL(string orderToken);
     }
 }

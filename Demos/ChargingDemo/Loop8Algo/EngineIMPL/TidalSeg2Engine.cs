@@ -8,16 +8,10 @@ namespace ChargingDemo.Loop8Algo.EngineIMPL
 {
     public class TidalSeg2Engine : Engine
     {
-        public TidalSeg2Engine(string RuleName, DateTime ValidDtime) : base(RuleName, ValidDtime) { }
-
-        public override double CalculateIMPL(bool OKToLetGo = true)
+        public TidalSeg2Engine(string RuleName) : base(RuleName) { }
+        public override double CalculationIMPL(DateTime t1, DateTime t2, bool LetGo = false)
         {
-            return base.CalculateIMPL(OKToLetGo);
-        }
-
-        public override string GenerateOrderIMPL()
-        {
-            return base.GenerateOrderIMPL();
+            return -0.0d;
         }
     }
 }
