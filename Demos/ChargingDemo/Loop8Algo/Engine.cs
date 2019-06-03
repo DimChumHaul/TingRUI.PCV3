@@ -28,17 +28,16 @@ namespace ChargingDemo.Loop8Algo
         /// </summary>
         public int F1 { get; set; } = 6;
         public int T1 { get; set; } = (int)Decimal.Zero;
-        public double T1Price { get; set; } = (double)Decimal.Zero  ;
+        public double T1Price { get; set; } = (double)Decimal.Zero;
         /// after time unit per Unit Price 后续计费单元 例如 2元/18分钟  AnN = 18 
         public int AFNUnit { get; set; } = 2;
         public double AFNUPrice { get; set; } = 18.0d;
-
         #endregion
 
         #region 算法引擎内核
         internal protected List<Tuple<DateTime, DateTime, string>> TimeSlice;
         private Int32 CurrentTPivot { get; set; }
-        internal protected double AmoutTotal { get; private set; }
+        internal protected double AmoutTotal { get; private set; } 
         #endregion
 
         public Engine(string RuleName , DateTime ValidDtime)
@@ -48,7 +47,9 @@ namespace ChargingDemo.Loop8Algo
 
             // 传入规则名称初始化
             if (!String.IsNullOrEmpty(RuleName))
+            {
                 EngineName = RuleName;
+            }
         }
 
         /* IMPL = implementation 算法的实现 */
