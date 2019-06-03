@@ -43,8 +43,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CalculationModule\Engine.cs" />
-    <Compile Include="CalculationModule\IChargeEngine.cs" />
+    <Compile Include="Loop8Algo\EngineIMPL\HyperStepNEngine.cs" />
+    <Compile Include="Loop8Algo\EngineIMPL\Seg2Engine.cs" />
+    <Compile Include="Loop8Algo\Engine.cs" />
+    <Compile Include="Loop8Algo\EngineIMPL\SingleTimesEngine.cs" />
+    <Compile Include="Loop8Algo\EngineIMPL\TidalEngine.cs" />
+    <Compile Include="Loop8Algo\EngineIMPL\TidalSeg2Engine.cs" />
+    <Compile Include="Loop8Algo\IChargeEngine.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

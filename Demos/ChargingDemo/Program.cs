@@ -1,4 +1,5 @@
-﻿using ChargingDemo.CalculationModule;
+﻿using ChargingDemo.Loop8Algo;
+using ChargingDemo.Loop8Algo.EngineIMPL;
 using ServiceStack.Text;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,8 @@ namespace ChargingDemo
             var NMinutes = random.Next(1000);
             var T1 = DateTime.Now;
             var EndTime = T1.AddMinutes(NMinutes);
-            IChargeEngine instance = new Engine("测试规则",DateTime.MinValue)
+
+            IChargeEngine instance = new Seg2Engine("二段式收费", DateTime.MinValue)
             {
                 // 模拟`二段式收费`
                 F1 = 10,T1 = 20, T1Price = 5.0d, ANUnit = 120, ANUPrice = 2,

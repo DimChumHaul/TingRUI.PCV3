@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChargingDemo.CalculationModule
+namespace ChargingDemo.Loop8Algo
 {
     /// <summary>
     /// 适用于人类一切`计费规则`相关的计费引擎接口

@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChargingDemo.CalculationModule
+namespace ChargingDemo.Loop8Algo
 {
     /// <summary>
     /// 算法状态机 ：八阵图 底层用到的算法逻辑封装类
     /// </summary>
-    internal class Engine : IChargeEngine
+    public class Engine : IChargeEngine
     {
         public string EngineName { get; } = $"[没有规则] - 请继承自这个类并提交你需要的规则代码在子类的方法重写中";
         protected internal byte[] RuleCode { get; set; }
@@ -43,7 +43,7 @@ namespace ChargingDemo.CalculationModule
             }
         }
 
-        public virtual double CalculationPrice(DateTime InTime, DateTime OutTime, bool OKToLetGo = false)
+        public virtual double CalculationPrice(DateTime InTime, DateTime OutTime, bool OKToLetGo = true)
         {
             return -0.0d;
         }
