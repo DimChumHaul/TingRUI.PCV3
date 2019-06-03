@@ -27,10 +27,10 @@ namespace ChargingDemo
             IChargeEngine instance = new Seg2Engine("二段式收费", DateTime.MinValue)
             {
                 // 模拟`二段式收费`
-                F1 = 10,T1 = 20, T1Price = 5.0d, ANUnit = 120, ANUPrice = 2,
+                F1 = 10,T1 = 20, T1Price = 5.0d, AFNUnit = 120, AFNUPrice = 2,
                 StartTime = DateTime.Now, EndTime = EndTime
             };
-            double price = instance.CalculationPrice();
+            double price = instance.CalculateIMPL();
             instance.PrintDump();
         }
     }

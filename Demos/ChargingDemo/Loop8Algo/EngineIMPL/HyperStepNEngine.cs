@@ -14,13 +14,13 @@ namespace ChargingDemo.Loop8Algo.EngineIMPL
 
         }
 
-        public override double CalculationPrice(bool OKToLetGo = true)
+        public override double CalculateIMPL(bool OKToLetGo = true)
         {
-            return base.CalculationPrice(OKToLetGo);
+            return base.CalculateIMPL(OKToLetGo);
         }
-        public override string GenerateOrderDetail()
+        public override string GenerateOrderIMPL()
         {
-            return base.GenerateOrderDetail();
+            return base.GenerateOrderIMPL();
         }
     }
 }
