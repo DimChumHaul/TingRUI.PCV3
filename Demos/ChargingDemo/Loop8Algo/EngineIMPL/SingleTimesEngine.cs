@@ -13,7 +13,9 @@ namespace ChargingDemo.Loop8Algo.EngineIMPL
         public override decimal? CalculationIMPL(DateTime t1, DateTime t2, bool LetGo = false)
         {
             if (LetGo) return base.LetGoPrice;
-            throw new NotImplementedException("关门放狗 必须给钱放行~");
+            var info = $"这里应该做相应的 操作员信息和订单记录 以及系统日志记录," + Environment.NewLine;
+            info += "关门放狗 必须给钱放行~";
+            throw new NotImplementedException(info);
         }
     }
 }
