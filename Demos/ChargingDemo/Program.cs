@@ -40,8 +40,8 @@ namespace ChargingDemo
                         // 模拟`二段式收费`
                         Segment1 = new Tuple<DateTime, DateTime>(t1Start, t1End),
                         Segment2 = new Tuple<DateTime, DateTime>(t2Start, t2End),
-                        CubeSun = new Tuple<float, int>(5.0f, 20),
-                        CubeMoon = new Tuple<float, int>(2.0f, 120),
+                        CubeSun = new Tuple<decimal?, int>(5.0m, 20),
+                        CubeMoon = new Tuple<decimal?, int>(2.0m, 120),
                         CrossNightRule = Loop8Algo.Enum.太极.阴,
                         FreeSeg1 = 10, // 免费时间10分钟 设置为0为没有免费时间
                     };

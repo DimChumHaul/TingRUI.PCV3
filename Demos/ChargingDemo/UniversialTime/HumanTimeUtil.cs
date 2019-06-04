@@ -13,6 +13,10 @@ namespace ChargingDemo.UniversialTime
     /// </summary>
     public static class HumanTimeUtil
     {
+        // 单位 分钟
+        public static readonly int HalfDay = 1440 / 2;
+        public static readonly int FullDay = 1440;
+
         public static DateTime MakeTime(this DateTime ATime,int h, int m, int s)
         {
             // 控制指针左右边界

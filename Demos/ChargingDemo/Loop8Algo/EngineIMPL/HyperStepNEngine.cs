@@ -10,9 +10,10 @@ namespace ChargingDemo.Loop8Algo.EngineIMPL
     public sealed class HyperStepNEngine : Engine
     {
         public HyperStepNEngine(string RuleName, DateTime ValidDtime) : base(RuleName) { }
-        public override void CalculationIMPL(DateTime t1, DateTime t2, bool LetGo = false)
+        public override decimal? CalculationIMPL(DateTime t1, DateTime t2, bool LetGo = false)
         {
-            
+            if(LetGo) return base.LetGoPrice;
+            throw new NotImplementedException("关门放狗 必须给钱放行~");
         }
     }
 }

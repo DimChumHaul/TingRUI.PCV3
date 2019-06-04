@@ -17,9 +17,21 @@ namespace ChargingDemo.Loop8Algo.EngineIMPL
         /// <param name="ValidDtime">规则有效期</param>
         public TidalEngine(string RuleName) : base(RuleName) { }
 
-        public override void CalculationIMPL(DateTime t1, DateTime t2, bool LetGo = false)
-        {
+        /* 白天盒子 */
+        public Tuple<float, int> CubeH1 { get; set; } = new Tuple<float, int>(1.5f, 15);
+        /* 夜晚盒子 */
+        public Tuple<float, int> CubeHN { get; set; } = new Tuple<float, int>(2.0f, 15);
 
+        public override decimal? CalculationIMPL(DateTime t1, DateTime t2, bool LetGo = false)
+        {
+            // 以下算法的逻辑 建立在 `最小计费单元是分钟`的基础上 不代表不可以继续切割分钟为更小的时间单元
+            if (t1.Year != t2.Year) throw new NotImplementedException("跨年算法暂时不公开...");
+            if (t1 > t2) throw new InvalidOperationException("出场时间必须大于入场时间");
+            InTime = t1 > t2 ? t2 : t1;
+            OutTimme = t1 < t2 ? t1 : t2;
+
+            double TTM = Math.Abs((t2 - t1).TotalMinutes);
+            return -1.0m;
         }
     }
 }

@@ -24,10 +24,11 @@ namespace ChargingDemo.Loop8Algo.EngineIMPL
         /// 1天   = 1440分 = 86400秒
         public Tuple<DateTime, DateTime> Segment1 { get; set; }
         public Tuple<DateTime, DateTime> Segment2 { get; set; }
+
         /* 白天盒子 */
-        public Tuple<float, int> CubeSun { get; set; } = new Tuple<float, int>(5.0f, 20);
+        public Tuple<decimal?, int> CubeSun { get; set; } = new Tuple<decimal?, int>(5.0m, 20);
         /* 夜晚盒子 */
-        public Tuple<float, int> CubeMoon { get; set; } = new Tuple<float, int>(2.0f, 120);
+        public Tuple<decimal?, int> CubeMoon { get; set; } = new Tuple<decimal?, int>(2.0m, 120);
         /* 后续所有单元默认使用第二段收费规则 如果用户勾选则选择第一段 */
         public 太极 CrossNightRule { get; set; } = 太极.阴;
 
@@ -45,10 +46,10 @@ namespace ChargingDemo.Loop8Algo.EngineIMPL
             for (int i = 0; i < divides; i++)
             {
                 TotalResult += CUBE.Item1;
-                Tailer.Add(new Tuple<int, string, float>(CUBE.Item2, EngineToken, CUBE.Item1));
+                Tailer.Add(new Tuple<int, string, decimal?>(CUBE.Item2, EngineToken, CUBE.Item1));
             }
             // 4.虚位以待
-            Tailer.Add(new Tuple<int, string, float>((int)tailer, EngineToken + $"尾巴时间[{tailer}]分钟", CUBE.Item1));
+            Tailer.Add(new Tuple<int, string, decimal?>((int)tailer, EngineToken + $"尾巴时间[{tailer}]分钟", CUBE.Item1));
             合计价格人类货币 = $"停车收费:[{TotalResult}]元...算法规则({EngineToken})";
         }
 
@@ -60,19 +61,18 @@ namespace ChargingDemo.Loop8Algo.EngineIMPL
         /// <param name="t2">出场</param>
         /// <param name="LetGo">是否直接放行 转为按次计费</param>
         /// <returns></returns>
-        public override void CalculationIMPL(DateTime t1, DateTime t2, bool LetGo = false)
+        public override decimal? CalculationIMPL(DateTime t1, DateTime t2, bool LetGo = false)
         {
             // 以下算法的逻辑 建立在 `最小计费单元是分钟`的基础上 不代表不可以继续切割分钟为更小的时间单元
-
             if (t1.Year != t2.Year) throw new NotImplementedException("跨年算法暂时不公开...");
             if (t1 > t2) throw new InvalidOperationException("出场时间必须大于入场时间");
             if (Segment1.Item2 >= Segment2.Item1) throw new InvalidOperationException("两段式设置不允许有时间轴交集");
+            InTime = t1 > t2 ? t2 : t1;
+            OutTimme = t1 < t2 ? t1 : t2;
 
             // 免费停车
             double TTM = Math.Abs((t2 - t1).TotalMinutes);
-            InTime = t1 > t2 ? t2 : t1;
-            OutTimme = t1 < t2 ? t1 : t2;
-            if ((int)TTM <= FreeSeg1) return;
+            if ((int)TTM <= FreeSeg1) return -.0m;
 
             #region 八阵图中枢神经层 :时钟自旋(1分钟) > 地球自转(1天) > 地球公转(1年) > 太阳公转(酒神代) > 银河公转(谷雨代) 
             // &升维: 地球自转(1天)：第二天
@@ -101,6 +101,7 @@ namespace ChargingDemo.Loop8Algo.EngineIMPL
                 var TTMRight = (TomorrowBegin - t1).TotalMinutes;
                 EngineGo(TTMRight, 太极.阴);
             }
+            return TotalResult;
             #endregion
         }
     }
