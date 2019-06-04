@@ -43,7 +43,7 @@ namespace ChargingDemo.Loop8Algo.EngineIMPL
             int divides = (int)TTM / CUBE.Item2;
             double tailer = TTM % CUBE.Item2;
             // 3.辗转相除
-            TotalResult = -.0m;
+            
             for (int i = 0; i < divides; i++)
             {
                 TotalResult += CUBE.Item1;
