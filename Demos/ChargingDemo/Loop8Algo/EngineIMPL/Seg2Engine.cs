@@ -17,12 +17,12 @@ namespace ChargingDemo.Loop8Algo.EngineIMPL
      */
     public class Seg2Engine : Engine
     {
-        //public Seg2Engine(string RuleName) : base(RuleName) { }
+        public Seg2Engine(string RuleName) : base(RuleName) { }
         /// 一天中的时间段 精确到秒 但这里就用整形 .NET SDK可以完成全自动转化  
         /// 0.5天 = 720分 = 43200秒
         /// 1天   = 1440分 = 86400秒
-        private Tuple<DateTime, DateTime> Segment1 { get; set; }
-        private Tuple<DateTime, DateTime> Segment2 { get; set; }
+        public Tuple<DateTime, DateTime> Segment1 { get; set; }
+        public Tuple<DateTime, DateTime> Segment2 { get; set; }
 
         // 后续所有单元默认使用第二段收费规则 如果用户勾选则选择第一段
         public bool EnableLoop = false;

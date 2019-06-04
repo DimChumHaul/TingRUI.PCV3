@@ -1,5 +1,6 @@
 ﻿using ChargingDemo.Loop8Algo;
 using ChargingDemo.Loop8Algo.EngineIMPL;
+using ChargingDemo.UniversialTime;
 using ServiceStack.Text;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,11 @@ namespace ChargingDemo
             var EndTime = T1.AddMinutes(NMinutes);
             $"停车总时长[{NMinutes}]分钟 起始时间[{T1}],结束时间[{EndTime}]".PrintDump();
 
+            DateTime t1Start = DateTime.Now.MakeTime(07, 00, 00);
+            DateTime t1End = DateTime.Now.MakeTime(19, 00, 00);
+            DateTime t2Start = t1End.AddMinutes(1);
+            // 注意这里是第二天早上6点
+            DateTime t2End = DateTime.Now.MakeTime(19, 00, 00);
             IChargeEngine instance = new Seg2Engine("二段式收费")
             {
                 // 模拟`二段式收费`

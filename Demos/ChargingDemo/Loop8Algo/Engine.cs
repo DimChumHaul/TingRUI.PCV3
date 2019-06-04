@@ -44,10 +44,11 @@ namespace ChargingDemo.Loop8Algo
 
         public Engine(string RuleName = @"ヽ｀、ヽ｀｀、ヽ｀ヽ｀、、ヽ ｀ヽ 、ヽ｀｀ヽヽ｀ヽ、ヽ｀ヽ｀、ヽ｀｀、ヽ 、｀｀、 ｀、ヽ｀ 、｀ ヽ｀ヽ、ヽ ｀、ヽ｀｀、ヽ、｀｀、｀、ヽ｀｀、 、ヽヽ｀、｀、、ヽヽ、｀｀、 、 ヽ｀、ヽ｀｀、ヽ｀ヽ｀、、ヽ ｀ヽ 、ヽ｀｀ヽ、｀｀ヽ｀、、｀ヽ｀")
         {
-            //var RuleValidaTime = DateTime.Now.AddYears(3);
-            EngineDead = TimeSpan.FromSeconds(1.618);
             // 传入规则名称初始化
             if (!String.IsNullOrEmpty(RuleName)) EngineToken = RuleName;
+
+            //var RuleValidaTime = DateTime.Now.AddYears(3);
+            EngineDead = TimeSpan.FromSeconds(1.618);
             争议处理办法 = new Lazy<Dictionary<string, IoC4ControversyHandler>>();
             争议处理办法.Value.Add("彭总的解决办法", (timesegments, OK) => 
             {
