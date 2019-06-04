@@ -21,10 +21,11 @@ namespace ChargingDemo
         static void Main(string[] args)
         {
             var random = new Random();
-            var NMinutes = random.Next(300,1440);
+            var NMinutes = random.Next(618,1440);
             var T1 = DateTime.Now;
-            var EndTime = T1.AddMinutes(NMinutes);
-            $"停车总时长[{NMinutes}]分钟 起始时间[{T1}],结束时间[{EndTime}]".PrintDump();
+            var T2 = T1.AddMinutes(NMinutes);
+
+            $"停车总时长[{NMinutes}]分钟 起始时间[{T1}],结束时间[{T2}]".PrintDump();
 
             {
                 DateTime t1Start = DateTime.Now.MakeTime(07, 00, 00);
@@ -44,11 +45,12 @@ namespace ChargingDemo
                         CrossNightRule = Loop8Algo.Enum.太极.阴,
                         FreeSeg1 = 10, // 免费时间10分钟 设置为0为没有免费时间
                     };
-                    instance.CalculationIMPL(T1,EndTime);
+                    instance.CalculationIMPL(T1,T2);
                     instance.PrintDump();
                 }
             }
 
+            while (true) ;
         }
     }
 }

@@ -49,6 +49,7 @@ namespace ChargingDemo.Loop8Algo.EngineIMPL
             }
             // 4.虚位以待
             Tailer.Add(new Tuple<int, string, float>((int)tailer, EngineToken + $"尾巴时间[{tailer}]分钟", CUBE.Item1));
+            合计价格人类货币 = $"停车收费:[{TotalResult}]元...算法规则({EngineToken})";
         }
 
         /// <summary>
