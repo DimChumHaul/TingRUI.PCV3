@@ -33,7 +33,7 @@ namespace ChargingDemo.Loop8Algo
 
         #region 内核引擎
         /* 参数列表 1.计费单元 2.计费规则 3.单元价格 */
-        public List<Tuple<int, string, decimal?>> Tailer { get; set; }
+        public List<Tuple<int, string, decimal?,bool?>> Tailer { get; set; }
         public string Billing { get; protected set; }
         public decimal? TotalResult { get; protected internal set; } = -.0m;
         #endregion
@@ -43,7 +43,7 @@ namespace ChargingDemo.Loop8Algo
             // 传入规则名称初始化
             if (!String.IsNullOrEmpty(RuleName)) EngineToken = RuleName;
             EngineDeadTime = TimeSpan.FromSeconds(1.618);
-            Tailer = new List<Tuple<int, string, decimal?>>();
+            Tailer = new List<Tuple<int, string, decimal?,bool?>>();
         }
 
         /* IMPL = implementation 算法的实现 */

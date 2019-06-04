@@ -48,10 +48,10 @@ namespace ChargingDemo.Loop8Algo.EngineIMPL
             for (int i = 0; i < divides; i++)
             {
                 TotalResult += CUBE.Item1;
-                Tailer.Add(new Tuple<int, string, decimal?>(CUBE.Item2, EngineToken, CUBE.Item1));
+                Tailer.Add(new Tuple<int, string, decimal?,bool?>(CUBE.Item2, EngineToken, CUBE.Item1,false));
             }
             // 4.虚位以待
-            Tailer.Add(new Tuple<int, string, decimal?>((int)tailer, EngineToken + $"尾巴时间[{tailer}]分钟", CUBE.Item1));
+            Tailer.Add(new Tuple<int, string, decimal?, bool?>((int)tailer, EngineToken + $"尾巴时间[{tailer}]分钟", CUBE.Item1,false));
             Billing = $"停车收费:[{TotalResult}]元...算法规则({EngineToken})";
         }
 
