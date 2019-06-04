@@ -23,6 +23,7 @@ namespace ChargingDemo.Loop8Algo.EngineIMPL
         /* NH紫红色盒子 */
         public Tuple<decimal?, int> CubeHN { get; set; } = new Tuple<decimal?, int>(2.0m, 15);
 
+        // 【内核算法】：立方体沙漏⏳模型
         public decimal? EngineGo(double TTM, 太极 TaiJi)
         {
             // 1.阴阳合和

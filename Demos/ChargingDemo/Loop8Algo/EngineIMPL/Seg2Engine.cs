@@ -26,24 +26,25 @@ namespace ChargingDemo.Loop8Algo.EngineIMPL
         public Tuple<DateTime, DateTime> Segment2 { get; set; }
 
         /* 白天盒子 */
-        public Tuple<decimal?, int> CubeSun { get; set; } = new Tuple<decimal?, int>(5.0m, 20);
+        public Tuple<decimal?, int> CubeSun { get; set; }
         /* 夜晚盒子 */
-        public Tuple<decimal?, int> CubeMoon { get; set; } = new Tuple<decimal?, int>(2.0m, 120);
+        public Tuple<decimal?, int> CubeMoon { get; set; }
+
         /* 后续所有单元默认使用第二段收费规则 如果用户勾选则选择第一段 */
         public 太极 CrossNightRule { get; set; } = 太极.阴;
 
         ///【离心机】时间轴切片Tuple说明 1.计费规则 2.计费单元 3.单元价格
-        /// 太极 只支持 阴阳相生  换句话说只支持两段式 时间轴区间划断 不支持24小时制 苦恼~
-        /// 也许是我抽象方式有问题：还不够精准
+        ///【太极】只支持【阴阳相生】换句话说只支持两段式 时间轴区间划断 不支持24小时制 
+        /// 苦恼~：八阵图达不到我所理想的 *** 通用模型 *** 效果
+        /// 也许是我抽象方式有问题：【还不够精准】
         public void EngineGo(double TTM, 太极 TaiJi)
         {
             // 1.阴阳合和
-            var CUBE = TaiJi == 太极.阳 ? CubeSun : CubeMoon;
+            var CUBE = TaiJi == 太极.阳 ? CubeSun : CubeMoon; 
             // 2.矩阵平方
             int divides = (int)TTM / CUBE.Item2;
             double tailer = TTM % CUBE.Item2;
             // 3.辗转相除
-            
             for (int i = 0; i < divides; i++)
             {
                 TotalResult += CUBE.Item1;
@@ -71,7 +72,8 @@ namespace ChargingDemo.Loop8Algo.EngineIMPL
             // 免费停车
             double TTM = Math.Abs((t2 - t1).TotalMinutes);
             if ((int)TTM <= FreeSeg1) return -.0m;
-
+            
+            /* 基础算法的展开 */
             #region 八阵图中枢神经层 :时钟自旋(1分钟) > 地球自转(1天) > 地球公转(1年) > 太阳公转(酒神代) > 银河公转(谷雨代) 
             // &升维: 地球自转(1天)：第二天
             var TomorrowBegin = Segment1.Item1.AddDays(1);
