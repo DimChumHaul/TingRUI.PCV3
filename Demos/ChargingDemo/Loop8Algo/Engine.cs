@@ -28,13 +28,13 @@ namespace ChargingDemo.Loop8Algo
 
         /* 白天盒子 */
         public Tuple<float, int> CubeSun { get; set; } = new Tuple<float, int>(5.0f, 20);
-        /** 月光盒子 */
+        /* 夜晚盒子 */
         public Tuple<float, int> CubeMoon { get; set; } = new Tuple<float, int>(2.0f, 120);
         #endregion
 
         #region 算法引擎内核
-        /* 算法底层所依赖的核心数据结构:【矩阵革命】微软Tuple数据结构切片儿 创建者：丁诚昊 v0.2 */ 
         internal protected double TotalResult { get; protected set; }
+        /* 算法底层所依赖的核心数据结构:【矩阵革命】微软Tuple数据结构切片儿 创建者：丁诚昊 v0.2 */ 
         /// <summary>
         /// 参数列表 1.计费单元 2.计费规则 3.单元价格
         /// </summary>

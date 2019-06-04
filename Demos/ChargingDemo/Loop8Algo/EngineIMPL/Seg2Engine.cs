@@ -21,13 +21,16 @@ namespace ChargingDemo.Loop8Algo.EngineIMPL
         /// 一天中的时间段 精确到秒 但这里就用整形 .NET SDK可以完成全自动转化  
         /// 0.5天 = 720分 = 43200秒
         /// 1天   = 1440分 = 86400秒
-        public Tuple<DateTime, DateTime> Segment1 { get; set; }
-        public Tuple<DateTime, DateTime> Segment2 { get; set; }
+        private Tuple<DateTime, DateTime> Segment1 { get; set; }
+        private Tuple<DateTime, DateTime> Segment2 { get; set; }
+
         // 后续所有单元默认使用第二段收费规则 如果用户勾选则选择第一段
         public bool EnableLoop = false;
 
         ///【离心机】时间轴切片Tuple说明 1.计费规则 2.计费单元 3.单元价格
-        public void Work4Money(double TTM, 太极 TaiJi)
+        /// 太极 只支持 阴阳相生  换句话说只支持两段式 时间轴区间划断 不支持24小时制 苦恼~
+        /// 也许是我抽象方式有问题：还不够精准
+        public void EngineGo(double TTM, 太极 TaiJi)
         {
             // 1.阴阳合和
             var CUBE = TaiJi == 太极.阳 ? CubeSun : CubeMoon;
@@ -73,25 +76,25 @@ namespace ChargingDemo.Loop8Algo.EngineIMPL
             if (t1 >= Segment1.Item1 && t1 <= Segment1.Item2)
             {
                 // 不跨时段
-                if (t2 <= Segment2.Item1) Work4Money(TTM, 太极.阳);
+                if (t2 <= Segment2.Item1) EngineGo(TTM, 太极.阳);
                 else // 跨时段 
                 {
                     var TTML1 = (Segment1.Item2 - t1).TotalMinutes;
-                    Work4Money(TTML1, 太极.阳);
+                    EngineGo(TTML1, 太极.阳);
                     // 递归划断一个[中轴线] :左边分钟数*带入阳面指针 + 右边分钟数 * 带入阴面指针
                     var TTMR1 = (t2 - Segment2.Item1).TotalMinutes;
-                    Work4Money(TTMR1, 太极.阴);
+                    EngineGo(TTMR1, 太极.阴);
                 }
             }
             // 阴面 & 不跨时段
-            else if (t1 >= Segment2.Item1 && t2 <= TomorrowBegin) Work4Money(TTM, 太极.阴); 
+            else if (t1 >= Segment2.Item1 && t2 <= TomorrowBegin) EngineGo(TTM, 太极.阴); 
             else // 跨时段
             {
                 var TTMLeft = (t2 - TomorrowBegin).TotalMinutes;
-                Work4Money(TTMLeft, EnableLoop ? 太极.阳 :太极.阴);
+                EngineGo(TTMLeft, EnableLoop ? 太极.阳 :太极.阴);
                 // 递归划断一个[中轴线] :左边分钟数*带入阳面指针 + 右边分钟数 * 带入阴面指针
                 var TTMRight = (TomorrowBegin - t1).TotalMinutes;
-                Work4Money(TTMRight, 太极.阴);
+                EngineGo(TTMRight, 太极.阴);
             }
             #endregion
         }
