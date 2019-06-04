@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace ChargingDemo.Loop8Algo.EngineIMPL
 {
     // 多段式收费
-    public sealed class HyperStepNEngine : Engine
+    public sealed class Hyper24HEngine : Engine
     {
-        public HyperStepNEngine(string RuleName, DateTime ValidDtime) : base(RuleName) { }
+        public Hyper24HEngine(string RuleName, DateTime ValidDtime) : base(RuleName) { }
         public override decimal? CalculationIMPL(DateTime t1, DateTime t2, bool LetGo = false)
         {
             if(LetGo) return base.LetGoPrice;
