@@ -8,9 +8,9 @@ namespace ChargingDemo.Loop8Algo.EngineIMPL
 {
     #region PCM = PinColorMinutes 算法的继承：先调用两段式算法计费 然后去引擎内部的Tail容器中***着色小球*** 最后带入折扣率
     // 算法的继承
-    public class TidalSeg2Engine : Seg2Engine
+    public class Seg2TidalEngine : Seg2Engine
     {
-        public TidalSeg2Engine(string RuleName) : base(RuleName) { }
+        public Seg2TidalEngine(string RuleName) : base(RuleName) { }
         // M = Minutes 彭工给的是小时 我用分钟作单位
         // 默认提供1小时的潮汐时间 延长潮汐时间能够提高车场收入 缓解交通压力
         public double PCM { get; set; } = 60.0d + 0.0001; 
@@ -32,9 +32,10 @@ namespace ChargingDemo.Loop8Algo.EngineIMPL
             // 1.免费停车
             double TTM = Math.Abs( (t2 - t1).TotalMinutes );
             if ((int)TTM <= FreeSeg1) return -.0m;
+
             // 2-1.先计算原始价格
             // 2-2.计算折扣率
-            DiscountRate = (float)(H1P / base.CubeSun.Item1);
+            DiscountRate = (float)(H1P / CubeSun.Item1);
             if (DiscountRate < 0) throw new Exception("折扣率不可以为负数") ;
             if (DiscountRate == 0) throw new NotImplementedException("潮汐价等于原价 折扣率恒等于1");
             if (DiscountRate > 1.0) throw new ArgumentOutOfRangeException("折扣率大于1.0 存在风险");
