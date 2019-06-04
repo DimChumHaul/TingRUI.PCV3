@@ -43,6 +43,7 @@ namespace ChargingDemo.Loop8Algo.EngineIMPL
             int divides = (int)TTM / CUBE.Item2;
             double tailer = TTM % CUBE.Item2;
             // 3.辗转相除
+            TotalResult = -.0m;
             for (int i = 0; i < divides; i++)
             {
                 TotalResult += CUBE.Item1;
@@ -50,7 +51,7 @@ namespace ChargingDemo.Loop8Algo.EngineIMPL
             }
             // 4.虚位以待
             Tailer.Add(new Tuple<int, string, decimal?>((int)tailer, EngineToken + $"尾巴时间[{tailer}]分钟", CUBE.Item1));
-            合计价格人类货币 = $"停车收费:[{TotalResult}]元...算法规则({EngineToken})";
+            Billing = $"停车收费:[{TotalResult}]元...算法规则({EngineToken})";
         }
 
         /// <summary>
@@ -63,12 +64,9 @@ namespace ChargingDemo.Loop8Algo.EngineIMPL
         /// <returns></returns>
         public override decimal? CalculationIMPL(DateTime t1, DateTime t2, bool LetGo = false)
         {
-            // 以下算法的逻辑 建立在 `最小计费单元是分钟`的基础上 不代表不可以继续切割分钟为更小的时间单元
-            if (t1.Year != t2.Year) throw new NotImplementedException("跨年算法暂时不公开...");
-            if (t1 > t2) throw new InvalidOperationException("出场时间必须大于入场时间");
             if (Segment1.Item2 >= Segment2.Item1) throw new InvalidOperationException("两段式设置不允许有时间轴交集");
-            InTime = t1 > t2 ? t2 : t1;
-            OutTimme = t1 < t2 ? t1 : t2;
+            /* TTM 时间轴校对函数 */
+            ParamCheck(t1, t2);
 
             // 免费停车
             double TTM = Math.Abs((t2 - t1).TotalMinutes);
