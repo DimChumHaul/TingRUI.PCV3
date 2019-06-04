@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChargingDemo.Loop8Algo.Enum;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,9 +24,12 @@ namespace ChargingDemo.Loop8Algo.EngineIMPL
         /// 1天   = 1440分 = 86400秒
         public Tuple<DateTime, DateTime> Segment1 { get; set; }
         public Tuple<DateTime, DateTime> Segment2 { get; set; }
-
-        // 后续所有单元默认使用第二段收费规则 如果用户勾选则选择第一段
-        public bool EnableLoop = false;
+        /* 白天盒子 */
+        public Tuple<float, int> CubeSun { get; set; } = new Tuple<float, int>(5.0f, 20);
+        /* 夜晚盒子 */
+        public Tuple<float, int> CubeMoon { get; set; } = new Tuple<float, int>(2.0f, 120);
+        /* 后续所有单元默认使用第二段收费规则 如果用户勾选则选择第一段 */
+        public 太极 CrossNightRule { get; set; } = 太极.阴;
 
         ///【离心机】时间轴切片Tuple说明 1.计费规则 2.计费单元 3.单元价格
         /// 太极 只支持 阴阳相生  换句话说只支持两段式 时间轴区间划断 不支持24小时制 苦恼~
@@ -67,7 +71,7 @@ namespace ChargingDemo.Loop8Algo.EngineIMPL
             double TTM = Math.Abs((t2 - t1).TotalMinutes);
             InTime = t1 > t2 ? t2 : t1;
             OutTimme = t1 < t2 ? t1 : t2;
-            if ((int)TTM <= F1) return;
+            if ((int)TTM <= FreeSeg1) return;
 
             #region 八阵图中枢神经层 :时钟自旋(1分钟) > 地球自转(1天) > 地球公转(1年) > 太阳公转(酒神代) > 银河公转(谷雨代) 
             // &升维: 地球自转(1天)：第二天
@@ -91,7 +95,7 @@ namespace ChargingDemo.Loop8Algo.EngineIMPL
             else // 跨时段
             {
                 var TTMLeft = (t2 - TomorrowBegin).TotalMinutes;
-                EngineGo(TTMLeft, EnableLoop ? 太极.阳 :太极.阴);
+                EngineGo(TTMLeft, CrossNightRule);
                 // 递归划断一个[中轴线] :左边分钟数*带入阳面指针 + 右边分钟数 * 带入阴面指针
                 var TTMRight = (TomorrowBegin - t1).TotalMinutes;
                 EngineGo(TTMRight, 太极.阴);

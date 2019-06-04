@@ -49,6 +49,7 @@
     <Compile Include="Loop8Algo\EngineIMPL\SingleTimesEngine.cs" />
     <Compile Include="Loop8Algo\EngineIMPL\TidalEngine.cs" />
     <Compile Include="Loop8Algo\EngineIMPL\TidalSeg2Engine.cs" />
+    <Compile Include="Loop8Algo\Enum\TaiJi.cs" />
     <Compile Include="Loop8Algo\IChargeEngine.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
