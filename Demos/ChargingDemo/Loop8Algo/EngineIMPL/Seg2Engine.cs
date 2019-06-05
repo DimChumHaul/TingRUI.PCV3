@@ -19,12 +19,26 @@ namespace ChargingDemo.Loop8Algo.EngineIMPL
     public class Seg2Engine : Engine
     {
         public Seg2Engine(string RuleName) : base(RuleName) { }
-        /// 一天中的时间段 精确到秒 但这里就用整形 .NET SDK可以完成全自动转化  
-        /// 0.5天 = 720分 = 43200秒
-        /// 1天   = 1440分 = 86400秒
-        public Tuple<DateTime, DateTime> Segment1 { get; set; }
-        public Tuple<DateTime, DateTime> Segment2 { get; set; }
 
+        /** 
+         * v1.0【时间轴切片】的设计灵感来源：电影 <雷神2:暗黑世界>
+         *      西方神话中关于时间的最小单元: `以太`的解释：
+         *      https://baike.baidu.com/item/%E4%BB%A5%E5%A4%AA/518267?fr=aladdin 
+         *      
+         * Pivot Segments: 用于存放最少1种最多N-1中计费规则 
+         * 时间轴切片: 通用计费软件中枢神经系统中的计费流水线
+         * 
+         *【算法的设计】:
+         * 携带时间轴的时间管理单元 会对地球自转的时间轴拉伸成一条直线  
+         * 这条直线的总长度为1440个MTU(最小时间单元) 俗称下刀 一刀划2段 N刀划N+1段  
+         * 一刀下去以后会生成两种规则 将`规则`统一抽象为一个【盒子(计价单元)】
+         *      例如：可口可乐流水线上的可乐代表流量 水瓶代表盒子 
+         *      3元一`种(不是一个)`盒子 10元代表`大容量盒子`
+         * 这里需要某种语言中的一种数据结构作容器 存放这些`时间轴切片儿`
+         */
+        public IEnumerable<Tuple<DateTime,DateTime,DKCube>> PivotSegments { get; set; }
+
+        /** 为切割之后的时间轴切片 */
         /* 白天盒子 */
         public Tuple<decimal?, int> CubeSun { get; set; }
         /* 夜晚盒子 */
@@ -32,28 +46,6 @@ namespace ChargingDemo.Loop8Algo.EngineIMPL
 
         /* 后续所有单元默认使用第二段收费规则 如果用户勾选则选择第一段 */
         public 太极 CrossNightRule { get; set; } = 太极.阴;
-
-        ///【离心机】时间轴切片Tuple说明 1.计费规则 2.计费单元 3.单元价格
-        ///【太极】只支持【阴阳相生】换句话说只支持两段式 时间轴区间划断 不支持24小时制 
-        /// 苦恼~：八阵图达不到我所理想的 *** 通用模型 *** 效果
-        /// 也许是我抽象方式有问题：【还不够精准】
-        public void EngineGo(double TTM, 太极 TaiJi)
-        {
-            // 1.阴阳合和
-            var CUBE = TaiJi == 太极.阳 ? CubeSun : CubeMoon; 
-            // 2.矩阵平方
-            int divides = (int)TTM / CUBE.Item2;
-            double tailer = TTM % CUBE.Item2;
-            // 3.辗转相除
-            for (int i = 0; i < divides; i++)
-            {
-                TotalResult += CUBE.Item1;
-                Tailer.Add(new Tuple<int, string, decimal?,bool?>(CUBE.Item2, EngineToken, CUBE.Item1,false));
-            }
-            // 4.虚位以待
-            Tailer.Add(new Tuple<int, string, decimal?, bool?>((int)tailer, EngineToken + $"尾巴时间[{tailer}]分钟", CUBE.Item1,false));
-            Billing = $"停车收费:[{TotalResult}]元...算法规则({EngineToken})";
-        }
 
         /// <summary>
         /// 如果超过当日让用户选择 超出第一天的部分 按照何种规则计价: 第一天夜间规则还是第一(二)天白天规则 
@@ -72,7 +64,7 @@ namespace ChargingDemo.Loop8Algo.EngineIMPL
             // 免费停车
             double TTM = Math.Abs((t2 - t1).TotalMinutes);
             if ((int)TTM <= FreeSeg1) return -.0m;
-            
+
             /* 基础算法的展开 */
             #region 八阵图中枢神经层 :时钟自旋(1分钟) > 地球自转(1天) > 地球公转(1年) > 太阳公转(酒神代) > 银河公转(谷雨代) 
             // &升维: 地球自转(1天)：第二天
@@ -92,7 +84,7 @@ namespace ChargingDemo.Loop8Algo.EngineIMPL
                 }
             }
             // 阴面 & 不跨时段
-            else if (t1 >= Segment2.Item1 && t2 <= TomorrowBegin) EngineGo(TTM, 太极.阴); 
+            else if (t1 >= Segment2.Item1 && t2 <= TomorrowBegin) EngineGo(TTM, 太极.阴);
             else // 跨时段
             {
                 var TTMLeft = (t2 - TomorrowBegin).TotalMinutes;

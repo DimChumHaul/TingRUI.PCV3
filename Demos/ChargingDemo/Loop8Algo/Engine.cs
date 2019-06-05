@@ -1,4 +1,5 @@
-﻿using ServiceStack;
+﻿using ChargingDemo.Loop8Algo.Enum;
+using ServiceStack;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,7 +39,11 @@ namespace ChargingDemo.Loop8Algo
         public decimal? TotalResult { get; protected internal set; } = -.0m;
         #endregion
 
-        public Engine(string RuleName = @"ヽ｀、ヽ｀｀、ヽ｀ヽ｀、、ヽ ｀ヽ 、ヽ｀｀ヽヽ｀ヽ、ヽ｀ヽ｀、ヽ｀｀、ヽ 、｀｀、 ｀、ヽ｀ 、｀ ヽ｀ヽ、ヽ ｀、ヽ｀｀、ヽ、｀｀、｀、ヽ｀｀、 、ヽヽ｀、｀、、ヽヽ、｀｀、 、 ヽ｀、ヽ｀｀、ヽ｀ヽ｀、、ヽ ｀ヽ 、ヽ｀｀ヽ、｀｀ヽ｀、、｀ヽ｀")
+        public Engine(string RuleName = @"酒神
+ヽ｀、ヽ｀｀、ヽ｀ヽ｀、、ヽ ｀ヽ 、ヽ｀｀ヽヽ｀ヽ、ヽ｀ヽ｀、ヽ｀｀、ヽ 、｀｀、
+｀、ヽ｀ 、｀ ヽ｀ヽ、ヽ ｀、ヽ｀｀、ヽ、｀｀、｀、ヽ｀｀、 、ヽヽ｀、｀、、ヽヽ
+、｀｀、 、 ヽ｀、ヽ｀｀、ヽ｀ヽ｀、、ヽ ｀ヽ 、ヽ｀｀ヽ、｀｀ヽ｀、、｀ヽ｀
+谷雨")
         {
             // 传入规则名称初始化
             if (!String.IsNullOrEmpty(RuleName)) EngineToken = RuleName;
@@ -59,6 +64,7 @@ namespace ChargingDemo.Loop8Algo
             return $"订单:[{Guid.NewGuid()}] - \n\t 停车收费: ---|{result}|--- ";
         }
 
+        #region 内核钩子作业函数区
         /// TTM 时间轴校对函数
         public virtual bool ParamCheck(DateTime T1, DateTime T2)
         {
@@ -78,5 +84,26 @@ namespace ChargingDemo.Loop8Algo
             ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ;
             return true;
         }
+
+        // 【内核算法】：立方体沙漏⏳模型
+        public decimal? EngineGo(double TTM, 太极 TaiJi)  
+        {
+            // 1.阴阳合和
+            var CUBE = TaiJi == 太极.阳 ? CubeH1 : CubeHN;
+            // 2.矩阵平方
+            int divides = (int)TTM / CUBE.Item2;
+            double tailer = TTM % CUBE.Item2;
+            // 3.辗转相除
+            for (int i = 0; i < divides; i++)
+            {
+                TotalResult += CUBE.Item1;
+                Tailer.Add(new Tuple<int, string, decimal?, bool?>(CUBE.Item2, EngineToken, CUBE.Item1, false));
+            }
+            // 4.虚位以待
+            Tailer.Add(new Tuple<int, string, decimal?, bool?>((int)tailer, EngineToken + $"尾巴时间[{tailer}]分钟", CUBE.Item1, false));
+            Billing = $"停车收费:[{TotalResult}]元...算法规则({EngineToken})";
+            return TotalResult;
+        }
+        #endregion
     }
 }

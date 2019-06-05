@@ -23,26 +23,6 @@ namespace ChargingDemo.Loop8Algo.EngineIMPL
         /* NH紫红色盒子 */
         public Tuple<decimal?, int> CubeHN { get; set; } = new Tuple<decimal?, int>(2.0m, 15);
 
-        // 【内核算法】：立方体沙漏⏳模型
-        public decimal? EngineGo(double TTM, 太极 TaiJi)
-        {
-            // 1.阴阳合和
-            var CUBE = TaiJi == 太极.阳 ? CubeH1 : CubeHN;
-            // 2.矩阵平方
-            int divides = (int)TTM / CUBE.Item2;
-            double tailer = TTM % CUBE.Item2;
-            // 3.辗转相除
-            for (int i = 0; i < divides; i++)
-            {
-                TotalResult += CUBE.Item1;
-                Tailer.Add(new Tuple<int, string, decimal?, bool?>(CUBE.Item2, EngineToken, CUBE.Item1,false));
-            }
-            // 4.虚位以待
-            Tailer.Add(new Tuple<int, string, decimal?, bool?>((int)tailer, EngineToken + $"尾巴时间[{tailer}]分钟", CUBE.Item1,false));
-            Billing = $"停车收费:[{TotalResult}]元...算法规则({EngineToken})";
-            return base.TotalResult;
-        }
-
         public override decimal? CalculationIMPL(DateTime t1, DateTime t2, bool LetGo = false)
         {
             /* TTM 时间轴校对函数 */
