@@ -49,7 +49,7 @@
     <Compile Include="AlgoCore\Enum\FloorOrCeil.cs" />
     <Compile Include="Loop8Algo\EngineIMPL\Hyper24HEngine.cs" />
     <Compile Include="Loop8Algo\EngineIMPL\Seg2Engine.cs" />
-    <Compile Include="Loop8Algo\Engine.cs" />
+    <Compile Include="Loop8Algo\EngineV1.cs" />
     <Compile Include="Loop8Algo\EngineIMPL\SingleTimesEngine.cs" />
     <Compile Include="Loop8Algo\EngineIMPL\TidalEngine.cs" />
     <Compile Include="Loop8Algo\EngineIMPL\Seg2TidalEngine.cs" />

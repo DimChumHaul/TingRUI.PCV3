@@ -16,7 +16,7 @@ namespace AlgoCore
     public class DKTimingUnit :DKTStd
     {
         #region  增加函数最好是以`扩展函数`的形式增强SDK 方便调用
-        public static DateTime CurrentTime(int h, int m, int s)
+        internal static DateTime ParseTime2DTime(int h, int m, int s)
         {
             // 检查Time返回值是否越界
             DateTime Today = DateTime.Today;

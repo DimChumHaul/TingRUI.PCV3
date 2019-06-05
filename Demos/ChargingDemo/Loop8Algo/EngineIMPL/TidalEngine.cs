@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AlgoCore.Loop8Algo.EngineIMPL
 {
-    public class TidalEngine : Engine
+    public class TidalEngine : EngineV1
     {
         /// <summary>
         /// 潮汐收费引擎说明: 
@@ -18,10 +18,10 @@ namespace AlgoCore.Loop8Algo.EngineIMPL
         /// <param name="ValidDtime">规则有效期</param>
         public TidalEngine(string RuleName) : base(RuleName) { }
 
-        /* 1H紫色盒子 */
-        public Tuple<decimal?, int> CubeH1 { get; set; } = new Tuple<decimal?, int>(1.5m, 15);
-        /* NH紫红色盒子 */
-        public Tuple<decimal?, int> CubeHN { get; set; } = new Tuple<decimal?, int>(2.0m, 15);
+        ///* 1H紫色盒子 */
+        //public Tuple<decimal?, int> CubeH1 { get; set; } = new Tuple<decimal?, int>(1.5m, 15);
+        ///* NH紫红色盒子 */
+        //public Tuple<decimal?, int> CubeHN { get; set; } = new Tuple<decimal?, int>(2.0m, 15);
 
         public override decimal? CalculationIMPL(DateTime t1, DateTime t2, bool LetGo = false)
         {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AlgoCore.Loop8Algo.EngineIMPL
 {
-    public class SingleTimesEngine : Engine
+    public class SingleTimesEngine : EngineV1
     {
         public SingleTimesEngine(string RuleName) : base(RuleName) { }
         /* 单次停车的收费放行价格? */

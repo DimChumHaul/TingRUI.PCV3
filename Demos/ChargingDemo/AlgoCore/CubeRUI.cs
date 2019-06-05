@@ -10,7 +10,9 @@ namespace AlgoCore
     {
         public 太极 阴阳界 { get; private set; } = DKTStd.DayOrNight ? 太极.阳 : 太极.阴;
         // 内核引擎的出厂盒子大小为 C5m120d
+        // 停车单元
         internal decimal? LastingPrice { get; set; } = 5.0m;
+        // 单元收费
         internal double LastingMinutes { get; set; } = 120d;
 
         // PricePerMinutes 一分钟计费价
@@ -24,7 +26,7 @@ namespace AlgoCore
         {
             // 初始化【计费盒子】
             LastingPrice = priceUnit.Item1;
-            LastingMinutes = priceUnit.Item2;
+            LastingMinutes = (int)priceUnit.Item2;
 
             // 检查参数
             if (disRate <= 0.0f || DisRate >= 1.0f) throw new Exception("初始化盒子失败：折扣率不能越界[0~1.0]");

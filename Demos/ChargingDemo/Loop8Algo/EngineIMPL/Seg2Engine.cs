@@ -25,17 +25,9 @@ namespace AlgoCore.Loop8Algo.EngineIMPL
     *      3元一`种(不是一个)`盒子 10元代表`大容量盒子`
     * 这里需要某种语言中的一种数据结构作容器 存放这些`时间轴切片儿`
     */
-    public class Seg2Engine : Engine
+    public class Seg2Engine : EngineV1
     {
         public Seg2Engine(string RuleName) : base(RuleName) { }
-
-        /* 白天盒子 + 夜晚盒子 : 在盒子内部会标注是白天盒子还是晚上盒子 
-         为切割之后的时间轴切片 
-         */
-        public IEnumerable<(DateTime start,DateTime pivot,DateTime end,CubeRUI RuiCube)> PivotSegments { get; set; }
-
-        /* 北京户口就是牛逼~ */
-        public FloorOrCeil floorOrCeil = FloorOrCeil.Ceil;
 
         /*【过夜规则】默认使用第二段收费规则 如果用户勾选则选择第一段 UI可以做成勾选框 */
         public bool crossNightRuleChange { get; set; } = false;

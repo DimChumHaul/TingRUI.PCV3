@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace AlgoCore.Loop8Algo.EngineIMPL
 {
     // 多段式收费
-    public sealed class Hyper24HEngine : Engine
+    public sealed class Hyper24HEngine : EngineV1
     {
         public Hyper24HEngine(string RuleName, DateTime ValidDtime) : base(RuleName) { }
         public override decimal? CalculationIMPL(DateTime t1, DateTime t2, bool LetGo = false)
