@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChargingDemo.Loop8Algo.EngineIMPL
+namespace AlgoCore.Loop8Algo.EngineIMPL
 {
     public class SingleTimesEngine : Engine
     {
         public SingleTimesEngine(string RuleName) : base(RuleName) { }
+        /* 单次停车的收费放行价格? */
+        public decimal? LetGoPrice { get; protected internal set; } = 5.0m;
 
         public override decimal? CalculationIMPL(DateTime t1, DateTime t2, bool LetGo = false)
         {

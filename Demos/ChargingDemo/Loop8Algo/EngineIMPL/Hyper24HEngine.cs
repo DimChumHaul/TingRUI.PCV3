@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChargingDemo.Loop8Algo.EngineIMPL
+namespace AlgoCore.Loop8Algo.EngineIMPL
 {
     // 多段式收费
     public sealed class Hyper24HEngine : Engine

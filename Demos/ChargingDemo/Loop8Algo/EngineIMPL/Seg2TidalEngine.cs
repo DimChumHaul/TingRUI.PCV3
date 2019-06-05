@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChargingDemo.Loop8Algo.EngineIMPL
+namespace AlgoCore.Loop8Algo.EngineIMPL
 {
     #region PCM = PinColorMinutes 算法的继承：先调用两段式算法计费 然后去引擎内部的Tail容器中***着色小球*** 最后带入折扣率
     // 算法的继承
@@ -48,11 +48,11 @@ namespace ChargingDemo.Loop8Algo.EngineIMPL
                 TotalResult -= PriceToMinus;
                 TotalResultMinus += PriceToMinus;
                 // 下到Tail尾巴算法容器内部进行【计费清单】的操作
-                int n1 = Tailer[i].Item1;
-                var s1 = Tailer[i].Item2;
-                var p1 = Tailer[i].Item3 - PriceToMinus;
+                int n1 = Tail[i].Item1;
+                var s1 = Tail[i].Item2;
+                var p1 = Tail[i].Item3 - PriceToMinus;
                 // 核心算法 用色彩去标记小球 统计 1.折扣率 2.潮汐获利金 3.小球着色标记
-                Tailer[i] = new Tuple<int, string, decimal?, bool?>(n1,s1,p1,true);
+                Tail[i] = new Tuple<int, string, decimal?, bool?>(n1,s1,p1,true);
             }
             return TotalResult;
         }

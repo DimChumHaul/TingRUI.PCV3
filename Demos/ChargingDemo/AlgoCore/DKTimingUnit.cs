@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChargingDemo.UniversialTime
+namespace AlgoCore
 {
     /// <summary>
     /// 停如意v3.0 PCv1.0版本所使用的时间管理器类
@@ -15,11 +15,6 @@ namespace ChargingDemo.UniversialTime
     /// </summary>
     public class DKTimingUnit :DKTStd
     {
-        // 最小时间单元 :1分钟(60秒)
-        internal static readonly int MinTU = 1;
-        // 最大时间单元 :1440分钟(1天)
-        internal static readonly int MaxTU = 1400;
-
         #region  增加函数最好是以`扩展函数`的形式增强SDK 方便调用
         public static DateTime CurrentTime(int h, int m, int s)
         {

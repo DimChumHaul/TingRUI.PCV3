@@ -1,6 +1,6 @@
-﻿using ChargingDemo.Loop8Algo;
-using ChargingDemo.Loop8Algo.EngineIMPL;
-using ChargingDemo.UniversialTime;
+﻿using AlgoCore.Loop8Algo;
+using AlgoCore.Loop8Algo.EngineIMPL;
+using AlgoCore.UniversialTime;
 using ServiceStack.Text;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChargingDemo
+namespace AlgoCore
 {
     class Program
     {

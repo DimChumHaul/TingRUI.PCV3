@@ -1,11 +1,11 @@
-﻿using ChargingDemo.Loop8Algo.Enum;
+﻿using AlgoCore.Loop8Algo.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChargingDemo.Loop8Algo.EngineIMPL
+namespace AlgoCore.Loop8Algo.EngineIMPL
 {
     public class TidalEngine : Engine
     {
