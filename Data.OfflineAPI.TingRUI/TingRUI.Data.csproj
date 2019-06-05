@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="JustEnum\LeftBarUIType.cs" />
+    <Compile Include="JustEnum\ProLevel.cs" />
     <Compile Include="Models\DataTemplate\ModulizedBtn.cs" />
     <Compile Include="Models\DataTemplate\ModualizedMenu.cs" />
     <Compile Include="Models\DataTemplate\UIBase.cs" />
