@@ -1,6 +1,7 @@
 ﻿
 using AlgoCore.Enum;
 using ServiceStack;
+using ServiceStack.Text;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,7 +38,7 @@ namespace AlgoCore.Loop8Algo
             // 1-1.初始化 作业引擎【时间切片儿】容器 - Init
             Tail = new List<ValueTuple<double, decimal?, bool?>> { };
             // 1-2.初始化 规则引擎【规则盒子】容器 - Init
-            SkyCubes = new List<ValueTuple<DateTime, DateTime, CubeRUI>>();
+            TinCubes = new List<ValueTuple<DateTime, DateTime, CubeRUI>>();
         }
 
         #region 内核引擎 - v1.0
@@ -46,31 +47,22 @@ namespace AlgoCore.Loop8Algo
         /* 向上向下取整 ~ */
         public FloorOrCeil floorOrCeil = FloorOrCeil.Ceil;
         public decimal? TotalResult { get; protected internal set; } = -.0m;
-        /* 参数列表 1.计费单元 2.计费规则 3.单元价格 */
+        /* 尾巴儿容器 参数列表 1.计费单元 2.计费规则 3.单元价格 */
         public List<(double ttmUnit, decimal? unitPrice, bool? discount)> Tail { get; set; }
-        /* 划界规则盒子 = [二段式盒子 + 潮汐盒子 + 24H盒子 + 单次盒子 + ... 各种盒子 */
-        public List<(DateTime start, DateTime end, CubeRUI RuiCube)> SkyCubes { get; set; }
+        /* 盒子模型 附加规则 = [二段式盒子 + 潮汐盒子 + 24H盒子 + 单次盒子 + ... 各种盒子 */
+        public List<(DateTime start, DateTime end, CubeRUI RuiCube)> TinCubes { get; set; }
         #endregion
 
         #region Algorithm's Core IMPL
         // TTM 时间轴校对函数
         public virtual bool ParamCheck(DateTime T1, DateTime T2)
         {
-            string debugInfo = string.Empty; // 用作日志
-            if (T1.Year != T2.Year)
-            {
-                debugInfo = "跨年算法暂时不公开...";
-                return false;
-            }
-            if (T1 > T2)
-            {
-                debugInfo = "出场时间必须大于入场时间";
-                return false;
-            }
-            InTime = T1 > T2 ? T2 : T1;
-            OutTimme = T1 < T2 ? T1 : T2;
-            ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ;
-            return true;
+            var debugInfo = string.Empty; // 用作日志
+            if (T1.Year != T2.Year) debugInfo = "跨年算法暂时不公开...";
+            if (T1 > T2) debugInfo = "出场时间必须大于入场时间";
+            debugInfo.PrintDump();
+            ; 
+            return string.IsNullOrWhiteSpace(debugInfo);
         }
 
         /// <summary>
@@ -79,41 +71,43 @@ namespace AlgoCore.Loop8Algo
         /// <param name="tStart">真正的停车起始时间 (不包含各种时间减免) 用于确认时间轴的下界 </param>
         /// <param name="tEnd">出场时间 时间轴上届 包含"借元"算法 </param>
         /// <param name="">首次运算得到的`临时停车费`</param>
-        /// <returns></returns>
+        /// <returns>钱</returns>
         public decimal? EngineGo(DateTime tStart, DateTime tEnd, bool letGo = false)
         {
-            if (SkyCubes.Count() <= 0) throw new Exception("基准规则寻址失败...规则清单长度为0...");
+            if (TinCubes.Count() <= 0) throw new Exception("基准规则寻址失败...规则清单长度为0...");
             TotalResult = -.0m;
 
             // 0.切割时间
             var TTM = Math.Abs((tEnd - tStart).TotalMinutes);
-            for (int ruleIdx = 0; ruleIdx < SkyCubes.Count(); ruleIdx++)
+
+            for (int ruleIdx = 0; ruleIdx < TinCubes.Count(); ruleIdx++)
             {
                 // 1.转换参数
-                var Rule = SkyCubes[ruleIdx];
+                var Rule = TinCubes[ruleIdx];
                 CubeRUI Cube = Rule.RuiCube;
                 var H = Rule.end.Hour; var M = Rule.end.Minute; var S = Rule.end.Second;
-
+                
                 // 2.划分时间轴节点的上下界(在循环内部作业)
                 var pivotTime = DKTimingUnit.ParseTime2DTime(H, M, S);
                 var RightPivot = pivotTime > tEnd ? pivotTime : tEnd;
 
                 // 2-1.矩阵平方
                 var ttmN = (RightPivot - tStart).TotalMinutes;
-                var N = (int)ttmN / Rule.RuiCube.LastingMinutes;
-                var Rest = ttmN % Rule.RuiCube.LastingMinutes;
+                var CubeCount = (int)ttmN / Rule.RuiCube.LastingMinutes;
+                var RestTailMinutes = ttmN % Rule.RuiCube.LastingMinutes;
 
                 // 3-1.万佛朝宗(辗转相加.获取总金额)
-                for (int cNo = 0; cNo < N; cNo++)
+                for (int cNo = 0; cNo < CubeCount; cNo++)
                 {
                     // 在争议得不到解决的情况下 我先进行`精准计算` 精确到每一分钟(小数点后32位)
                     TotalResult += Rule.RuiCube.LastingPrice * (decimal)Rule.RuiCube.DisRate;
                     Tail.Add((ttmN, Rule.RuiCube.LastingPrice, Rule.RuiCube.ShouldDiscount));
                 }
+
                 // 4.虚位以待
-                var 跨界尾片儿 = (decimal)Rule.RuiCube.PPM * M * (decimal)Rule.RuiCube.DisRate;
-                TotalResult += 跨界尾片儿;
-                Tail.Add((Rest,跨界尾片儿, Rule.RuiCube.ShouldDiscount));
+                var ControversyResult = Rule.RuiCube.PPM * RestTailMinutes * Rule.RuiCube.DisRate;
+                TotalResult += (decimal)ControversyResult;
+                Tail.Add((RestTailMinutes, (decimal)ControversyResult, Rule.RuiCube.ShouldDiscount));
             }
             return TotalResult;
         }
