@@ -16,9 +16,9 @@ namespace AlgoCore
         internal double LastingMinutes { get; set; } = 120d;
 
         // PricePerMinutes 一分钟计费价
-        internal double PPM { get; private set; } 
+        internal double PPM { get; private set; }
         // DiscountRate 计价单元折扣率
-        internal float? DisRate { get; set; }
+        internal float? DisRate { get; set; } = 1.0f;
         // 是否打折 默认不打折
         internal bool ShouldDiscount { get; private set; } = false;
 

@@ -37,7 +37,7 @@ namespace AlgoCore.Loop8Algo
             // 1-1.初始化 作业引擎【时间切片儿】容器 - Init
             Tail = new List<ValueTuple<double, decimal?, bool?>> { };
             // 1-2.初始化 规则引擎【规则盒子】容器 - Init
-            SkyCubes = new List<ValueTuple<DateTime, DateTime, CubeRUI, DateTime>>();
+            SkyCubes = new List<ValueTuple<DateTime, DateTime, CubeRUI>>();
         }
 
         #region 内核引擎 - v1.0
@@ -100,26 +100,22 @@ namespace AlgoCore.Loop8Algo
 
                 // 2-1.矩阵平方
                 var ttmN = (RightPivot - tStart).TotalMinutes;
-                var MatrixW = (int)ttmN / Rule.RuiCube.LastingMinutes;
-                var MatrixRest = ttmN % Rule.RuiCube.LastingMinutes;
+                var N = (int)ttmN / Rule.RuiCube.LastingMinutes;
+                var Rest = ttmN % Rule.RuiCube.LastingMinutes;
 
                 // 3-1.万佛朝宗(辗转相加.获取总金额)
-                for (int cNo = 0; cNo < MatrixW; cNo++)
+                for (int cNo = 0; cNo < N; cNo++)
                 {
                     // 在争议得不到解决的情况下 我先进行`精准计算` 精确到每一分钟(小数点后32位)
-                    TotalResult += Rule.RuiCube.LastingPrice;
+                    TotalResult += Rule.RuiCube.LastingPrice * (decimal)Rule.RuiCube.DisRate;
                     Tail.Add((ttmN, Rule.RuiCube.LastingPrice, Rule.RuiCube.ShouldDiscount));
                 }
-                TotalResult += Rule.RuiCube.LastingPrice * Rule.
+                // 4.虚位以待
+                var 跨界尾片儿 = (decimal)Rule.RuiCube.PPM * M * (decimal)Rule.RuiCube.DisRate;
+                TotalResult += 跨界尾片儿;
+                Tail.Add((Rest,跨界尾片儿, Rule.RuiCube.ShouldDiscount));
             }
-
-            double tailer = TTM % CUBE.Item2;
-            for (int i = 0; i < divides; i++)
-            {
-                TotalResult += CUBE.Item1;
-                Tail.Add(new Tuple<int, string, decimal?, bool?>(CUBE.Item2,  CUBE.Item1, false));
-            }
-            // 4.虚位以待
+            return TotalResult;
         }
 
         /* IMPL = implementation 算法的实现 */
