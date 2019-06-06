@@ -9,6 +9,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+#region v2.0 -【跨天算法代码段】提升时间单元为`天` 计算右边界出场时间点落在`当天`的第几段`停如意`盒子上 
+#endregion
+
+
 namespace AlgoCore.Loop8Algo
 {
     // 内核碎片函数指针 交给应用层调用者注入 设计模式：函数式编程+依赖注入
@@ -47,12 +51,9 @@ namespace AlgoCore.Loop8Algo
         #region 内核引擎 - v1.0 参数区
         // 免费时长?
         public int FreeSeg1 { get; set; } = 60;
-        // TTM
-        protected internal double TTM { get; private set; }
-        // 算法碎片 【时间轴中枢】
-        protected DateTime TTMPivot { get; private set; }
         /* 向上向下取整 ~ */
         public FloorOrCeil floorOrCeil = FloorOrCeil.Ceil;
+
         public decimal? TotalResult { get; protected internal set; } = -.0m;
         /* 尾巴儿容器 参数列表 1.计费单元 2.计费规则 3.单元价格 */
         public List<(double ttmUnit, decimal? unitPrice, bool? discount)> Tail { get; set; }
@@ -75,48 +76,47 @@ namespace AlgoCore.Loop8Algo
         }
 
         /// <summary>
-        ///【停如意错峰算法】：作业函数: 时间轴划界 + 含附加规则算法簇 + ⏳盒子m³模型 + "尾巴"算法 + "借元"算法
+        ///【停如意错峰算法】：作业函数: 
+        ///     时间轴划界 + 含附加规则算法簇 + ⏳盒子m³模型 + "尾巴"算法 + "借元"算法
+        ///     v1版本不解决`跨年`问题
         /// </summary>
         /// <param name="tStart">真正的停车起始时间 (不包含各种时间减免) 用于确认时间轴的下界 </param>
         /// <param name="tEnd">出场时间 时间轴上届 包含"借元"算法 </param>
-        /// <param name="">首次运算得到的`临时停车费`</param>
-        /// <returns>钱</returns>
+        /// <param name="letGo">是否直接开闸放行</param>
+        /// <returns>钱.订单详情列表.时间片信息组</returns>
         public decimal? EngineGo(DateTime tStart, DateTime tEnd, bool letGo = false)
         {
             if (TinCubes.Count() <= 0) throw new Exception("基准规则寻址失败...规则清单长度为0...");
             if (letGo) throw new NotImplementedException("直接开闸放行...做好日志处理和权限操作记录");
+            //var PivotRight = new PivotTemplate(tStart, tEnd);
 
             TotalResult = -.0m;
-            TTM = Math.Abs((tEnd - tStart).TotalMinutes);
-            // 1-1.寻址中枢轴`左边界` v1版本不解决`跨年`问题
-            TTMPivot = tStart;
-            // 1-2.寻址中枢轴的`右边界` 将维度上升到`天` 外层while处理跨天问题 内层For处理跨段问题
-            var TPL = new PivotTemplate(tStart, tEnd);
 
-            while(TTMPivot <= tEnd)
+            /* 1-2.启动引擎 开始三重扫描 */
+            var PivotLeft = tStart;
+            var PivotRight = DateTime.MinValue;
+            while( PivotLeft < tEnd )
             {
-                #region v2.0 -【跨天算法代码段】提升时间单元为`天` 计算右边界出场时间点落在`当天`的第几段`停如意`盒子上 
-                #endregion
-                // 时间轴推进式计算 扫描一天内时间轴上附加的所有规则盒子
+                // 规则附加(投放盒子) * 时间片切割(矩阵平方) * 循环划界切割最小单元(for)
                 for (int ruleIdx = 0; ruleIdx < TinCubes.Count(); ruleIdx++)
                 {
                     // 1.转换参数
                     var Rule = TinCubes[ruleIdx];
                     CubeRUI Cube = Rule.RuiCube;
-                    var H = Rule.end.Hour; var M = Rule.end.Minute; var S = Rule.end.Second;
-                    // 2.划分时间轴节点的上下界(在循环内部作业)
-                    var pivotTime = DKTimingUnit.ParseTime2DTime(H, M, S);
-                    var RightPivot = pivotTime > tEnd ? pivotTime : tEnd;
-                    // 2-1.矩阵平方
-                    var ttmN = (RightPivot - tStart).TotalMinutes;
-                    var CubeCount = (int)ttmN / Cube.LastingMinutes;
-                    var RestTailMinutes = ttmN % Cube.LastingMinutes;
+
+                    // 2-1.矩阵平方 分别计算 ttmN 一个盒子入场以后能够获取的所有沙砾
+                    PivotRight = Cube.RuleEnd.FromTime() <= tEnd ? Cube.RuleEnd.FromTime() : tEnd;
+                    PivotLeft = tStart;
+
+                    var temp = (int)((PivotRight - PivotLeft).TotalMinutes);
+                    var CubeCount = temp / Cube.MTUnit;
+                    var RestTailMinutes = temp % Cube.MTUnit;
                     // 3-1.万佛朝宗(辗转相加.获取总金额)
                     for (int cNo = 0; cNo < CubeCount; cNo++)
                     {
                         // 在争议得不到解决的情况下 我先进行`精准计算` 精确到每一分钟(小数点后32位)
-                        TotalResult += Cube.LastingPrice * (decimal)Cube.DisRate;
-                        Tail.Add((ttmN, Cube.LastingPrice, Cube.ShouldDiscount));
+                        TotalResult += Cube.MTPrice * (decimal)Cube.DisRate;
+                        Tail.Add((ttmInCube, Cube.MTPrice, Cube.ShouldDiscount));
                     }
                     // 4.虚位以待
                     var ControversyResult = Cube.PPM * RestTailMinutes * Cube.DisRate;

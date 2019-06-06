@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ServiceStack;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,20 +12,36 @@ namespace ChargingDemo.Loop8Algo
     public class PivotTemplate
     {
         /// 逗留的总天数
-        public int Day { get; set; }
-        /// 逗留的当日剩余分钟数
-        public int Minute { get; set; }
+        protected internal int AllHHs { get; set; }
+        /// 逗留的剩余分钟数
+        protected internal int RestMMs { get; set; }
+        /// 剩余秒数
+        protected internal int RestSSs { get; set; }
         /// 软件部署类型
-        ConsumeType ConsumeType;
-        /// 人类识别字符串
-        public (int h,int m) HourMinutes { get; set; }
+        private ConsumeType CSType { get; }
+
+        // 关键数据结构 PreciselyToken
+        /// 当日的 hh:mm:ss & 人类识别字符串
+        protected internal (int HH,int MM, int SS) PreciselyPivot { get; set; }
+
         internal PivotTemplate(DateTime t1,DateTime t2,ConsumeType type = ConsumeType.停车收费软件)
         {
-            double duration = Math.Abs((t1 - t2).TotalMinutes);
-            Day = (int)duration / MaxTU;
-            Minute = (int)(duration % MaxTU);
-            ConsumeType = type;
-            HourMinutes = (Minute / 60, Minute % 60);
+            double duration = Math.Abs((t1 - t2).TotalSeconds);
+            // 统计驻留 总的小时分钟和秒数
+            AllHHs = (int)duration / (MaxTU * 60);
+            RestMMs = (int)duration % MaxTU;
+            RestSSs = (int)duration % (MaxTU * 60);
+
+            /* 计算出场时间位于未来当日的几点几分几秒 HH:MM:SS */
+            var ttime = t2.TimeOfDay;
+            PreciselyPivot = new ValueTuple<int,int,int>(ttime.Hours,ttime.Minutes,ttime.Seconds);
+            // 部署类型
+            CSType = type;
+        }
+
+        public override string ToString()
+        {
+            return $"消费类型: {CSType}".ToJson() + base.ToString();
         }
         // 最小时间单元 :1分钟(60秒)
         internal const int MinTU = 1;
