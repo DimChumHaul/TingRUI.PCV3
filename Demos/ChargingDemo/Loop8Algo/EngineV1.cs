@@ -1,5 +1,6 @@
 ﻿
 using AlgoCore.Enum;
+using ChargingDemo.Loop8Algo;
 using ServiceStack;
 using ServiceStack.Text;
 using System;
@@ -21,6 +22,7 @@ namespace AlgoCore.Loop8Algo
     /// </summary>
     public class EngineV1 : IChargeEngine
     {
+        #region 作业引擎需要用到的脏代码区
         public string EngineToken { get; private set; } = $"[没有规则]-请继承自这个类并提交你需要的规则代码在子类的方法重写中";
         // 引擎计算容错预留 ：1.6秒没有完成 计费API+订单流水API 则写入崩溃日志
         public const string 收费规则占位符 = "酒神代ヽ｀、ヽ｀｀、ヽ｀ヽ｀、、ヽ ｀ヽ 、ヽ｀｀ヽヽ｀ヽ、ヽ｀ヽ｀、ヽ｀｀、ヽ 、｀｀、｀、ヽ｀ 、｀ ヽ｀ヽ、ヽ ｀、ヽ｀｀、ヽ、｀｀、｀、ヽ｀｀、 、ヽヽ｀、｀、、ヽヽ、｀｀、 、 ヽ｀、ヽ｀｀、ヽ｀ヽ｀、、ヽ ｀ヽ 、ヽ｀｀ヽ、｀｀ヽ｀、、｀ヽ｀谷雨代";
@@ -40,10 +42,15 @@ namespace AlgoCore.Loop8Algo
             // 1-2.初始化 规则引擎【规则盒子】容器 - Init
             TinCubes = new List<ValueTuple<DateTime, DateTime, CubeRUI>>();
         }
+        #endregion 
 
-        #region 内核引擎 - v1.0
+        #region 内核引擎 - v1.0 参数区
         // 免费时长?
         public int FreeSeg1 { get; set; } = 60;
+        // TTM
+        protected internal double TTM { get; private set; }
+        // 算法碎片 【时间轴中枢】
+        protected DateTime TTMPivot { get; private set; }
         /* 向上向下取整 ~ */
         public FloorOrCeil floorOrCeil = FloorOrCeil.Ceil;
         public decimal? TotalResult { get; protected internal set; } = -.0m;
@@ -51,6 +58,8 @@ namespace AlgoCore.Loop8Algo
         public List<(double ttmUnit, decimal? unitPrice, bool? discount)> Tail { get; set; }
         /* 盒子模型 附加规则 = [二段式盒子 + 潮汐盒子 + 24H盒子 + 单次盒子 + ... 各种盒子 */
         public List<(DateTime start, DateTime end, CubeRUI RuiCube)> TinCubes { get; set; }
+        // 记录作业引擎中的重要操作 转化为字符串 记录到内存中 将来写入内核日志
+        public IEnumerable<string> EngineLog { get; set; }
         #endregion
 
         #region Algorithm's Core IMPL
@@ -75,39 +84,45 @@ namespace AlgoCore.Loop8Algo
         public decimal? EngineGo(DateTime tStart, DateTime tEnd, bool letGo = false)
         {
             if (TinCubes.Count() <= 0) throw new Exception("基准规则寻址失败...规则清单长度为0...");
+            if (letGo) throw new NotImplementedException("直接开闸放行...做好日志处理和权限操作记录");
+
             TotalResult = -.0m;
+            TTM = Math.Abs((tEnd - tStart).TotalMinutes);
+            // 1-1.寻址中枢轴`左边界` v1版本不解决`跨年`问题
+            TTMPivot = tStart;
+            // 1-2.寻址中枢轴的`右边界` 将维度上升到`天` 外层while处理跨天问题 内层For处理跨段问题
+            var TPL = new PivotTemplate(tStart, tEnd);
 
-            // 0.切割时间
-            var TTM = Math.Abs((tEnd - tStart).TotalMinutes);
-
-            for (int ruleIdx = 0; ruleIdx < TinCubes.Count(); ruleIdx++)
+            while(TTMPivot <= tEnd)
             {
-                // 1.转换参数
-                var Rule = TinCubes[ruleIdx];
-                CubeRUI Cube = Rule.RuiCube;
-                var H = Rule.end.Hour; var M = Rule.end.Minute; var S = Rule.end.Second;
-                
-                // 2.划分时间轴节点的上下界(在循环内部作业)
-                var pivotTime = DKTimingUnit.ParseTime2DTime(H, M, S);
-                var RightPivot = pivotTime > tEnd ? pivotTime : tEnd;
-
-                // 2-1.矩阵平方
-                var ttmN = (RightPivot - tStart).TotalMinutes;
-                var CubeCount = (int)ttmN / Rule.RuiCube.LastingMinutes;
-                var RestTailMinutes = ttmN % Rule.RuiCube.LastingMinutes;
-
-                // 3-1.万佛朝宗(辗转相加.获取总金额)
-                for (int cNo = 0; cNo < CubeCount; cNo++)
+                #region v2.0 -【跨天算法代码段】提升时间单元为`天` 计算右边界出场时间点落在`当天`的第几段`停如意`盒子上 
+                #endregion
+                // 时间轴推进式计算 扫描一天内时间轴上附加的所有规则盒子
+                for (int ruleIdx = 0; ruleIdx < TinCubes.Count(); ruleIdx++)
                 {
-                    // 在争议得不到解决的情况下 我先进行`精准计算` 精确到每一分钟(小数点后32位)
-                    TotalResult += Rule.RuiCube.LastingPrice * (decimal)Rule.RuiCube.DisRate;
-                    Tail.Add((ttmN, Rule.RuiCube.LastingPrice, Rule.RuiCube.ShouldDiscount));
+                    // 1.转换参数
+                    var Rule = TinCubes[ruleIdx];
+                    CubeRUI Cube = Rule.RuiCube;
+                    var H = Rule.end.Hour; var M = Rule.end.Minute; var S = Rule.end.Second;
+                    // 2.划分时间轴节点的上下界(在循环内部作业)
+                    var pivotTime = DKTimingUnit.ParseTime2DTime(H, M, S);
+                    var RightPivot = pivotTime > tEnd ? pivotTime : tEnd;
+                    // 2-1.矩阵平方
+                    var ttmN = (RightPivot - tStart).TotalMinutes;
+                    var CubeCount = (int)ttmN / Cube.LastingMinutes;
+                    var RestTailMinutes = ttmN % Cube.LastingMinutes;
+                    // 3-1.万佛朝宗(辗转相加.获取总金额)
+                    for (int cNo = 0; cNo < CubeCount; cNo++)
+                    {
+                        // 在争议得不到解决的情况下 我先进行`精准计算` 精确到每一分钟(小数点后32位)
+                        TotalResult += Cube.LastingPrice * (decimal)Cube.DisRate;
+                        Tail.Add((ttmN, Cube.LastingPrice, Cube.ShouldDiscount));
+                    }
+                    // 4.虚位以待
+                    var ControversyResult = Cube.PPM * RestTailMinutes * Cube.DisRate;
+                    TotalResult += (decimal)ControversyResult;
+                    Tail.Add((RestTailMinutes, (decimal)ControversyResult, Cube.ShouldDiscount));
                 }
-
-                // 4.虚位以待
-                var ControversyResult = Rule.RuiCube.PPM * RestTailMinutes * Rule.RuiCube.DisRate;
-                TotalResult += (decimal)ControversyResult;
-                Tail.Add((RestTailMinutes, (decimal)ControversyResult, Rule.RuiCube.ShouldDiscount));
             }
             return TotalResult;
         }

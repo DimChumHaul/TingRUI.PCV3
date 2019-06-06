@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlgoCore\Enum\FloorOrCeil.cs" />
+    <Compile Include="Loop8Algo\PivotTemplate.cs" />
     <Compile Include="Loop8Algo\EngineIMPL\Hyper24HEngine.cs" />
     <Compile Include="Loop8Algo\EngineIMPL\Seg2Engine.cs" />
     <Compile Include="Loop8Algo\EngineV1.cs" />
@@ -59,7 +60,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AlgoCore\CubeRUI.cs" />
     <Compile Include="AlgoCore\DKTimingUnit.cs" />
-    <Compile Include="AlgoCore\DKTStd.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
