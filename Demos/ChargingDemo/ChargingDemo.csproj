@@ -55,7 +55,7 @@
     <Compile Include="Loop8Algo\EngineIMPL\Seg2TidalEngine.cs" />
     <Compile Include="AlgoCore\Enum\TaiJi.cs" />
     <Compile Include="Loop8Algo\IChargeEngine.cs" />
-    <Compile Include="AlgoCore\DKScorpio.cs" />
+    <Compile Include="AlgoCore\DKSkyScorpion.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AlgoCore\TingRUICube.cs" />
