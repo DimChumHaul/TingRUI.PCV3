@@ -92,30 +92,28 @@ namespace AlgoCore.Loop8Algo
             
             /* 0-1.启动三重作业引擎: 作业蝎子 + 盒子模型 * 矩阵平方 * 尾巴儿算法 */
             TotalResult = -.0m;
-            var PIVOT = new DKScorpio(ref tStart, ref tEnd);
-            while( PIVOT.PivotLeft <= PIVOT.PivotRight )
+            var PIVOT = new DKScorpio(tStart,tEnd);
+            while(PIVOT.PivotLeft >= tStart && PIVOT.PivotRight < tEnd )
             {
+                // 我跟夏老师吹牛逼 我可以写一个算法不用一行If Else 但还是用了..但实际上是可以放到While()中的而不用if的
+                if (letGo == false) break;
+
                 // 规则附加(投放盒子) * 时间片切割(矩阵平方) * 循环划界切割最小单元(for)
                 for (int ruleIdx = 0; ruleIdx < TinCubes.Count(); ruleIdx++)
                 {
-                    // 1.启动时间轴引擎 开始附加基础规则
-                    var Rule = TinCubes[ruleIdx];
-                    TingRUICube Cube = Rule.RuiCube;
-                    var ptu = Cube.PTU;
-                    var mtu = Cube.MTU;
-                    var rStart = Cube.RuleStart;
-                    var rEnd = Cube.RuleEnd;
+                    // 1-1.启动时间轴引擎 开始附加基础规则
+                    var Cube = TinCubes[ruleIdx].RuiCube as TingRUICube;
+
+                    // 1-2.释放丁诚昊蝎子 
+                    var ptu = Cube.PTU; var mtu = Cube.MTU; var ppm = Cube.PPM;
+                    var ruleStart = Cube.RuleStart;
+                    var ruleEnd = Cube.RuleEnd;
                     var disRate = Cube.DisRate;
                     var enableDis = Cube.EnableRuleCuoFeng;
-                    var ppm = Cube.PPM;
 
-                    /* 
-                     * 只有王波是完全领悟了错峰算法的:
-                     *  "停车软件的一切计费争议解决办法 就是入场的那一分钟在哪个盒子里"
-                     */
-                    // 2-1.作业蝎子 定位单次规则内的左右手精确时间轴节点
-                    PIVOT.PivotLeft  = tStart;
-                    PIVOT.PivotRight = tEnd > Cube.RuleEnd.FromTime2DT()? Cube.RuleEnd.FromTime2DT() : tEnd;
+                    // 1-3.蝎子摆尾 定位单次规则内的左右手时间点 (注意已经进入作业流水线内层While循环)
+                    PIVOT.PivotLeft  = tStart > ruleStart.FromTime2DT() ? tStart : ruleStart.FromTime2DT(); 
+                    PIVOT.PivotRight = tEnd > ruleEnd.FromTime2DT()? ruleEnd.FromTime2DT() : tEnd;
 
                     // 2-2.矩阵平方
                     var minutes = (int)(PIVOT.PivotRight - PIVOT.PivotLeft).TotalMinutes;
@@ -130,14 +128,16 @@ namespace AlgoCore.Loop8Algo
                         // 记录每一个带`色彩(规则)`的小盒子
                         Tail.Add((mtu,ptu,enableDis));
                     }
-                    // 4.虚位以待
+                    // 3-2.尾巴儿算法&容器数据结构
                     var RestMoney = ppm * Rest * (enableDis ? disRate : 1);
                     TotalResult += (decimal)RestMoney;
                     Tail.Add((Rest, (decimal)RestMoney, Cube.EnableRuleCuoFeng));
 
                     // 5.蝎子进行下一次作业循环 挪动左右手 重新获取时间轴边界
-
+                    ; ; ;
                 }
+                InTime = tStart;
+                OutTime = tEnd;
             }
             return TotalResult;
         }

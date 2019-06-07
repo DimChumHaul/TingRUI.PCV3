@@ -19,12 +19,11 @@ namespace AlgoCore
         private Time AsDayTimeLeft { get => PivotLeft.ToTime(); }
         private Time AsDayTimeRight { get => PivotRight.ToTime(); }
 
-        public DKScorpio(ref DateTime workingDTLeft,ref DateTime workingDTRight)
+        public DKScorpio(DateTime workingDTLeft,DateTime workingDTRight)
         {
             PivotLeft = workingDTLeft;
             PivotRight = workingDTRight;
         }
-
         /// <summary>
         /// 获取左右手位置的`当日时间`
         /// </summary>
