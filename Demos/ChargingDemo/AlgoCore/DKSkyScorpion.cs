@@ -16,12 +16,10 @@ namespace AlgoCore
     {
         public decimal? TotalResult { get; protected internal set; } = -.0m;
         /* 尾巴儿容器 参数列表 1.计费单元 2.计费规则 3.单元价格 */
-        public List<(double ttmUnit, decimal? unitPrice, bool? discount)> Tail { get; set; }
+        public List<(Time Mtu1,Time Mtu2, decimal? unitPrice, bool? discount)> Tail { get; set; }
 
-        protected internal DateTime PivotLeft { get; set; } 
+        protected internal DateTime PivotLeft { get; set ; } 
         protected internal DateTime PivotRight { get; set; }
-        private Time AsDayTimeLeft { get => PivotLeft.ToTime(); }
-        private Time AsDayTimeRight { get => PivotRight.ToTime(); }
 
         public DKSkyScorpion(DateTime workingDTLeft,DateTime workingDTRight)
         {
@@ -31,17 +29,7 @@ namespace AlgoCore
             /* 1-0.启动三重作业引擎: 蝎子 + 盒子 * 矩阵平方 * 尾巴儿 */
             TotalResult = -.0m;
             // 1-1.初始化 作业引擎【时间切片儿】容器 - Init
-            Tail = new List<ValueTuple<double, decimal?, bool?>> { };
-        }
-        /// <summary>
-        /// 获取左右手位置的`当日时间`
-        /// </summary>
-        /// <returns>元组:(时间轴左边界应对的当日时间,时间轴应对的右边界当日时间)</returns>
-        private (Time LeftDT2T,Time RightDT2T) DTAsTime()
-        {
-            var start = this.PivotLeft.ToTime();
-            var end = this.PivotRight.ToTime();
-            return (start, end);
+            Tail = new List<ValueTuple<Time,Time, decimal?, bool?>> { };
         }
     }
 }

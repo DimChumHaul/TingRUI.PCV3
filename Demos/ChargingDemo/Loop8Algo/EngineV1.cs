@@ -36,7 +36,7 @@ namespace AlgoCore.Loop8Algo
 
         /* 盒子模型 附加规则 = [二段式盒子 + 潮汐盒子 + 24H盒子 + 单次盒子 + ... 各种盒子 */
         public List<(DateTime start, DateTime end, TingRUICube RuiCube)> TinCubes { get; set; }
-        private DKSkyScorpion _scorpion;
+        private DKSkyScorpion Scorpion;
         // 记录作业引擎中的重要操作 转化为字符串 记录到内存中 将来写入内核日志
         public IEnumerable<string> EngineLog { get; set; }
         #endregion
@@ -58,7 +58,7 @@ namespace AlgoCore.Loop8Algo
         public virtual bool ParamCheck(DateTime T1, DateTime T2)
         {
             var debugInfo = string.Empty; // 用作日志
-            if (T1.Year != T2.Year) debugInfo = "跨年算法暂时不公开...";
+            if (T1.Year != T2.Year) debugInfo = DKStd.ErrorInfo[0x3b];
             if (T1 > T2) debugInfo = "出场时间必须大于入场时间";
             debugInfo.PrintDump();
             ; 
@@ -78,81 +78,84 @@ namespace AlgoCore.Loop8Algo
         {
             // 检查参数
             ParamCheck(tStart, tEnd);
-
             // 直接开闸放行...做好日志处理和权限操作记录
-            _scorpion = new DKSkyScorpion(tStart,tEnd);
-            if (letGo) 
-            {
-                _scorpion.TotalResult = 5.0m;
-                return _scorpion.TotalResult;
-            }
             if (TinCubes.Count() <= 0) throw new Exception("基准规则寻址失败...规则清单长度为0...");
+            if (letGo) return Scorpion.TotalResult;
 
-            while(_scorpion.PivotLeft < tEnd && _scorpion.PivotRight < tEnd )
+            // 1-2.释放丁诚昊蝎子 
+            Scorpion = new DKSkyScorpion(tStart,tEnd);
+            while(Scorpion.PivotLeft < tEnd && Scorpion.PivotRight < tEnd )
             {
-                // 规则附加(投放盒子) * 时间片切割(矩阵平方) * 循环划界切割最小单元(for)
+                // 1-1.启动天蝎座作业引擎 开始寻址计费规则
                 for (int idx = 0; idx < TinCubes.Count(); idx++)
                 {
-                    // 1-1.启动时间轴引擎 开始附加基础规则
                     TingRUICube Cube = TinCubes[idx].RuiCube;
-                    // 1-2.释放丁诚昊蝎子 
                     var ptu = Cube.PTU; // price per unit
                     var mtu = Cube.MTU; // minutes per unit
                     var ppm = Cube.PPM; // price per minute
-                    var ruleStart = Cube.RuleStart;
-                    var ruleEnd = Cube.RuleEnd;
-                    var disRate = Cube.DisRate;
-                    var enableDis = Cube.EnableRuleCuoFeng;
-                    // 1-3.蝎子摆尾 定位单次规则内的左右手时间点 (左右手不断++)
-                    _scorpion.PivotLeft  = tStart >= ruleStart.FromTime2DT() ? tStart : ruleStart.FromTime2DT();
-                    _scorpion.PivotRight = tEnd <= ruleEnd.FromTime2DT() ? tEnd : ruleEnd.FromTime2DT();
+                    var ruleStart = Cube.RuleStart; var ruleEnd = Cube.RuleEnd;
+                    var disRate = Cube.DisRate; var enableDis = Cube.EnableRuleCuoFeng;
+
+                    // 1-3.蝎子摆尾 定位单次规则内的左右手时间点 (左手不断++)
+                    Scorpion.PivotLeft  = tStart >= ruleStart.FromTime2DT() ? tStart : ruleStart.FromTime2DT();
+                    Scorpion.PivotRight = tEnd <= ruleEnd.FromTime2DT() ? tEnd : ruleEnd.FromTime2DT();
+
                     // 2-2.矩阵平方
-                    var minutes = (int)(_scorpion.PivotRight - _scorpion.PivotLeft).TotalMinutes;
+                    var minutes = (int)(Scorpion.PivotRight - Scorpion.PivotLeft).TotalMinutes;
                     var Counts = minutes / mtu;
                     var Rest = minutes % mtu;
+                    
                     // 3-1.循环作业获取大盒子内的小盒子个数 辗转相加 保存每一段时间片儿计费
                     for (int index = 0; index < Counts; index++)
                     {
-                        // 在争议得不到解决的情况下 我先进行`精准计算` 精确到每一分钟(小数点后32位)
-                        _scorpion.TotalResult += ptu * (decimal)(enableDis ? disRate : 1);
-                        // 记录每一个带`色彩(规则)`的小盒子
-                        _scorpion.Tail.Add((mtu,ptu,enableDis));
+                        Scorpion.TotalResult += ptu * (decimal)(enableDis ? disRate : 1);
+                        DateTime lefthand = Scorpion.PivotLeft;
+                        Scorpion.Tail.Add((lefthand.ToTime(),lefthand.AddMinutes(mtu).ToTime(), ptu,enableDis));
+                        Scorpion.PivotLeft = lefthand.AddMinutes(mtu);
+                        // ** 错峰函数的关键实现处1
                     }
+
                     // 3-2.尾巴儿算法&容器数据结构
                     var RestMoney = ppm * Rest * (enableDis ? disRate : 1);
-                    _scorpion.TotalResult += (decimal)RestMoney;
-                    _scorpion.Tail.Add((Rest, (decimal)RestMoney, Cube.EnableRuleCuoFeng));
+                    Scorpion.TotalResult += (decimal)RestMoney;
+                    DateTime lastHand = Scorpion.PivotLeft;
+                    Scorpion.Tail.Add((lastHand.ToTime(), lastHand.AddMinutes(Rest).ToTime(),(decimal)RestMoney, Cube.EnableRuleCuoFeng));
+                    // ** 错峰函数的关键实现处1
                 }
                 // 鞋子左右手完成所有时间片切割则跳出死循环
-                _scorpion.PivotRight = _scorpion.PivotLeft = tEnd;
+                Scorpion.PivotRight = Scorpion.PivotLeft = tEnd;
             }
             InTime = tStart; OutTime = tEnd;
-            return _scorpion.TotalResult;
+            return Scorpion.TotalResult;
         }
         #endregion
 
         /* IMPL = implementation 算法的实现 */
         public virtual decimal? CalculationIMPL(DateTime t1, DateTime t2, bool LetGo = false)
         {
-            return this.EngineGo(t1,t2, LetGo);
+            return EngineGo(t1,t2, LetGo);
         }
 
         /* IMPL = implementation 算法的实现 */
         public virtual string GenOrderIMPL(string orderToken)
         {
-            var result = this.ToSafeJson();
-            var code = Encoding.UTF8.GetBytes(result);
-            RuleCode = code;
-            return $"订单:[{Guid.NewGuid()}] - \n\t 停车收费: ---|{result}|--- ";
+            if(Scorpion is DKSkyScorpion SS)
+            {
+                RuleCode = Encoding.UTF8.GetBytes(SS.ToJson());
+                var orderList = SS.ToJson().IndentJson();
+                return $"订单:[{Billing}.[{Guid.NewGuid()}]] - {Environment.NewLine} " +
+                    $"停车收费: ---|{orderList}|--- ";
+            }
+            return Scorpion.ToJson();
         }
 
         #region 脏代码区
-        public string EngineToken { get; private set; } = $"[没有规则]-请继承自这个类并提交你需要的规则代码在子类的方法重写中";
         
         // 引擎计算容错预留 ：1.6秒没有完成 计费API+订单流水API 则写入崩溃日志
         public TimeSpan EngineWorkTimeout { get; set; }
         protected internal byte[] RuleCode { get; set; }
         public string Billing = "【停如意】- 错峰停车首创者 停车场管理无人值守引领者" + Environment.NewLine;
+        public string EngineToken { get; private set; } = $"[没有规则]-请继承自这个类并提交你需要的规则代码在子类的方法重写中";
         #endregion 
     }
 }

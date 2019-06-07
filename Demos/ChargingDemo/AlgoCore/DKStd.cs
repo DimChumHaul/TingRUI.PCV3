@@ -23,7 +23,8 @@ namespace AlgoCore
 
         public static Dictionary<byte, string> ErrorInfo = new Dictionary<byte, string>
         {
-            { 0x7e , "返回值是否越界 : 时间转换函数逻辑错误" }
+            { 0x7e , "返回值是否越界 : 时间转换函数逻辑错误" },
+            { 0x3b , "跨年算法暂时不公开..." }
         };
         #endregion
 
