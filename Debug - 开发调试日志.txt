@@ -3,3 +3,10 @@
 源：stackoverflow
 --Listbox模板内按钮点击命令指定到挡墙vm内命令
 Command="{Binding DataContext.PlusCmd,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}}"
+
+v1.0通用计费软件算法引擎 ：
+	最终版本的正确抽象 == 1*.MTU最小时间单元(盒子模型) + 2*.划界机械摇臂 + 3.尾巴容器 
+				+ 4*.IoC注入争议字段处理函数指针* 
+				+ 5.矩阵平方(降维) + 6.借位消元(跨年/跨酒神代) 
+				+ 7*.盒子着色(错峰打折)
+ 	德意志工业的顶层设计：七大模组 交互作业流水线
