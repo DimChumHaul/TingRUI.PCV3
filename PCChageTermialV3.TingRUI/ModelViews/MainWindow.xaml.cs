@@ -1,4 +1,5 @@
-﻿using MahApps.Metro.Controls;
+﻿using GalaSoft.MvvmLight.Threading;
+using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,9 @@ namespace PCChageTermialV3.TingRUI
         public MainWindow()
         {
             InitializeComponent();
+
+            // 初始化STA UI线程
+            DispatcherHelper.Initialize();
         }
     }
 }
