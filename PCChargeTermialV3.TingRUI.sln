@@ -8,6 +8,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TingRUI.Data", "Data.OfflineAPI.TingRUI\TingRUI.Data.csproj", "{447EA98B-3FAA-412D-8E30-D31477599800}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{3F026776-9E7A-41CA-A128-D24EB80644FC}"
+	ProjectSection(SolutionItems) = preProject
+		Lib\ChargingDemo.exe = Lib\ChargingDemo.exe
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tcp", "Tcp", "{D4726DDF-83E5-4D7A-8099-A848BB04E841}"
 EndProject
