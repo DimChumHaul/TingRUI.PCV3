@@ -7,7 +7,8 @@
              mc:Ignorable="d" Background="Snow" Foreground="Purple" 
              FontSize="24" FontFamily="宋体"
              d:DesignHeight="1024" d:DesignWidth="768">
-    <Grid>
-            
-    </Grid>
+    <DockPanel>
+        <Label DockPanel.Dock="Top">计费引擎</Label>
+        <TextBlock FontSize="24" DockPanel.Dock="Bottom">二段式错峰结算页面</TextBlock>
+    </DockPanel>
 </UserControl>

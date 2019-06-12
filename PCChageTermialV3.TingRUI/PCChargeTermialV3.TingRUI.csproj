@@ -94,7 +94,7 @@
     </Compile>
     <Compile Include="ViewModels\ChargingEngineV1VM.cs" />
     <Compile Include="ViewModels\HardWareCtrlVM.cs" />
-    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModelVM.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Page Include="ModelViews\FlayoutEngineCtrl.xaml">
       <SubType>Designer</SubType>
