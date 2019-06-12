@@ -89,10 +89,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ViewModels\ChargingDemoVM.cs" />
+    <Compile Include="ModelViews\FlayoutEngineCtrl.xaml.cs">
+      <DependentUpon>FlayoutEngineCtrl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\ChargingEngineV1VM.cs" />
     <Compile Include="ViewModels\HardWareCtrlVM.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Page Include="ModelViews\FlayoutEngineCtrl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ModelViews\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

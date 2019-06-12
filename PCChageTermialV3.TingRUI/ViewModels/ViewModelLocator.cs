@@ -31,17 +31,14 @@ namespace PCChageTermialV3.TingRUI.ViewModel
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            // 注入类型到IoC容器 首页VM-ViewModel
             SimpleIoc.Default.Register<MainViewModel>();
-            //SimpleIoc.Default.Register<ParkingInfoVM>();
-            //SimpleIoc.Default.Register<CacheInfoVM>();
             SimpleIoc.Default.Register<HardWareCtrlVM>();
         }
 
         public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
+        public HardWareCtrlVM HardwareVM => ServiceLocator.Current.GetInstance<HardWareCtrlVM>();
         //public ParkingInfoVM SettingVM => ServiceLocator.Current.GetInstance<ParkingInfoVM>();
         //public CacheInfoVM CacheVM => ServiceLocator.Current.GetInstance<CacheInfoVM>();
-        public HardWareCtrlVM HardwareVM => ServiceLocator.Current.GetInstance<HardWareCtrlVM>();
 
         public static void Cleanup()
         {
