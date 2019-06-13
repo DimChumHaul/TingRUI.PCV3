@@ -23,7 +23,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "文档", "文档", "{E71BBF
 	ProjectSection(SolutionItems) = preProject
 		README.OrmLite-v5.5.0.zh-CN.md = README.OrmLite-v5.5.0.zh-CN.md
 		README.Text-v5.5.0.zh-CN.md = README.Text-v5.5.0.zh-CN.md
-		Docs\【彭工】关于二段式收费和潮汐收费的原理性解释文档.xlsx = Docs\【彭工】关于二段式收费和潮汐收费的原理性解释文档.xlsx
 		下雨.txt = 下雨.txt
 	EndProjectSection
 EndProject
@@ -32,6 +31,13 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demos", "Demos", "{F3422D02-86A3-4DDD-996C-4EF20401FBCD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "计费规则Demo", "计费规则Demo", "{2B8F735C-7FD3-4B91-8904-F4E1BC27A1FA}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{663CA302-3528-42FF-AA5F-B6B7DBB7EA79}"
+	ProjectSection(SolutionItems) = preProject
+		Docs\RS485 - 串口通讯.txt = Docs\RS485 - 串口通讯.txt
+		Docs\【彭工】关于二段式收费和潮汐收费的原理性解释文档.xlsx = Docs\【彭工】关于二段式收费和潮汐收费的原理性解释文档.xlsx
+		Docs\北京某车场收费规则.jpg = Docs\北京某车场收费规则.jpg
+		Docs\第一次两段式计费结果.txt = Docs\第一次两段式计费结果.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

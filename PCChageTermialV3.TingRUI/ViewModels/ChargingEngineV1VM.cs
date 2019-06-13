@@ -7,13 +7,11 @@ using System.Threading.Tasks;
 
 namespace PCChageTermialV3.TingRUI.ViewModels
 {
-    class CacheInfoVM :ViewModelBase
+    /// <summary>
+    /// 计费规则引擎VM 计费视图模型
+    /// </summary>
+    public class ChargingEngineV1VM :ViewModelBase
     {
-        // CacheInfoVM的调用放到 主页视图中
-        // 硬件VM的调用放到App视图中
-        public CacheInfoVM()
-        {
 
-        }
     }
 }

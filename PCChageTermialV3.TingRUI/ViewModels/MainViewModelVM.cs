@@ -25,7 +25,7 @@ namespace PCChageTermialV3.TingRUI.ViewModel
     /// See http://www.galasoft.ch/mvvm
     /// </para>
     /// </summary>
-    internal class MainViewModel : ViewModelBase
+    internal class MainViewModelVM :ViewModelBase
     {
         public string AppInfo { get; set; } = string.Format("1.{0} App开发始于{1}",
             App.AppDescription,
@@ -45,7 +45,7 @@ namespace PCChageTermialV3.TingRUI.ViewModel
         /// <summary>
         /// 初始化一个 VM实体 继承自 ViewModelBase MvvmLight框架基类
         /// </summary>
-        public MainViewModel()
+        public MainViewModelVM()
         {
             // 一次性初始化所有UI模块
             InitialAllFuckingModules();

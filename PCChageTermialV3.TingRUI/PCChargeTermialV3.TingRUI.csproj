@@ -16,6 +16,7 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -36,7 +37,13 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Logo.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ChargingDemo">
+      <HintPath>..\Lib\ChargingDemo.exe</HintPath>
+    </Reference>
     <Reference Include="CommonServiceLocator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.2.0.4\lib\net46\CommonServiceLocator.dll</HintPath>
     </Reference>
@@ -85,11 +92,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ViewModels\CacheInfoVM.cs" />
-    <Compile Include="ViewModels\HardWareControlVM.cs" />
-    <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="ViewModels\ParkingInfoVM.cs" />
+    <Compile Include="ModelViews\FlayoutEngineCtrl.xaml.cs">
+      <DependentUpon>FlayoutEngineCtrl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\ChargingEngineV1VM.cs" />
+    <Compile Include="ViewModels\HardWareCtrlVM.cs" />
+    <Compile Include="ViewModels\MainViewModelVM.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Page Include="ModelViews\FlayoutEngineCtrl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ModelViews\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -145,6 +158,8 @@
     <Resource Include="Resources\MainBg1.jpg" />
     <Resource Include="Resources\MainBg3-Programer.jpg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Logo.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
