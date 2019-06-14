@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 
 namespace PCChageTermialV3.TingRUI.ViewModels
 {
+
+    /// <summary>
+    /// 如果是需要实现双绑的对象 应该直接继承自 MvvmLight对象 :ObservableObject
+    /// </summary>
     internal class HardWareCtrlVM :ViewModelBase
     {
         // 要被 ServiceLocator捕获 必须要有一个无参构造方法

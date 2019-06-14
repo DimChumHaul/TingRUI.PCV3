@@ -1,0 +1,5 @@
+
+RS485协议:
+	https://www.cnblogs.com/dayuhope/p/3376238.html
+
+臻识公司局域网 地址 192.168.0.229

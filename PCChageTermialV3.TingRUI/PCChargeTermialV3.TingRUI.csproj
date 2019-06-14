@@ -96,7 +96,7 @@
     <Compile Include="ModelViews\FlayoutEngineCtrl.xaml.cs">
       <DependentUpon>FlayoutEngineCtrl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\ChargingEngineV1VM.cs" />
+    <Compile Include="ViewModels\OrderCalculationV1VM.cs" />
     <Compile Include="ViewModels\HardWareCtrlVM.cs" />
     <Compile Include="ViewModels\MainViewModelVM.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
@@ -156,7 +156,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\MainBg2-TonyStark.JPG" />
-    <Resource Include="Resources\MainBg1.jpg" />
     <Resource Include="Resources\MainBg3-Programer.jpg" />
   </ItemGroup>
   <ItemGroup>

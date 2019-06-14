@@ -23,7 +23,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "文档", "文档", "{E71BBF
 	ProjectSection(SolutionItems) = preProject
 		README.OrmLite-v5.5.0.zh-CN.md = README.OrmLite-v5.5.0.zh-CN.md
 		README.Text-v5.5.0.zh-CN.md = README.Text-v5.5.0.zh-CN.md
-		下雨.txt = 下雨.txt
+		Docs\RS485 - 串口通讯.txt = Docs\RS485 - 串口通讯.txt
+		Docs\北京某车场收费规则.jpg = Docs\北京某车场收费规则.jpg
+		Docs\第一次两段式计费结果.txt = Docs\第一次两段式计费结果.txt
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrmLite-V5.5.0", "Lib\Orm\ServiceStack.OrmLite-V5.5\OrmLite-V5.5.0.csproj", "{3F3D7F2F-6FF9-4277-8B2B-3AB0E327750F}"

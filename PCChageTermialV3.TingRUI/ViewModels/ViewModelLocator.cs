@@ -19,8 +19,8 @@ using PCChageTermialV3.TingRUI.ViewModels;
 namespace PCChageTermialV3.TingRUI.ViewModel
 {
     /// <summary>
-    /// This class contains static references to all the view models in the
-    /// application and provides an entry point for the bindings.
+    /// ＶＭ类的加载走静态内存段　由Mvvm框架静态管理器类ViewModelLocator 统一接管
+    /// 新的VM应该注册为Locator类的一个成员属性 在构造方法中注册为IoC容器的孩子
     /// </summary>
     internal class ViewModelLocator
     {
@@ -33,12 +33,12 @@ namespace PCChageTermialV3.TingRUI.ViewModel
 
             SimpleIoc.Default.Register<MainViewModelVM>();
             SimpleIoc.Default.Register<HardWareCtrlVM>();
-            SimpleIoc.Default.Register<ChargingEngineV1VM>();
+            SimpleIoc.Default.Register<OrderCalculationV1VM>();
         }
 
         public MainViewModelVM Main => ServiceLocator.Current.GetInstance<MainViewModelVM>();
         public HardWareCtrlVM Hardware => ServiceLocator.Current.GetInstance<HardWareCtrlVM>();
-        public ChargingEngineV1VM Engine => ServiceLocator.Current.GetInstance<ChargingEngineV1VM>();
+        public OrderCalculationV1VM Engine => ServiceLocator.Current.GetInstance<OrderCalculationV1VM>();
 
         public static void Cleanup()
         {
