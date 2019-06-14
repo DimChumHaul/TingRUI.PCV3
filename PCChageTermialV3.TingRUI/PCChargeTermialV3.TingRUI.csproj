@@ -99,7 +99,7 @@
     <Compile Include="ModelViews\FlayoutEngineCtrl.xaml.cs">
       <DependentUpon>FlayoutEngineCtrl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\ChargingEngineV1VM.cs" />
+    <Compile Include="ViewModels\OrderCalculationV1VM.cs" />
     <Compile Include="ViewModels\HardWareCtrlVM.cs" />
     <Compile Include="ViewModels\MainViewModelVM.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
