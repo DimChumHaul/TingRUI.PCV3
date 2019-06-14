@@ -159,7 +159,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\MainBg2-TonyStark.JPG" />
-    <Resource Include="Resources\MainBg1.jpg" />
     <Resource Include="Resources\MainBg3-Programer.jpg" />
   </ItemGroup>
   <ItemGroup>
