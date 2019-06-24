@@ -73,11 +73,11 @@ namespace PCChageTermialV3.TingRUI.ViewModel
         private void InitialMenuSubNodes()
         {
             // LINQ: 内存分页添加
-            ModualizedMenu DockerLast = this.AcceptMenus.LastOrDefault();
+            ModualizedMenu DockerLast = AcceptMenus.LastOrDefault();
             if (DockerLast == null) return;
-            var range2Add = AcceptModuels
-                    .Where(o => o.gType == DockerLast.gTypeL1)
-                    .ToList();
+            
+            // 手动添加 首页顶部模块需要用到的Model
+            var range2Add = AcceptModuels.Where(o => o.gType == DockerLast.gTypeL1).ToList();
             DockerLast.MenuSublines.AddRange(range2Add);
         }
 
@@ -105,7 +105,7 @@ namespace PCChageTermialV3.TingRUI.ViewModel
 
         #region  WPF事件转命令
         public RelayCommand FuncModuleCMD { get; set; }
-        public RelayCommand<Object> ChangeBgColorCMD { get; set; }
+        public RelayCommand<object> ChangeBgColorCMD { get; set; }
         #endregion
     }
 }

@@ -95,7 +95,7 @@
             <!--树状菜单控件的第二种写法-->
             <TreeView ItemsSource="{Binding AcceptMenus}" 
                       Name="ViewX" BorderThickness="5" 
-                      BorderBrush="Red" FontSize="24" Foreground="Red" 
+                      BorderBrush="LightBlue" FontSize="24" Foreground="Red" 
                       Margin="10" Style="{StaticResource VirtualisedMetroTreeView}">
                 <TreeView.Resources>
                     <HierarchicalDataTemplate DataType="{x:Type Data:ModualizedMenu}"  
