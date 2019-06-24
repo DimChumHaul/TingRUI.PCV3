@@ -93,8 +93,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ModelViews\FlayoutEngineCtrl.xaml.cs">
-      <DependentUpon>FlayoutEngineCtrl.xaml</DependentUpon>
+    <Compile Include="ModelViews\CustomStyles\Window4Blend.xaml.cs">
+      <DependentUpon>Window4Blend.xaml</DependentUpon>
     </Compile>
     <Compile Include="ModelViews\Pages\PageIndexHome.xaml.cs">
       <DependentUpon>PageIndexHome.xaml</DependentUpon>
@@ -118,7 +118,7 @@
     <Compile Include="ViewModels\HardWareCtrlVM.cs" />
     <Compile Include="ViewModels\MainViewModelVM.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
-    <Page Include="ModelViews\FlayoutEngineCtrl.xaml">
+    <Page Include="ModelViews\CustomStyles\Window4Blend.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PCChageTermialV3.TingRUI.ModelViews
+namespace PCChageTermialV3.TingRUI.ModelViews.CustomStyles
 {
     /// <summary>
-    /// FlayoutEngineCtrl.xaml 的交互逻辑
+    /// Window4Blend.xaml 的交互逻辑
     /// </summary>
-    public partial class FlayoutEngineCtrl : UserControl
+    public partial class Window4Blend : Window
     {
-        public FlayoutEngineCtrl()
+        public Window4Blend()
         {
             InitializeComponent();
         }
