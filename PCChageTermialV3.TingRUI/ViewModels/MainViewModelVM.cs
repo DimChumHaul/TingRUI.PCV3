@@ -10,6 +10,7 @@ using System.Windows.Media;
 using TingRUI.Data.Models.DataTemplate;
 using TingRUI.Data.JustEnum;
 using System.Collections.Generic;
+using ServiceStack.Text;
 
 namespace PCChageTermialV3.TingRUI.ViewModel
 {
@@ -50,9 +51,9 @@ namespace PCChageTermialV3.TingRUI.ViewModel
             // 一次性初始化所有UI模块
             InitialAllFuckingModules();
 
-            FuncModuleCMD = new RelayCommand<object>((MVObj) =>
+            FuncModuleCMD = new RelayCommand<UIBase>((MVObj) =>
             {
-                MessageBox.Show("测试【事件转命令】成功...");
+                MessageBox.Show("测试【事件转命令】成功... --->" + MVObj.ToJson().IndentJson());
             });
 
             ChangeBgColorCMD = new RelayCommand<Object>( Idx => 
@@ -104,7 +105,7 @@ namespace PCChageTermialV3.TingRUI.ViewModel
         }
 
         #region  WPF事件转命令
-        public RelayCommand<object> FuncModuleCMD { get; set; }
+        public RelayCommand<UIBase> FuncModuleCMD { get; set; }
         public RelayCommand<object> ChangeBgColorCMD { get; set; }
         #endregion
     }
