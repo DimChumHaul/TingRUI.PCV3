@@ -55,8 +55,9 @@ namespace PCChageTermialV3.TingRUI.ViewModel
                 MessageBox.Show("测试【事件转命令】成功...");
             });
 
-            ChangeBgColorCMD = new RelayCommand<Object>( Idx => {
-                App.Current.MainWindow.Background = Brushes.Yellow;
+            ChangeBgColorCMD = new RelayCommand<Object>( Idx => 
+            {
+                App.Current.MainWindow.Background = Brushes.AliceBlue;
             });
         }
 
