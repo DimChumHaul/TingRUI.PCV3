@@ -32,6 +32,7 @@ namespace PCChageTermialV3.TingRUI.ViewModel
         public string AppInfo { get; set; } = string.Format("1.{0} App开发始于{1}",App.AppDescription,App.StartAt.ToLongDateString()
         );
         private Int32 SelectedIdxNo { get; set; } = 5;  // 夏老师 & 丁老师
+        public string TodaysBackImage { get; } = AutoImageSelector();
 
         /* 动态配置主界面左边系 【统菜单栏】 */
         public ObservableCollection<ModulizedBtn> AcceptModuels { get; set; } = new ObservableCollection<ModulizedBtn>();
@@ -44,12 +45,6 @@ namespace PCChageTermialV3.TingRUI.ViewModel
         {
             // 一次性初始化所有UI模块
             InitialAllFuckingModules();
-
-            /* 用户点击顶部状态栏以后发生的一系列事件处理回调 */
-            SelectCommand = new RelayCommand<ListBox>( BoxItems =>
-            {
-                //BoxItems.SelectedIndex = SelectedIdxNo;
-            });
 
             /* 用户单击按钮以后发生的模块化操作 */
             FuncModuleCMD = new RelayCommand<UIBase>( MVObj =>
@@ -108,8 +103,6 @@ namespace PCChageTermialV3.TingRUI.ViewModel
         #region  WPF事件转命令
 
         public RelayCommand<UIBase> FuncModuleCMD { get; set; }
-
-        public RelayCommand<ListBox> SelectCommand { get; set; }
 
         public RelayCommand<object> ChangeBgColorCMD { get; set; }
 

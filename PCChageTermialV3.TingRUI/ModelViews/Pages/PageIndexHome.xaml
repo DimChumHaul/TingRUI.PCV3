@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="PCChageTermialV3.TingRUI.ModelViews.Pages.PageIndexHome"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:Pages="clr-namespace:PCChageTermialV3.TingRUI.ModelViews.Pages"
+             xmlns:Data="clr-namespace:TingRUI.Data.Models.DataTemplate;assembly=TingRUI.Data"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid x:Name="DataDynamicView" Grid.Row="1" >
+        <Grid.Background>
+            <ImageBrush ImageSource="{Binding Path=TodaysBackImage,Mode=OneWay}" Stretch="Fill"/>
+        </Grid.Background>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.75*" />
+            <ColumnDefinition Width="8*" />
+        </Grid.ColumnDefinitions>
+
+        <!--树状菜单控件的第二种写法-->
+        <TreeView ItemsSource="{Binding AcceptMenus}" 
+                      Name="ViewX" BorderThickness="5" FontSize="24" 
+                      BorderBrush="LightBlue" Margin="10" 
+                      Style="{StaticResource VirtualisedMetroTreeView}">
+            <TreeView.Resources>
+                <HierarchicalDataTemplate DataType="{x:Type Data:ModualizedMenu}"  
+                                              ItemsSource="{Binding MenuSublines}">
+                    <HierarchicalDataTemplate.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Title}" />
+                        </DataTemplate>
+                    </HierarchicalDataTemplate.ItemTemplate>
+                    <TextBlock Text="{Binding Title}" Margin="2.5" />
+                </HierarchicalDataTemplate>
+            </TreeView.Resources>
+        </TreeView>
+
+        <Label Grid.Column="1" VerticalAlignment="Top" Content="{Binding AppInfo, Mode=TwoWay,ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged,
+               NotifyOnValidationError=True}" Controls:TextBoxHelper.Watermark="Number smaller than 18"
+               Width="Auto" Height="84">
+        </Label>
+    </Grid>
+</UserControl>

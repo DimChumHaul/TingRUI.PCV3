@@ -4,24 +4,41 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:Data="clr-namespace:TingRUI.Data.Models.DataTemplate;assembly=TingRUI.Data"
-        xmlns:SVG ="http://metro.mahapps.com/winfx/xaml/iconpacks"    
+        xmlns:Pages="clr-namespace:PCChageTermialV3.TingRUI.ModelViews.Pages"
+        xmlns:SVG ="http://metro.mahapps.com/winfx/xaml/iconpacks" 
         xmlns:DK="clr-namespace:TingRUI.Data.Models.DataTemplate;assembly=TingRUI.Data"
-        mc:Ignorable="d" x:Name="WinMain"
-        DataContext="{Binding Source={StaticResource Locator},Path=Main}"
         xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
-        Title="{Binding Path=AppInfo}" Height="768" Width="1024" 
-        WindowStartupLocation="CenterScreen" WindowState="Maximized" 
-        Cursor="Arrow" AllowDrop="True" Tag="1000" Visibility="Visible" 
         xmlns:MvvmLight="http://www.galasoft.ch/mvvmlight"
         xmlns:I="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:Data="clr-namespace:TingRUI.Data.Models.DataTemplate;assembly=TingRUI.Data"
+    
+        DataContext="{Binding Source={StaticResource Locator},Path=Main}"
+        Title="{Binding Path=AppInfo}" Width="1024" Height="768"
+        mc:Ignorable="d" x:Name="WinMain"
+        WindowStartupLocation="CenterScreen" WindowState="Maximized" 
+        Cursor="Arrow" AllowDrop="True" Visibility="Visible" 
         BorderThickness="2.5" Background="{x:Null}">
+   
     <!--为了使用MVVMLight中 EventToCommand-[事件转命令] 功能。-->
+    <Controls:MetroWindow.LeftWindowCommands>
+        <Controls:WindowCommands>
+            <Button Click="LaunchMahAppsOnGitHub" ToolTip="MahApps.Metro on GitHub">
+                <SVG:PackIconModern Width="22" Height="22" Kind="SocialGithubOctocat" />
+            </Button>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.LeftWindowCommands>
+    <!--右上角系统标头附加按钮-->
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands ShowLastSeparator="True">
+            <ToggleButton Content="确认弹窗"
+                          IsChecked="{Binding QuitConfirmationEnabled}"
+                          ToolTip="在弹出框内部确认取消操作" />
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
 
     <Controls:MetroWindow.Resources>
         <Thickness x:Key="InnerBannerMargin">2.5</Thickness>
         <Thickness x:Key="ItemViewsMargin">2.5</Thickness>
-
         <!-- 顶部菜单栏核心布局 这种UI在WPF的实现中以`样式Style`的方式实现 -->
         <Style TargetType="ListBox" x:Key="TopListStyle">
             <Setter Property="Template">
@@ -39,6 +56,22 @@
             <Setter Property="SelectedIndex" Value="7" />
         </Style>
 
+        <!--系统菜单栏样式-->
+        <Style x:Key="AppThemeMenuItemStyle"
+                   BasedOn="{StaticResource MetroMenuItem}"
+                   TargetType="{x:Type MenuItem}">
+            <Setter Property="Command" Value="{Binding ChangeAccentCommand}" />
+            <Setter Property="Header" Value="{Binding Name, Mode=OneWay}" />
+        </Style>
+
+        <!--色彩下拉选项样式-->
+        <Style x:Key="AccentColorMenuItemStyle"
+                   BasedOn="{StaticResource MetroMenuItem}"
+                   TargetType="{x:Type MenuItem}">
+            <Setter Property="Command" Value="{Binding ChangeAccentCommand}" />
+            <Setter Property="Header" Value="{Binding Name, Mode=OneWay}" />
+        </Style>
+
         <DataTemplate DataType="{x:Type Data:ModulizedBtn}">
             <Controls:DropDownButton Name="Setting" 
                                      Margin="{StaticResource ItemViewsMargin}" MinWidth="64"
@@ -50,85 +83,116 @@
                     <SVG:PackIconModern Margin="5" Kind="{Binding Path=SVGImage}" MinWidth="32" MinHeight="32"/>
                 </Controls:DropDownButton.Icon>
 
-                     <!--1.多触发器 2.参数的传递 是底层DataModel--> 
+                <!--1.多触发器 2.参数的传递 是底层DataModel-->
                 <I:Interaction.Triggers>
                     <I:EventTrigger EventName="Click">
                         <MvvmLight:EventToCommand 
-                            Command="{Binding DataContext.FuncModuleCMD,
-                            RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=ListBox}}">
+                            Command="{Binding DataContext.FuncModuleCMD,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=ListBox}}">
                             <MvvmLight:EventToCommand.CommandParameter>
                                 <DK:UIBase Title="哈哈字符串" />
                             </MvvmLight:EventToCommand.CommandParameter>
                         </MvvmLight:EventToCommand>
                     </I:EventTrigger>
                 </I:Interaction.Triggers>
-
             </Controls:DropDownButton>
         </DataTemplate>
     </Controls:MetroWindow.Resources>
 
+    <!--首页不设置列定义 全部用1列N行 行内再嵌入复杂布局-->
     <Grid x:Name="MainWinGView">
-        <!--首页不设置列定义 全部用1列N行 行内再嵌入复杂布局-->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="6.18*" />
-            <RowDefinition Height="32" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <!--计费+监控...功能模块-->
-        <ListBox x:Name="TopView" Grid.Row="0" Style="{StaticResource TopListStyle}" 
-                 ItemsSource="{Binding Path=AcceptModuels}">
-            <I:Interaction.Triggers>
-                <I:EventTrigger EventName="SelectionChanged">
-                    <MvvmLight:EventToCommand Command="{Binding SelectCommand}" />
-                </I:EventTrigger>
-            </I:Interaction.Triggers>
-        </ListBox>
+        <!--网格 Grid.Row[0] 系统菜单栏-->
+        <Menu Grid.Row="0" Width="1024" HorizontalAlignment="Left" VerticalAlignment="Stretch">
+            <MenuItem Header="主题设置"
+                      ItemContainerStyle="{StaticResource AppThemeMenuItemStyle}"
+                      ItemsSource="{Binding AppThemes, Mode=OneWay}" />
+            <MenuItem Header="色彩"
+                      ItemContainerStyle="{StaticResource AccentColorMenuItemStyle}"
+                      ItemsSource="{Binding AccentColors, Mode=OneWay}" />
+            <MenuItem Header="对话框">
+                <MenuItem Command="{Binding ShowProgressDialogCommand}" Header="Show ProgressDialog via VM" />
+                <MenuItem Command="{Binding ShowCustomDialogCommand}" Header="Show CustomDialog via VM" />
+            </MenuItem>
+            <MenuItem Header="桌面设置">
+                <MenuItem Header="ShowTitleBar"
+                          IsCheckable="True"
+                          IsChecked="{Binding Path=ShowMyTitleBar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <MenuItem Header="ShowInTaskbar"
+                          IsCheckable="True"
+                          IsChecked="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Controls:MetroWindow}}, Path=ShowInTaskbar}" />
+                <MenuItem Header="Topmost"
+                          IsCheckable="True"
+                          IsChecked="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Controls:MetroWindow}}, Path=Topmost}" />
+                <Separator />
 
-        <Grid x:Name="DataDynamicView" Grid.Row="1" Margin="{StaticResource InnerBannerMargin}">
-            <Grid.Background>
-                <ImageBrush ImageSource="{Binding Path=TodaysBackImage,Mode=OneWay}" Stretch="Fill"/>
-            </Grid.Background>
-            
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1.75*" />
-                <ColumnDefinition Width="8*" />
-            </Grid.ColumnDefinitions>
+                <Separator />
+                <MenuItem x:Name="ShowSeparatorsMI"
+                          Header="ShowSeparators (RightWindowCommands)"
+                          IsCheckable="True"
+                          IsChecked="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Controls:MetroWindow}}, Path=RightWindowCommands.ShowSeparators}" />
+                <MenuItem Header="ShowLastSeparator in (RightWindowCommands)"
+                          IsCheckable="True"
+                          IsChecked="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Controls:MetroWindow}}, Path=RightWindowCommands.ShowLastSeparator}"
+                          IsEnabled="{Binding ElementName=ShowSeparatorsMI, Path=IsChecked, Mode=OneWay}" />
+                <Separator />
+                <MenuItem Command="{Binding ToggleIconScalingCommand}"
+                          CommandParameter="{x:Static Controls:MultiFrameImageMode.ScaleDownLargerFrame}"
+                          Header="Window icon: scale down larger frame"
+                          IsCheckable="True"
+                          IsChecked="{Binding IsScaleDownLargerFrame, Mode=OneWay}" />
+                <MenuItem Command="{Binding ToggleIconScalingCommand}"
+                          CommandParameter="{x:Static Controls:MultiFrameImageMode.NoScaleSmallerFrame}"
+                          Header="Window icon: no scale, smaller frame"
+                          IsCheckable="True"
+                          IsChecked="{Binding IsNoScaleSmallerFrame, Mode=OneWay}" />
+                <Separator />
+                <MenuItem Header="ShowSystemMenu"
+                          IsCheckable="True"
+                          IsChecked="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Controls:MetroWindow}}, Path=ShowSystemMenu}" />
+                <MenuItem Header="ShowSystemMenuOnRightClick"
+                          IsCheckable="True"
+                          IsChecked="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Controls:MetroWindow}}, Path=ShowSystemMenuOnRightClick}" />
+            </MenuItem>
+        </Menu>
 
-            <!--树状菜单控件的第二种写法-->
-            <TreeView ItemsSource="{Binding AcceptMenus}" 
-                      Name="ViewX" BorderThickness="5" FontSize="24" 
-                      BorderBrush="LightBlue" Margin="10" 
-                      Style="{StaticResource VirtualisedMetroTreeView}">
-                <TreeView.Resources>
-                    <HierarchicalDataTemplate DataType="{x:Type Data:ModualizedMenu}"  
-                                              ItemsSource="{Binding MenuSublines}">
-                        <HierarchicalDataTemplate.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Title}" />
-                            </DataTemplate>
-                        </HierarchicalDataTemplate.ItemTemplate>
-                        <TextBlock Text="{Binding Title}" Margin="2.5" />
-                    </HierarchicalDataTemplate>
-                </TreeView.Resources>
-            </TreeView>
-
-            <Label Grid.Column="1" VerticalAlignment="Top" Content="{
-                Binding AppInfo, 
-                Mode=TwoWay,ValidatesOnDataErrors=True,
-                UpdateSourceTrigger=PropertyChanged,
-                NotifyOnValidationError=True}" 
-                   Controls:TextBoxHelper.Watermark="Number smaller than 18" Width="Auto" Height="84">
-            </Label>
-        </Grid>
-
+        <!--ItemsSource="{Binding Path=AcceptModuels}"-->
+        <Controls:MetroTabControl x:Name="TopView" Grid.Row="1"
+                                          TabStripPlacement="Top" 
+                                          ItemsSource="{Binding AcceptModuels}"
+                                          ScrollViewer.CanContentScroll="True">
+            <!--<TabItem Header="停车场计费首页">
+                <Pages:PageIndexHome DataContext="{Binding}"/>
+            </TabItem>
+            <TabItem Header="成都停如意1">
+                <Pages:SubPage2 DataContext="{Binding}" />
+            </TabItem>
+            <TabItem Header="成都停如意2">
+                <Pages:SubPage3 DataContext="{Binding}" />
+            </TabItem>
+            <TabItem Header="成都停如意3">
+                <Pages:SubPage4 DataContext="{Binding}" />
+            </TabItem>
+            <TabItem Header="成都停如意4">
+                <Pages:SubPage5 DataContext="{Binding}" />
+            </TabItem>
+            <TabItem Header="成都停如意5">
+                <Pages:SubPage6 DataContext="{Binding}" />
+            </TabItem>-->
+        </Controls:MetroTabControl>
+        
+        <!--底部实时状态栏跟踪-->
         <StatusBar Grid.Row="2">
             <StatusBarItem>底部实时状态栏</StatusBarItem>
             <Separator Style="{StaticResource MetroStatusBarSeparator}" />
             <StatusBarItem>Selected Tab:</StatusBarItem>
             <StatusBarItem Content="{Binding ElementName=MainTabControl, Path=SelectedItem.Header, Mode=OneWay}" />
         </StatusBar>
-
+        
     </Grid>
 
 </Controls:MetroWindow>

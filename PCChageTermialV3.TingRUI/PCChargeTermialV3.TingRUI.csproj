@@ -96,6 +96,9 @@
     <Compile Include="ModelViews\FlayoutEngineCtrl.xaml.cs">
       <DependentUpon>FlayoutEngineCtrl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ModelViews\Pages\PageIndexHome.xaml.cs">
+      <DependentUpon>PageIndexHome.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ModelViews\Pages\SubPage2.xaml.cs">
       <DependentUpon>SubPage2.xaml</DependentUpon>
     </Compile>
@@ -131,6 +134,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ModelViews\Pages\PageIndexHome.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ModelViews\Pages\SubPage2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

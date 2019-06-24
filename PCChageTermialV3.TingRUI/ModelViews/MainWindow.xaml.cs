@@ -28,7 +28,16 @@ namespace PCChageTermialV3.TingRUI
             InitializeComponent();
 
             DispatcherHelper.Initialize();
-            
+        }
+
+        private void LaunchMahAppsOnGitHub(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/MahApps/MahApps.Metro");
+        }
+
+        private void LaunchIcons(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/MahApps/MahApps.Metro.IconPacks");
         }
     }
 }
