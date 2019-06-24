@@ -96,6 +96,21 @@
     <Compile Include="ModelViews\FlayoutEngineCtrl.xaml.cs">
       <DependentUpon>FlayoutEngineCtrl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ModelViews\Pages\SubPage2.xaml.cs">
+      <DependentUpon>SubPage2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ModelViews\Pages\SubPage3.xaml.cs">
+      <DependentUpon>SubPage3.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ModelViews\Pages\SubPage4.xaml.cs">
+      <DependentUpon>SubPage4.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ModelViews\Pages\SubPage5.xaml.cs">
+      <DependentUpon>SubPage5.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ModelViews\Pages\SubPage6.xaml.cs">
+      <DependentUpon>SubPage6.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\OrderCalculationV1VM.cs" />
     <Compile Include="ViewModels\HardWareCtrlVM.cs" />
     <Compile Include="ViewModels\MainViewModelVM.cs" />
@@ -116,6 +131,26 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ModelViews\Pages\SubPage2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ModelViews\Pages\SubPage3.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ModelViews\Pages\SubPage4.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ModelViews\Pages\SubPage5.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ModelViews\Pages\SubPage6.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

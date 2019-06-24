@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="PCChageTermialV3.TingRUI.ModelViews.Pages.SubPage4"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PCChageTermialV3.TingRUI.ModelViews.Pages"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.Background>
+            <RadialGradientBrush>
+                <GradientStop Color="OliveDrab" Offset="1"/>
+                <GradientStop Color="#FF15EA6B"/>
+            </RadialGradientBrush>
+        </Grid.Background>
+        <Button FontSize="28"
+               FontFamily="宋体" FontWeight="ExtraBold"
+               Foreground="Black" Background="Transparent"
+               VerticalAlignment="Center"
+               HorizontalContentAlignment="Center"
+               Content="WPF.子页面(统计查询)进行首页布局"/>
+    </Grid>
+</UserControl>
