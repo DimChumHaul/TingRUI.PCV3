@@ -151,7 +151,6 @@
         </Menu>
 
         <!--核心布局 Grid.Row[1] :鼎辰模块列表-->
-        <!--ItemsSource="{Binding AcceptModuels}"-->
         <Controls:MetroTabControl x:Name="TopView" Grid.Row="1" 
                                   TabStripPlacement="Top">
             <TabItem Header="{Binding Path=AcceptModuels[0]}">
@@ -171,6 +170,24 @@
             </TabItem>
             <TabItem Header="{Binding Path=AcceptModuels[5]}">
                 <Pages:SubPage6 DataContext="{Binding}" />
+            </TabItem>
+            <TabItem Header="{Binding Path=AcceptModuels[6]}">
+                <Pages:SubPage7 DataContext="{Binding}" />
+            </TabItem>
+            <TabItem Header="{Binding Path=AcceptModuels[7]}">
+                <Pages:SubPage8 DataContext="{Binding}" />
+            </TabItem>
+            <TabItem Header="{Binding Path=AcceptModuels[8]}">
+                <Pages:SubPage9 DataContext="{Binding}" />
+            </TabItem>
+            <TabItem Header="{Binding Path=AcceptModuels[9]}">
+                <Pages:SubPage6 DataContext="{Binding}" />
+            </TabItem>
+            <TabItem Header="{Binding Path=AcceptModuels[10]}">
+                <Pages:SubPage6 DataContext="{Binding}" />
+            </TabItem>
+            <TabItem Header="{Binding Path=AcceptModuels[11]}">
+                <TextBlock DataContext="{Binding SelectedIdxNo}" />
             </TabItem>
         </Controls:MetroTabControl>
 

@@ -10,7 +10,8 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid x:Name="DataDynamicView" Grid.Row="1" >
         <Grid.Background>
-            <ImageBrush ImageSource="{Binding Path=TodaysBackImage,Mode=OneWay}" Stretch="Fill"/>
+            <ImageBrush ImageSource="{Binding Path=TodaysBackImage,Mode=OneWay}" 
+                        Stretch="UniformToFill"/>
         </Grid.Background>
 
         <Grid.ColumnDefinitions>

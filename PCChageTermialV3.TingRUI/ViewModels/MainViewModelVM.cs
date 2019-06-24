@@ -96,9 +96,8 @@ namespace PCChageTermialV3.TingRUI.ViewModel
         }
 
         public string AppInfo { get; set; } = string.Format("1.{0} App开发始于{1}",App.AppDescription, App.StartAt.ToLongDateString());
-
-        private Int32 SelectedIdxNo { get; set; } = 5;  // 夏老师 & 丁老师
-        public string TodaysBackImage { get; } = AutoImageSelector();
+        public int SelectedIdxNo { get; set; } = 5;  // 夏老师 & 丁老师
+        public string TodaysBackImage { get; set; } = AutoImageSelector();
 
         #region  WPF事件转命令
 

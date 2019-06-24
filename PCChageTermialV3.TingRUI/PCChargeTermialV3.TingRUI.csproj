@@ -111,6 +111,15 @@
     <Compile Include="ModelViews\Pages\SubPage6.xaml.cs">
       <DependentUpon>SubPage6.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ModelViews\Pages\SubPage7.xaml.cs">
+      <DependentUpon>SubPage7.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ModelViews\Pages\SubPage8.xaml.cs">
+      <DependentUpon>SubPage8.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ModelViews\Pages\SubPage9.xaml.cs">
+      <DependentUpon>SubPage9.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\OrderCalculationV1VM.cs" />
     <Compile Include="ViewModels\HardWareCtrlVM.cs" />
     <Compile Include="ViewModels\MainViewModelVM.cs" />
@@ -148,6 +157,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ModelViews\Pages\SubPage6.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ModelViews\Pages\SubPage7.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ModelViews\Pages\SubPage8.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ModelViews\Pages\SubPage9.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
