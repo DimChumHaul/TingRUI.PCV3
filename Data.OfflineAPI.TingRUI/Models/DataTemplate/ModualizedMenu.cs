@@ -7,20 +7,12 @@ using TingRUI.Data.JustEnum;
 
 namespace TingRUI.Data.Models.DataTemplate
 {
-    
-
     // MDM : Modulized Data Menu 模块化菜单组选数据模板 用作UI第二层容器 
     // 按类型进行分类管理 用枚举类型就行分组实现
-    public class ModualizedMenu : UIBase
+    public class ModualizedMenu : PrettyModuel
     {
         public List<ModulizedBtn> MenuSublines { get; set; } = new List<ModulizedBtn>();
-        public int SubCount { get; }
         public LeftBarUIType gTypeL1 { get; set; }
-
-        public ModualizedMenu()
-        {
-            SubCount = MenuSublines.Count();
-        }
 
         public static List<ModualizedMenu> FakeData()
         {

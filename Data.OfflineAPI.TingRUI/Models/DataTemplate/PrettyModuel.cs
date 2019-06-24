@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace TingRUI.Data.Models.DataTemplate
 {
-    public class UIBase
+    public class PrettyModuel
     {
-        public string Title { get; set; } = "WpfCtrlBase空间标题";
+        public string SvgImage { get; set; }
+        public string Title { get; set; }
         public string SubTitle { get; set; } = "子标题";
-        public string SVGImage { get; set; } = "打开NuGet搜索 `MahApps.Metro.IconPacks`";
 
         public static bool isHoliday()
         {

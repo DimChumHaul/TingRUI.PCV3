@@ -54,7 +54,7 @@
     <Compile Include="JustEnum\ProLevel.cs" />
     <Compile Include="Models\DataTemplate\ModulizedBtn.cs" />
     <Compile Include="Models\DataTemplate\ModualizedMenu.cs" />
-    <Compile Include="Models\DataTemplate\UIBase.cs" />
+    <Compile Include="Models\DataTemplate\PrettyModuel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -66,5 +66,6 @@
   <ItemGroup>
     <None Include="AppSetting.json" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

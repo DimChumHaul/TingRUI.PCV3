@@ -93,14 +93,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ModelViews\CustomStyles\Window4Blend.xaml.cs">
-      <DependentUpon>Window4Blend.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ModelViews\Pages\PageIndexHome.xaml.cs">
       <DependentUpon>PageIndexHome.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ModelViews\Pages\SubPage2.xaml.cs">
-      <DependentUpon>SubPage2.xaml</DependentUpon>
+    <Compile Include="ModelViews\Pages\PageChargingRulesSetting.xaml.cs">
+      <DependentUpon>PageChargingRulesSetting.xaml</DependentUpon>
     </Compile>
     <Compile Include="ModelViews\Pages\SubPage3.xaml.cs">
       <DependentUpon>SubPage3.xaml</DependentUpon>
@@ -118,10 +115,6 @@
     <Compile Include="ViewModels\HardWareCtrlVM.cs" />
     <Compile Include="ViewModels\MainViewModelVM.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
-    <Page Include="ModelViews\CustomStyles\Window4Blend.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="ModelViews\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -138,7 +131,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ModelViews\Pages\SubPage2.xaml">
+    <Page Include="ModelViews\Pages\PageChargingRulesSetting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

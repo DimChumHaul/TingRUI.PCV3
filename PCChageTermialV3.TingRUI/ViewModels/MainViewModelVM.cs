@@ -29,11 +29,6 @@ namespace PCChageTermialV3.TingRUI.ViewModel
     /// </summary>
     internal class MainViewModelVM :ViewModelBase
     {
-        public string AppInfo { get; set; } = string.Format("1.{0} App开发始于{1}",App.AppDescription,App.StartAt.ToLongDateString()
-        );
-        private Int32 SelectedIdxNo { get; set; } = 5;  // 夏老师 & 丁老师
-        public string TodaysBackImage { get; } = AutoImageSelector();
-
         /* 动态配置主界面左边系 【统菜单栏】 */
         public ObservableCollection<ModulizedBtn> AcceptModuels { get; set; } = new ObservableCollection<ModulizedBtn>();
         public ObservableCollection<ModualizedMenu> AcceptMenus { get; set; } = new ObservableCollection<ModualizedMenu>();
@@ -47,7 +42,7 @@ namespace PCChageTermialV3.TingRUI.ViewModel
             InitialAllFuckingModules();
 
             /* 用户单击按钮以后发生的模块化操作 */
-            FuncModuleCMD = new RelayCommand<UIBase>( MVObj =>
+            FuncModuleCMD = new RelayCommand<PrettyModuel>( MVObj =>
             {
                 var Info = MVObj.ToJson().IndentJson();
                 MessageBox.Show(Info);
@@ -62,7 +57,7 @@ namespace PCChageTermialV3.TingRUI.ViewModel
         private static string AutoImageSelector()
         {
             string JpgFile = string.Empty;
-            JpgFile = UIBase.isHoliday()?"MainBg3-Programer.Jpg":"MainBg2-TonyStark.JPG";
+            JpgFile = PrettyModuel.isHoliday()?"MainBg3-Programer.Jpg":"MainBg2-TonyStark.JPG";
             var Resource_Dir_File = Path.Combine("~/".MapProjectPath(),$"/Resources/{JpgFile}");
             return Resource_Dir_File;
         }
@@ -100,10 +95,14 @@ namespace PCChageTermialV3.TingRUI.ViewModel
             }
         }
 
+        public string AppInfo { get; set; } = string.Format("1.{0} App开发始于{1}",App.AppDescription, App.StartAt.ToLongDateString());
+
+        private Int32 SelectedIdxNo { get; set; } = 5;  // 夏老师 & 丁老师
+        public string TodaysBackImage { get; } = AutoImageSelector();
+
         #region  WPF事件转命令
 
-        public RelayCommand<UIBase> FuncModuleCMD { get; set; }
-
+        public RelayCommand<PrettyModuel> FuncModuleCMD { get; set; }
         public RelayCommand<object> ChangeBgColorCMD { get; set; }
 
         #endregion

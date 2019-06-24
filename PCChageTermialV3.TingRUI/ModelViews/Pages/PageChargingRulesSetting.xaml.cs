@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PCChageTermialV3.TingRUI.ModelViews.CustomStyles
+namespace PCChageTermialV3.TingRUI.ModelViews.Pages
 {
     /// <summary>
-    /// Window4Blend.xaml 的交互逻辑
+    /// SubPage2.xaml 的交互逻辑
     /// </summary>
-    public partial class Window4Blend : Window
+    public partial class PageChargingRulesSetting : UserControl
     {
-        public Window4Blend()
+        public PageChargingRulesSetting()
         {
             InitializeComponent();
         }

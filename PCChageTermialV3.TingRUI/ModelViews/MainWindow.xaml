@@ -65,12 +65,6 @@
             <Setter Property="Header" Value="{Binding Name, Mode=OneWay}" />
         </Style>
 
-        <!--色彩下拉选项样式-->
-        <Style x:Key="AccentColorMenuItemStyle" BasedOn="{StaticResource MetroMenuItem}" TargetType="{x:Type MenuItem}">
-            <Setter Property="Command" Value="{Binding ChangeAccentCommand}" />
-            <Setter Property="Header" Value="{Binding Name, Mode=OneWay}" />
-        </Style>
-
         <DataTemplate DataType="{x:Type Data:ModulizedBtn}">
             <Controls:DropDownButton Name="Setting" Margin="{StaticResource ItemViewsMargin}"
                                      Content="{Binding Path=Title}"
@@ -78,7 +72,7 @@
                                      DisplayMemberPath="{Binding Path=OrderIndex}">
                 <!--命令的ICON图标-->
                 <Controls:DropDownButton.Icon>
-                    <SVG:PackIconModern Margin="5" Kind="{Binding Path=SVGImage}" MinWidth="32" MinHeight="32"/>
+                    <SVG:PackIconModern Margin="5" Kind="{Binding Path=SvgImage}" MinWidth="32" MinHeight="32"/>
                 </Controls:DropDownButton.Icon>
 
                 <!--1.多触发器 2.参数的传递 是底层DataModel-->
@@ -88,12 +82,11 @@
                             Command="{Binding Path=DataContext.FuncModuleCMD,
                                     RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=TabControl}}">
                             <MvvmLight:EventToCommand.CommandParameter>
-                                <DK:UIBase Title="从UI收参" SubTitle="暂时写死在UI中" />
+                                <DK:PrettyModuel Title="从UI收参" SubTitle="暂时写死在UI中" />
                             </MvvmLight:EventToCommand.CommandParameter>
                         </MvvmLight:EventToCommand>
                     </I:EventTrigger>
                 </I:Interaction.Triggers>
-                
             </Controls:DropDownButton>
         </DataTemplate>
     </Controls:MetroWindow.Resources>
@@ -111,9 +104,7 @@
             <MenuItem Header="主题设置"
                       ItemContainerStyle="{StaticResource AppThemeMenuItemStyle}"
                       ItemsSource="{Binding AppThemes, Mode=OneWay}" />
-            <MenuItem Header="色彩"
-                      ItemContainerStyle="{StaticResource AccentColorMenuItemStyle}"
-                      ItemsSource="{Binding AccentColors, Mode=OneWay}" />
+            <MenuItem Header="色彩" ItemsSource="{Binding AccentColors, Mode=OneWay}" />
             <MenuItem Header="对话框">
                 <MenuItem Command="{Binding ShowProgressDialogCommand}" Header="Show ProgressDialog via VM" />
                 <MenuItem Command="{Binding ShowCustomDialogCommand}" Header="Show CustomDialog via VM" />
@@ -160,12 +151,29 @@
         </Menu>
 
         <!--核心布局 Grid.Row[1] :鼎辰模块列表-->
+        <!--ItemsSource="{Binding AcceptModuels}"-->
         <Controls:MetroTabControl x:Name="TopView" Grid.Row="1" 
-                                          TabStripPlacement="Top" 
-                                          ItemsSource="{Binding AcceptModuels}"
-                                          ScrollViewer.CanContentScroll="True">
+                                  TabStripPlacement="Top">
+            <TabItem Header="{Binding Path=AcceptModuels[0]}">
+                <Pages:PageIndexHome DataContext="{Binding}" />
+            </TabItem>
+            <TabItem Header="{Binding Path=AcceptModuels[1]}">
+                <Pages:PageChargingRulesSetting DataContext="{Binding}" />
+            </TabItem>
+            <TabItem Header="{Binding Path=AcceptModuels[2]}">
+                <Pages:SubPage3 DataContext="{Binding}" />
+            </TabItem>
+            <TabItem Header="{Binding Path=AcceptModuels[3]}">
+                <Pages:SubPage4 DataContext="{Binding}" />
+            </TabItem>
+            <TabItem Header="{Binding Path=AcceptModuels[4]}">
+                <Pages:SubPage5 DataContext="{Binding}" />
+            </TabItem>
+            <TabItem Header="{Binding Path=AcceptModuels[5]}">
+                <Pages:SubPage6 DataContext="{Binding}" />
+            </TabItem>
         </Controls:MetroTabControl>
-        
+
         <!--底部实时状态栏跟踪-->
         <StatusBar Grid.Row="2">
             <StatusBarItem>底部实时状态栏</StatusBarItem>

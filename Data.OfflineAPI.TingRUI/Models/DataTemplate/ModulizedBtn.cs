@@ -8,16 +8,12 @@ using TingRUI.Data.JustEnum;
 
 namespace TingRUI.Data.Models.DataTemplate
 {
-    // 功能按钮抽象出来的底层数据模型
-    // 名词解释 DM Data Model Modulized 模块化可配置数据模板
-    public class ModulizedBtn : UIBase
+    // v0.1.2 增加一些属性用于为菜单按钮分组
+    public class ModulizedBtn : PrettyModuel
     {
-        public string RemoteImage { get; set; }
         public string URILocator { get; set; } = "/TingRUI/PCWin32/WSAPI/V1/MvvMLight/Button4";
-        public bool IsOfflineSupport { get; } = false;
-
-        // v0.1.2 增加一些属性用于为菜单按钮分组
         public LeftBarUIType gType { get; private set; }
+        public bool IsVip { get; } = false;
 
         public override string ToString()
         {
@@ -31,9 +27,8 @@ namespace TingRUI.Data.Models.DataTemplate
 
             if (!string.IsNullOrEmpty(this.ToJson()))
             {
-                var commandURI = $"{URILocator}/{ModuleName}";
-
                 // 判断 模块功能URI是否格式正确
+                var commandURI = $"{URILocator}/{ModuleName}";
                 var code = commandURI.LastRightPart('/');
                 if (string.IsNullOrWhiteSpace(code)) throw new NotImplementedException("模块Uri格式错误或功能缺失");
 
@@ -41,13 +36,15 @@ namespace TingRUI.Data.Models.DataTemplate
                 this.gType = gType;
             }
         }
+
         public static IEnumerable<ModulizedBtn> FakeData()
         {
             var data = new List<ModulizedBtn>();
 
-            /* 动态配置主界面顶部【操作员功能模块】 */
+            /* 动态配置主界面顶部【操作员功能模块】v3.0-11个模块 */
             bool 哈哈 = isHoliday();
-            var FakeModules = new List<dynamic> {
+            var FakeModules = new List<dynamic>
+            {
                 new { Name = "收费设置" , SvgIcon = "BarCode" ,Node = LeftBarUIType.SystemAdmin },
                 new { Name = "车场设置", SvgIcon = "Marketplace",Node = LeftBarUIType.SystemAdmin },
                 new { Name = "车道设置", SvgIcon = "AdobePhotoshop",Node = LeftBarUIType.SystemAdmin },
@@ -59,18 +56,18 @@ namespace TingRUI.Data.Models.DataTemplate
                 new { Name = "数据库备份", SvgIcon = "ConnectionWifiVariant",Node = LeftBarUIType.LiveMonitor },
                 new { Name = "数据库还原", SvgIcon = "DrawPenReflection",Node = LeftBarUIType.CrystalReports },
                 new { Name = "重新登陆", SvgIcon = "Laptop",Node = LeftBarUIType.CrystalReports },
-                new { Name = 哈哈?"夏老师":"丁老师", SvgIcon = 哈哈?"FuturamaFry":"Trophy", Node = LeftBarUIType.CrystalReports },
+                new { Name = 哈哈?"夏老师":"丁老师",
+                    SvgIcon = 哈哈?"FuturamaFry":"Trophy",
+                    Node = LeftBarUIType.CrystalReports },
             };
 
             for (int i = 0; i < FakeModules.Count; i++)
             {
                 var moduleBtn = FakeModules[i];
-
-                //李孟阔是个猛男 惹不起(33%可能打得过) 所以高经理也惹不起
                 var row = new ModulizedBtn(moduleBtn.Name, moduleBtn.Node) 
                 {
                     Title = FakeModules.ElementAt(i).Name,
-                    SVGImage = FakeModules[i].SvgIcon,
+                    SvgImage = FakeModules[i].SvgIcon,
                     gType = moduleBtn.Node,
                 };
                 data.Add(row);
