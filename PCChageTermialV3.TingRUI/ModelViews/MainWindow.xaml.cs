@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Threading;
 using MahApps.Metro.Controls;
+using PCChageTermialV3.TingRUI.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,5 +30,14 @@ namespace PCChageTermialV3.TingRUI
             // 初始化STA UI线程
             DispatcherHelper.Initialize();
         }
+
+        //private void TopView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    if(DataContext is MainViewModelVM VM)
+        //    {
+        //        var func = VM.FuncModuleCMD;
+        //        func.Execute(null);
+        //    }
+        //}
     }
 }

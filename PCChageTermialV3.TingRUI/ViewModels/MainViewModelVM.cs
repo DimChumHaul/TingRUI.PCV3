@@ -50,7 +50,7 @@ namespace PCChageTermialV3.TingRUI.ViewModel
             // 一次性初始化所有UI模块
             InitialAllFuckingModules();
 
-            FuncModuleCMD = new RelayCommand(() =>
+            FuncModuleCMD = new RelayCommand<object>((MVObj) =>
             {
                 MessageBox.Show("测试【事件转命令】成功...");
             });
@@ -104,7 +104,7 @@ namespace PCChageTermialV3.TingRUI.ViewModel
         }
 
         #region  WPF事件转命令
-        public RelayCommand FuncModuleCMD { get; set; }
+        public RelayCommand<object> FuncModuleCMD { get; set; }
         public RelayCommand<object> ChangeBgColorCMD { get; set; }
         #endregion
     }

@@ -49,6 +49,7 @@
                     <SVG:PackIconModern Margin="5" Kind="{Binding Path=SVGImage}" MinWidth="32" MinHeight="32"/>
                 </Controls:DropDownButton.Icon>
 
+                     <!--1.多触发器 2.参数的传递 是底层DataModel--> 
                 <I:Interaction.Triggers>
                     <I:EventTrigger EventName="Click">
                         <MvvmLight:EventToCommand 
@@ -56,8 +57,6 @@
                             RelativeSource=
                             {RelativeSource Mode=FindAncestor,AncestorType=ListBox}}" />
                     </I:EventTrigger>
-
-                    <!-- 1.多触发器 2.参数的传递 是底层DataModel -->
                     <I:EventTrigger EventName="MouseEnter">
                         <MvvmLight:EventToCommand 
                             Command="{Binding ChangeBgColorCMD,
@@ -80,7 +79,7 @@
 
         <!--计费+监控...功能模块-->
         <ListBox Grid.Row="0" Style="{StaticResource TopListStyle}"
-                 ItemsSource="{Binding Path=AcceptModuels}"
+                 ItemsSource="{Binding Path=AcceptModuels}" 
                  Name="TopView" />
           
         <Grid x:Name="DataDynamicView" Grid.Row="1" Margin="{StaticResource InnerBannerMargin}">
