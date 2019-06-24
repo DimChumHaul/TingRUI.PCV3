@@ -18,6 +18,7 @@
                Foreground="LightCyan" Background="Transparent"
                VerticalAlignment="Center"
                HorizontalContentAlignment="Center"
-               Content="WPF.子页面(车(场)辆管理)进行首页布局"/>
+               Content="WPF.子页面(车(场)辆管理)进行首页布局">
+        </Button>
     </Grid>
 </UserControl>

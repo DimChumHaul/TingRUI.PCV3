@@ -53,7 +53,7 @@ namespace PCChageTermialV3.TingRUI.ViewModel
                 MessageBox.Show(Info);
             });
 
-            ChangeBgColorCMD = new RelayCommand<Object>( Idx => 
+            ChangeBgColorCMD = new RelayCommand<object>( Idx => 
             {
                 Application.Current.MainWindow.Background = Brushes.AliceBlue;
             });
