@@ -12,7 +12,6 @@
         x:Class="PCChageTermialV3.TingRUI.MainWindow"
         xmlns:Pages="clr-namespace:PCChageTermialV3.TingRUI.ModelViews.Pages"
     
-    
         DataContext="{Binding Source={StaticResource Locator},Path=Main}"
         Title="{Binding Path=AppInfo}" Width="1024" Height="768"
         mc:Ignorable="d" x:Name="WinMain"
@@ -28,10 +27,11 @@
             </Button>
         </Controls:WindowCommands>
     </Controls:MetroWindow.LeftWindowCommands>
+    
     <!--右上角系统标头附加按钮-->
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands ShowLastSeparator="True">
-            <ToggleButton Content="确认弹窗"
+            <ToggleButton Content="确认弹窗" 
                           IsChecked="{Binding QuitConfirmationEnabled}"
                           ToolTip="在弹出框内部确认取消操作" />
         </Controls:WindowCommands>
@@ -45,9 +45,11 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate>
-                        <WrapPanel Orientation="Horizontal" FlowDirection="LeftToRight" 
-                                   IsItemsHost="True" Margin="1" Background="Snow">
-                        </WrapPanel>
+                        <WrapPanel Orientation="Horizontal" 
+                                   FlowDirection="LeftToRight" 
+                                   Margin="1" 
+                                   IsItemsHost="True" 
+                                   Background="Snow" />
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -58,24 +60,19 @@
         </Style>
 
         <!--系统菜单栏样式-->
-        <Style x:Key="AppThemeMenuItemStyle"
-                   BasedOn="{StaticResource MetroMenuItem}"
-                   TargetType="{x:Type MenuItem}">
+        <Style x:Key="AppThemeMenuItemStyle" BasedOn="{StaticResource MetroMenuItem}" TargetType="{x:Type MenuItem}">
             <Setter Property="Command" Value="{Binding ChangeAccentCommand}" />
             <Setter Property="Header" Value="{Binding Name, Mode=OneWay}" />
         </Style>
 
         <!--色彩下拉选项样式-->
-        <Style x:Key="AccentColorMenuItemStyle"
-                   BasedOn="{StaticResource MetroMenuItem}"
-                   TargetType="{x:Type MenuItem}">
+        <Style x:Key="AccentColorMenuItemStyle" BasedOn="{StaticResource MetroMenuItem}" TargetType="{x:Type MenuItem}">
             <Setter Property="Command" Value="{Binding ChangeAccentCommand}" />
             <Setter Property="Header" Value="{Binding Name, Mode=OneWay}" />
         </Style>
 
         <DataTemplate DataType="{x:Type Data:ModulizedBtn}">
-            <Controls:DropDownButton Name="Setting" 
-                                     Margin="{StaticResource ItemViewsMargin}" MinWidth="64"
+            <Controls:DropDownButton Name="Setting" Margin="{StaticResource ItemViewsMargin}"
                                      Content="{Binding Path=Title}"
                                      Orientation="Vertical" 
                                      DisplayMemberPath="{Binding Path=OrderIndex}">
@@ -89,13 +86,14 @@
                     <I:EventTrigger EventName="Click">
                         <MvvmLight:EventToCommand 
                             Command="{Binding Path=DataContext.FuncModuleCMD,
-                            RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=TabControl}}">
+                                    RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=TabControl}}">
                             <MvvmLight:EventToCommand.CommandParameter>
                                 <DK:UIBase Title="从UI收参" SubTitle="暂时写死在UI中" />
                             </MvvmLight:EventToCommand.CommandParameter>
                         </MvvmLight:EventToCommand>
                     </I:EventTrigger>
                 </I:Interaction.Triggers>
+                
             </Controls:DropDownButton>
         </DataTemplate>
     </Controls:MetroWindow.Resources>
@@ -132,7 +130,6 @@
                           IsChecked="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Controls:MetroWindow}}, Path=Topmost}" />
                 <Separator />
 
-                <Separator />
                 <MenuItem x:Name="ShowSeparatorsMI"
                           Header="ShowSeparators (RightWindowCommands)"
                           IsCheckable="True"
@@ -163,7 +160,7 @@
         </Menu>
 
         <!--核心布局 Grid.Row[1] :鼎辰模块列表-->
-        <Controls:MetroTabControl x:Name="TopView" Grid.Row="1"
+        <Controls:MetroTabControl x:Name="TopView" Grid.Row="1" 
                                           TabStripPlacement="Top" 
                                           ItemsSource="{Binding AcceptModuels}"
                                           ScrollViewer.CanContentScroll="True">

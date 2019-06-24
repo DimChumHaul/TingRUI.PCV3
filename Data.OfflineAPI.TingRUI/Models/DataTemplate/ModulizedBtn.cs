@@ -45,7 +45,6 @@ namespace TingRUI.Data.Models.DataTemplate
         {
             var data = new List<ModulizedBtn>();
 
-            // <iconPacks:PackIconModern Kind="Marketplace" />
             /* 动态配置主界面顶部【操作员功能模块】 */
             bool 哈哈 = isHoliday();
             var FakeModules = new List<dynamic> {
@@ -60,7 +59,6 @@ namespace TingRUI.Data.Models.DataTemplate
                 new { Name = "数据库备份", SvgIcon = "ConnectionWifiVariant",Node = LeftBarUIType.LiveMonitor },
                 new { Name = "数据库还原", SvgIcon = "DrawPenReflection",Node = LeftBarUIType.CrystalReports },
                 new { Name = "重新登陆", SvgIcon = "Laptop",Node = LeftBarUIType.CrystalReports },
-                //{ ["Trophy":"丁老师","FuturamaFry":"夏老师"]
                 new { Name = 哈哈?"夏老师":"丁老师", SvgIcon = 哈哈?"FuturamaFry":"Trophy", Node = LeftBarUIType.CrystalReports },
             };
 
