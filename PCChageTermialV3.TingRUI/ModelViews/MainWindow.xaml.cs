@@ -27,17 +27,8 @@ namespace PCChageTermialV3.TingRUI
         {
             InitializeComponent();
 
-            // 初始化STA UI线程
             DispatcherHelper.Initialize();
+            
         }
-
-        //private void TopView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    if(DataContext is MainViewModelVM VM)
-        //    {
-        //        var func = VM.FuncModuleCMD;
-        //        func.Execute(null);
-        //    }
-        //}
     }
 }

@@ -54,22 +54,13 @@
                 <I:Interaction.Triggers>
                     <I:EventTrigger EventName="Click">
                         <MvvmLight:EventToCommand 
-                            Command="{Binding 
-                                DataContext.FuncModuleCMD,
-                                RelativeSource={
-                                    RelativeSource Mode=FindAncestor,
-                                    AncestorType=ListBox}
-                                    }">
+                            Command="{Binding DataContext.FuncModuleCMD,
+                            RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=ListBox}}">
                             <MvvmLight:EventToCommand.CommandParameter>
-                                <DK:UIBase Title="哈哈字符串"></DK:UIBase>
+                                <DK:UIBase Title="哈哈字符串" />
                             </MvvmLight:EventToCommand.CommandParameter>
                         </MvvmLight:EventToCommand>
                     </I:EventTrigger>
-                    <!--<I:EventTrigger EventName="MouseEnter">
-                        <MvvmLight:EventToCommand 
-                            Command="{Binding ChangeBgColorCMD, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=ListBox}}" 
-                            CommandParameter="{Binding ElementName=TopView,Path=SelectedItem}" />
-                    </I:EventTrigger>-->
                 </I:Interaction.Triggers>
 
             </Controls:DropDownButton>
@@ -85,14 +76,20 @@
         </Grid.RowDefinitions>
 
         <!--计费+监控...功能模块-->
-        <ListBox Grid.Row="0" Style="{StaticResource TopListStyle}"
-                 ItemsSource="{Binding Path=AcceptModuels}" 
-                 Name="TopView" />
-          
+        <ListBox x:Name="TopView" Grid.Row="0" Style="{StaticResource TopListStyle}" 
+                 ItemsSource="{Binding Path=AcceptModuels}">
+            <I:Interaction.Triggers>
+                <I:EventTrigger EventName="SelectionChanged">
+                    <MvvmLight:EventToCommand Command="{Binding SelectCommand}" />
+                </I:EventTrigger>
+            </I:Interaction.Triggers>
+        </ListBox>
+
         <Grid x:Name="DataDynamicView" Grid.Row="1" Margin="{StaticResource InnerBannerMargin}">
             <Grid.Background>
-                <ImageBrush ImageSource="{Binding Path=TodaysBackImage,Mode=OneWay}" Stretch="UniformToFill"/>
+                <ImageBrush ImageSource="{Binding Path=TodaysBackImage,Mode=OneWay}" Stretch="Fill"/>
             </Grid.Background>
+            
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1.75*" />
                 <ColumnDefinition Width="8*" />
@@ -100,9 +97,9 @@
 
             <!--树状菜单控件的第二种写法-->
             <TreeView ItemsSource="{Binding AcceptMenus}" 
-                      Name="ViewX" BorderThickness="5" 
-                      BorderBrush="LightBlue" FontSize="24" Foreground="Red" 
-                      Margin="10" Style="{StaticResource VirtualisedMetroTreeView}">
+                      Name="ViewX" BorderThickness="5" FontSize="24" 
+                      BorderBrush="LightBlue" Margin="10" 
+                      Style="{StaticResource VirtualisedMetroTreeView}">
                 <TreeView.Resources>
                     <HierarchicalDataTemplate DataType="{x:Type Data:ModualizedMenu}"  
                                               ItemsSource="{Binding MenuSublines}">

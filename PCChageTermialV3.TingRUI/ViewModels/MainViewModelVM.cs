@@ -11,6 +11,7 @@ using TingRUI.Data.Models.DataTemplate;
 using TingRUI.Data.JustEnum;
 using System.Collections.Generic;
 using ServiceStack.Text;
+using System.Windows.Controls;
 
 namespace PCChageTermialV3.TingRUI.ViewModel
 {
@@ -28,20 +29,13 @@ namespace PCChageTermialV3.TingRUI.ViewModel
     /// </summary>
     internal class MainViewModelVM :ViewModelBase
     {
-        public string AppInfo { get; set; } = string.Format("1.{0} App开发始于{1}",
-            App.AppDescription,
-            App.StartAt.ToLongDateString()
+        public string AppInfo { get; set; } = string.Format("1.{0} App开发始于{1}",App.AppDescription,App.StartAt.ToLongDateString()
         );
-
-        public string TodaysBackImage { get; } = AutoImageSelector();
-        public static bool IsHoliday = false;
-
-        public ObservableCollection<ModulizedBtn> AcceptModuels { get; set; }
-            = new ObservableCollection<ModulizedBtn>();
+        private Int32 SelectedIdxNo { get; set; } = 5;  // 夏老师 & 丁老师
 
         /* 动态配置主界面左边系 【统菜单栏】 */
-        public ObservableCollection<ModualizedMenu> AcceptMenus { get; set; }
-            = new ObservableCollection<ModualizedMenu>();
+        public ObservableCollection<ModulizedBtn> AcceptModuels { get; set; } = new ObservableCollection<ModulizedBtn>();
+        public ObservableCollection<ModualizedMenu> AcceptMenus { get; set; } = new ObservableCollection<ModualizedMenu>();
 
         /// <summary>
         /// 初始化一个 VM实体 继承自 ViewModelBase MvvmLight框架基类
@@ -51,20 +45,28 @@ namespace PCChageTermialV3.TingRUI.ViewModel
             // 一次性初始化所有UI模块
             InitialAllFuckingModules();
 
-            FuncModuleCMD = new RelayCommand<UIBase>((MVObj) =>
+            /* 用户点击顶部状态栏以后发生的一系列事件处理回调 */
+            SelectCommand = new RelayCommand<ListBox>( BoxItems =>
             {
-                MessageBox.Show("测试【事件转命令】成功... --->" + MVObj.ToJson().IndentJson());
+                //BoxItems.SelectedIndex = SelectedIdxNo;
+            });
+
+            /* 用户单击按钮以后发生的模块化操作 */
+            FuncModuleCMD = new RelayCommand<UIBase>( MVObj =>
+            {
+                var Info = MVObj.ToJson().IndentJson();
+                MessageBox.Show(Info);
             });
 
             ChangeBgColorCMD = new RelayCommand<Object>( Idx => 
             {
-                App.Current.MainWindow.Background = Brushes.AliceBlue;
+                Application.Current.MainWindow.Background = Brushes.AliceBlue;
             });
         }
 
         private static string AutoImageSelector()
         {
-            var JpgFile = string.Empty;
+            string JpgFile = string.Empty;
             JpgFile = UIBase.isHoliday()?"MainBg3-Programer.Jpg":"MainBg2-TonyStark.JPG";
             var Resource_Dir_File = Path.Combine("~/".MapProjectPath(),$"/Resources/{JpgFile}");
             return Resource_Dir_File;
@@ -88,11 +90,10 @@ namespace PCChageTermialV3.TingRUI.ViewModel
         void InitialAllFuckingModules()
         {
             IEnumerable<ModulizedBtn> data = ModulizedBtn.FakeData();
+            
+            /* 添加顶部【***所有基础功能***】菜单栏 */
             foreach (var item in data)
-            {
-                /* 添加顶部【***所有基础功能***】菜单栏 */
                 AcceptModuels.Add(item);
-            }
             
             var menus = ModualizedMenu.FakeData();
             for (int i = 0; i < menus.Count; i++)
@@ -105,8 +106,13 @@ namespace PCChageTermialV3.TingRUI.ViewModel
         }
 
         #region  WPF事件转命令
+
         public RelayCommand<UIBase> FuncModuleCMD { get; set; }
+
+        public RelayCommand<ListBox> SelectCommand { get; set; }
+
         public RelayCommand<object> ChangeBgColorCMD { get; set; }
+
         #endregion
     }
 }
