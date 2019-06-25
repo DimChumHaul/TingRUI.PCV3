@@ -1,6 +1,8 @@
 ﻿using GalaSoft.MvvmLight.Threading;
 using MahApps.Metro.Controls;
 using PCChageTermialV3.TingRUI.ViewModel;
+using ServiceStack;
+using ServiceStack.Text;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,12 +31,10 @@ namespace PCChageTermialV3.TingRUI
 
             DispatcherHelper.Initialize();
         }
-
         private void LaunchMahAppsOnGitHub(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Process.Start("https://github.com/MahApps/MahApps.Metro");
         }
-
         private void LaunchIcons(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Process.Start("https://github.com/MahApps/MahApps.Metro.IconPacks");

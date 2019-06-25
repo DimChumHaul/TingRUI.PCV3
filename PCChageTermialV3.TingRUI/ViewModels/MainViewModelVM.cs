@@ -41,16 +41,16 @@ namespace PCChageTermialV3.TingRUI.ViewModel
             // 一次性初始化所有UI模块
             InitialAllFuckingModules();
 
-            /* 用户单击按钮以后发生的模块化操作 */
-            FuncModuleCMD = new RelayCommand<PrettyModuel>( MVObj =>
-            {
-                var Info = MVObj.ToJson().IndentJson();
-                MessageBox.Show(Info);
-            });
-
             ChangeBgColorCMD = new RelayCommand<object>( Idx => 
             {
                 Application.Current.MainWindow.Background = Brushes.AliceBlue;
+            });
+
+            LoadModuleCMD = new RelayCommand<PrettyModuel>(tokenParam =>
+            {
+                Random R = new Random();
+                var result = R.Next(AcceptModuels.Count);
+                MessageBox.Show(tokenParam.ToJson().IndentJson() + $"随机到索引:|{result}|");
             });
         }
 
@@ -100,10 +100,10 @@ namespace PCChageTermialV3.TingRUI.ViewModel
         public string TodaysBackImage { get; set; } = AutoImageSelector();
 
         #region  WPF事件转命令
-
-        public RelayCommand<PrettyModuel> FuncModuleCMD { get; set; }
         public RelayCommand<object> ChangeBgColorCMD { get; set; }
 
+        // WPF按钮配合TabControl控件 模拟首页模块加载|切换 效果
+        public RelayCommand<PrettyModuel> LoadModuleCMD { get; set; }
         #endregion
     }
 }

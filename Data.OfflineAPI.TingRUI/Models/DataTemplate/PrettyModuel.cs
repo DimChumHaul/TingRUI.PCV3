@@ -22,11 +22,11 @@ namespace TingRUI.Data.Models.DataTemplate
                 case DayOfWeek.Thursday:
                 case DayOfWeek.Tuesday:
                 case DayOfWeek.Wednesday:
-                    return false;
+                    return true;
                 case DayOfWeek.Saturday:
                 case DayOfWeek.Sunday:
                 default:
-                    return true;
+                    return false;
             }
         }
     }
