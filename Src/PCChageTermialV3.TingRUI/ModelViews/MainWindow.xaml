@@ -79,7 +79,7 @@
                 <!--1.多触发器 2.参数的传递 是底层DataModel-->
                 <I:Interaction.Triggers>
                     <I:EventTrigger EventName="Click">
-                        <MvvmLight:EventToCommand Command="{Binding LoadModuleCMD,
+                        <MvvmLight:EventToCommand Command="{Binding Path=DataContext.LoadModuleCMD,
                             RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Controls:MetroTabControl}}" >
                             <MvvmLight:EventToCommand.CommandParameter>
                                 <DK:PrettyModuel Title="...PrettyModuel..." SubTitle="暂时写死在UI中" />
@@ -152,8 +152,7 @@
         </Menu>
 
         <!--核心布局 Grid.Row[1] :鼎辰模块列表-->
-        <Controls:MetroTabControl x:Name="TopView" Grid.Row="1" 
-                                  TabStripPlacement="Top">
+        <Controls:MetroTabControl x:Name="TopView" Grid.Row="1" TabStripPlacement="Bottom">
             <TabItem Header="{Binding Path=AcceptModuels[0]}">
                 <Pages:PageIndexHome DataContext="{Binding}" />
             </TabItem>

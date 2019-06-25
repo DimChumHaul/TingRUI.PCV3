@@ -38,19 +38,24 @@ namespace PCChageTermialV3.TingRUI.ViewModel
         /// </summary>
         public MainViewModelVM()
         {
-            // 一次性初始化所有UI模块
             InitialAllFuckingModules();
 
+            // 一次性初始化所有UI模块
             ChangeBgColorCMD = new RelayCommand<object>( Idx => 
             {
                 Application.Current.MainWindow.Background = Brushes.AliceBlue;
             });
 
+            /* 软件首页的顶部TopView的相关模块操作 */ 
             LoadModuleCMD = new RelayCommand<PrettyModuel>(tokenParam =>
             {
+                var Info = tokenParam.ToJson();
+                var PageHome = Application.Current.MainWindow as MainWindow;
+                PageHome.Title = Info;
                 Random R = new Random();
-                var result = R.Next(AcceptModuels.Count);
-                MessageBox.Show(tokenParam.ToJson().IndentJson() + $"随机到索引:|{result}|");
+                var index = R.Next(AcceptModuels.Count);
+                // 选择具体的哪一个模块所对应的页面
+                PageHome.TopView.SelectedIndex = index;
             });
         }
 
