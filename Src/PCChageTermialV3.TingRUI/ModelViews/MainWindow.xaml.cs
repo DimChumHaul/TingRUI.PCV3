@@ -22,7 +22,8 @@ using System.Windows.Shapes;
 namespace PCChageTermialV3.TingRUI
 {
     /// <summary>
-    /// MainWindow.xaml 的交互逻辑
+    /// MainWindow.xaml 代码隐藏 ：处理UI相关的交互逻辑 不关心底层谁在调用 UI&Data彻底分离 
+    /// 按钮崩了500不会导致软件崩溃
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
@@ -46,23 +47,22 @@ namespace PCChageTermialV3.TingRUI
             };
         }
 
-        #region 这一段要拿到MV模型视图中去处理
+        #region 哈哈  用了TabControl之后甚至都没走这个方法 不过这段Demo留着 有用
         private void BtnSelectedChange(string Token)
         {
             UserSelectingIndex = Convert.ToInt32(Token);
-
             if (string.IsNullOrEmpty(Token)) throw new ArgumentOutOfRangeException("MvvmLight消息机Token非法~");
+
             /*
             * MVVM Light Messenger 
             * 旨在通过简单的设计模式来精简此场景：任何对象都可以是接收端；
             * 任何对象都可以是发送端；任何对象都可以是消息 
             */
-            Random R = new Random();
             string originTitle = this.Title;
             this.Title = Token.ToJson();
-            // MessageBox.Show($"MVVM Light Messenger - 用户选中TabItem:|{UserSelectingIndex}|");
+            MessageBox.Show($"MVVM Light Messenger - 用户选中TabItem:|{UserSelectingIndex}|");
             this.Title = originTitle;
-            TopView.SelectedIndex = R.Next(10);
+            TopView.SelectedIndex = UserSelectingIndex;
         }
         #endregion
 

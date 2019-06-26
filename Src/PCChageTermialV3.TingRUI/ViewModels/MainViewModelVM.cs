@@ -47,12 +47,11 @@ namespace PCChageTermialV3.TingRUI.ViewModel
                 Application.Current.MainWindow.Background = Brushes.AliceBlue;
             });
 
+            /* 软件首页的顶部TopView的相关模块操作 把用户选中项目的TabControl的SelectedIndex传过去 */
             LoadModuleCMD = new RelayCommand<int>(BtnParam =>
             {
-                /* 软件首页的顶部TopView的相关模块操作 把用户选中项目的TabControl的SelectedIndex传过去 */
-                
-                Messenger.Default.Send<String>(BtnParam.ToString(),
-                    /* 注意：token参数一致 */ "TopViewTokenAction"); 
+                /*注意：token参数一致*/
+                Messenger.Default.Send<string>(BtnParam.ToString(),"TopViewTokenAction"); 
             });
         }
 
