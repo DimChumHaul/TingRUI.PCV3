@@ -60,9 +60,8 @@ namespace PCChageTermialV3.TingRUI
             {
                 string originTitle = this.Title;
                 this.Title = Token.ToJson();
-                MessageBox.Show($"MVVM Light Messenger - 用户选中TabItem:|{UserSelectingIndex}|");
+                // MessageBox.Show($"MVVM Light Messenger - 用户选中TabItem:|{UserSelectingIndex}|");
                 this.Title = originTitle;
-
                 TopView.SelectedIndex = UserSelectingIndex;
             }
         }

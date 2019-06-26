@@ -32,21 +32,20 @@
         </Style>
 
         <!-- 核心模块化布局模板 - 对类型[ModulizedBtn].附加数据模板.DataTemplate -->
-        <!--<DataTemplate DataType="{x:Type Data:ModulizedBtn}">
+        <DataTemplate DataType="{x:Type Data:ModulizedBtn}">
             <Controls:DropDownButton Name="Setting" Margin="{StaticResource ItemViewsMargin}"
                                      Content="{Binding Path=Title}"
                                      Orientation="Vertical" 
                                      Command="{Binding Path=DataContext.LoadModuleCMD,RelativeSource={RelativeSource 
                                      Mode=FindAncestor,AncestorType=Controls:MetroTabControl}}"
                                      CommandParameter="{Binding ElementName=TopView,Path=SelectedIndex}">
-                --><!-- 一些非常好看的ICON图标 而且不依赖于二进制资源文件的SVG矢量图库 --><!--
                 <Controls:DropDownButton.Icon>
                     <SVG:PackIconModern Margin="5" Kind="{Binding Path=SvgImage}" 
                                         MinWidth="32" MinHeight="32"/>
                 </Controls:DropDownButton.Icon>
             </Controls:DropDownButton>
             
-        </DataTemplate>-->
+        </DataTemplate>
     </Controls:MetroWindow.Resources>
 
     <!--首页不设置列定义 全部用1列N行 行内再嵌入复杂布局-->
@@ -109,7 +108,7 @@
         </Menu>
 
         <!--核心布局 Grid.Row[1] :鼎辰模块列表-->
-        <Controls:MetroTabControl x:Name="TopView" Grid.Row="1" TabStripPlacement="Bottom">
+        <Controls:MetroAnimatedTabControl x:Name="TopView" Grid.Row="1" TabStripPlacement="Top">
             <TabItem Header="{Binding Path=AcceptModuels[0]}">
                 <Pages:PageIndexHome DataContext="{Binding}" />
             </TabItem>
@@ -147,7 +146,7 @@
                 <TextBlock DataContext="{Binding SelectedIdxNo}" />
             </TabItem>
             
-        </Controls:MetroTabControl>
+        </Controls:MetroAnimatedTabControl>
 
         <!--底部实时状态栏跟踪-->
         <StatusBar Grid.Row="2">
