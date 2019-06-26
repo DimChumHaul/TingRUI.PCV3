@@ -4,14 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:SVG ="http://metro.mahapps.com/winfx/xaml/iconpacks" 
-        xmlns:DK="clr-namespace:TingRUI.Data.Models.DataTemplate;assembly=TingRUI.Data"
         xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
-        xmlns:MvvmLight="http://www.galasoft.ch/mvvmlight"
-        xmlns:I="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:Data="clr-namespace:TingRUI.Data.Models.DataTemplate;assembly=TingRUI.Data"
         xmlns:Pages="clr-namespace:PCChageTermialV3.TingRUI.ModelViews.Pages"
-        xmlns:Sys="clr-namespace:System;assembly=mscorlib"
         x:Class="PCChageTermialV3.TingRUI.MainWindow"
+    
+        xmlns:I="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:DK="clr-namespace:TingRUI.Data.Models.DataTemplate;assembly=TingRUI.Data"
+        xmlns:MvvmLight="http://www.galasoft.ch/mvvmlight"
+        xmlns:Sys="clr-namespace:System;assembly=mscorlib"
     
         DataContext="{Binding Source={StaticResource Locator},Path=Main}"
         Title="{Binding Path=AppInfo}" Width="1024" Height="768"
@@ -39,8 +40,7 @@
                                      Mode=FindAncestor,AncestorType=Controls:MetroTabControl}}"
                                      CommandParameter="{Binding ElementName=TopView,Path=SelectedIndex}">
                 <Controls:DropDownButton.Icon>
-                    <SVG:PackIconModern Margin="5" Kind="{Binding Path=SvgImage}" 
-                                        MinWidth="32" MinHeight="32"/>
+                    <SVG:PackIconModern Margin="5" Kind="{Binding Path=SvgImage}" MinWidth="32" MinHeight="32"/>
                 </Controls:DropDownButton.Icon>
             </Controls:DropDownButton>
             
@@ -54,7 +54,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="32" />
         </Grid.RowDefinitions>
-
+        
         <!--网格 Grid.Row[0] :系统菜单栏-->
         <Menu Grid.Row="0" Width="1024" HorizontalAlignment="Left" VerticalAlignment="Stretch">
             <MenuItem Header="主题设置"
@@ -107,7 +107,7 @@
         </Menu>
 
         <!--核心布局 Grid.Row[1] :鼎辰模块列表-->
-        <Controls:MetroTabControl x:Name="TopView" Grid.Row="1" TabStripPlacement="Top">
+        <Controls:MetroTabControl x:Name="TopView" Grid.Row="1" TabStripPlacement="Top" Style="{StaticResource ETCPTabCtrl}">
             <TabItem Header="{Binding Path=AcceptModuels[0]}">
                 <Pages:PageIndexHome DataContext="{Binding}" />
             </TabItem>
