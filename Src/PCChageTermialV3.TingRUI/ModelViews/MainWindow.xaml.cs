@@ -29,8 +29,17 @@ namespace PCChageTermialV3.TingRUI
         {
             InitializeComponent();
 
-            DispatcherHelper.Initialize();
+            // 根据顶部模组 初始化首页
+            LoadBasicUI();
         }
+        private void LoadBasicUI()
+        {
+            // 1.找到应该加载的 首页TopView 索引数
+            TopViewSelectingIndex = 3;
+
+            // 2.异步|同步 ...加载页面... 
+        }
+
         private void LaunchMahAppsOnGitHub(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Process.Start("https://github.com/MahApps/MahApps.Metro");
@@ -39,5 +48,7 @@ namespace PCChageTermialV3.TingRUI
         {
             System.Diagnostics.Process.Start("https://github.com/MahApps/MahApps.Metro.IconPacks");
         }
+
+        private uint TopViewSelectingIndex = 0;
     }
 }

@@ -69,6 +69,8 @@ namespace TingRUI.Data.Models.DataTemplate
                     Title = FakeModules.ElementAt(i).Name,
                     SvgImage = FakeModules[i].SvgIcon,
                     gType = moduleBtn.Node,
+                    // 绑定模块化顺序
+                    OrderIndex = (uint)i,
                 };
                 data.Add(row);
             }

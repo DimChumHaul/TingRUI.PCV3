@@ -12,6 +12,9 @@ namespace TingRUI.Data.Models.DataTemplate
         public string Title { get; set; }
         public string SubTitle { get; set; } = "子标题";
 
+        /* 一个非常重要的 OrderIndex属性 直接绑定到模块中去 走绑定传递变量 */
+        public uint OrderIndex { get; set; }
+
         public static bool isHoliday()
         {
             DayOfWeek NowDay = DateTime.Now.DayOfWeek;

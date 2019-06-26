@@ -47,15 +47,16 @@ namespace PCChageTermialV3.TingRUI.ViewModel
             });
 
             /* 软件首页的顶部TopView的相关模块操作 */ 
-            LoadModuleCMD = new RelayCommand<PrettyModuel>(tokenParam =>
+            LoadModuleCMD = new RelayCommand<PrettyModuel>(BtnParam =>
             {
-                var Info = tokenParam.ToJson();
-                var PageHome = Application.Current.MainWindow as MainWindow;
-                PageHome.Title = Info;
-                Random R = new Random();
-                var index = R.Next(AcceptModuels.Count);
                 // 选择具体的哪一个模块所对应的页面
-                PageHome.TopView.SelectedIndex = index;
+                var Info = BtnParam.ToJson();
+                var PageHome = Application.Current.MainWindow as MainWindow;
+                string originTitle = PageHome.Title;
+                PageHome.Title = Info;
+                var N = BtnParam.OrderIndex;
+                MessageBox.Show($"用户选中TabItem:|{N}|");
+                PageHome.Title = originTitle;
             });
         }
 
@@ -105,9 +106,8 @@ namespace PCChageTermialV3.TingRUI.ViewModel
         public string TodaysBackImage { get; set; } = AutoImageSelector();
 
         #region  WPF事件转命令
-        public RelayCommand<object> ChangeBgColorCMD { get; set; }
-
         // WPF按钮配合TabControl控件 模拟首页模块加载|切换 效果
+        public RelayCommand<object> ChangeBgColorCMD { get; set; }
         public RelayCommand<PrettyModuel> LoadModuleCMD { get; set; }
         #endregion
     }
