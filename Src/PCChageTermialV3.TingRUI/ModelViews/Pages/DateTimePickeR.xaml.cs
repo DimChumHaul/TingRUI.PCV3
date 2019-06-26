@@ -18,9 +18,9 @@ namespace PCChageTermialV3.TingRUI.ModelViews.Pages
     /// <summary>
     /// SubPage4.xaml 的交互逻辑
     /// </summary>
-    public partial class SubPage4 : UserControl
+    public partial class DateTimePickeR : UserControl
     {
-        public SubPage4()
+        public DateTimePickeR()
         {
             InitializeComponent();
         }

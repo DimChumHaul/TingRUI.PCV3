@@ -114,13 +114,13 @@
                 <Pages:PageIndexHome DataContext="{Binding}" />
             </TabItem>
             <TabItem Header="{Binding Path=AcceptModuels[1]}">
-                <Pages:PageChargingRulesSetting DataContext="{Binding}" />
+                <Pages:ChargingRulesSetting DataContext="{Binding}" />
             </TabItem>
             <TabItem Header="{Binding Path=AcceptModuels[2]}">
                 <Pages:SubPage3 DataContext="{Binding}" />
             </TabItem>
             <TabItem Header="{Binding Path=AcceptModuels[3]}">
-                <Pages:SubPage4 DataContext="{Binding}" />
+                <Pages:DateTimePickeR DataContext="{Binding}" />
             </TabItem>
             <TabItem Header="{Binding Path=AcceptModuels[4]}">
                 <Pages:SubPage5 DataContext="{Binding}" />

@@ -48,7 +48,7 @@ namespace TingRUI.Data.Models.DataTemplate
                 new { Name = "收费设置" , SvgIcon = "BarCode" ,Node = LeftBarUIType.SystemAdmin },
                 new { Name = "车场设置", SvgIcon = "Marketplace",Node = LeftBarUIType.SystemAdmin },
                 new { Name = "车道设置", SvgIcon = "AdobePhotoshop",Node = LeftBarUIType.SystemAdmin },
-                new { Name = "部门管理", SvgIcon = "BatteryCharging",Node = LeftBarUIType.UserAdmin },
+                new { Name = "日期选择器", SvgIcon = "BatteryCharging",Node = LeftBarUIType.UserAdmin },
                 new { Name = "用户管理", SvgIcon = "BookContact",Node = LeftBarUIType.UserAdmin },
                 new { Name = "车辆管理", SvgIcon = "BrowserChrome",Node = LeftBarUIType.UserAdmin },
                 new { Name = "操作员管理", SvgIcon = "CalendarYear",Node = LeftBarUIType.ParkingFactory },
