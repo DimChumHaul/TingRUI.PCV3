@@ -12,6 +12,7 @@ using TingRUI.Data.JustEnum;
 using System.Collections.Generic;
 using ServiceStack.Text;
 using System.Windows.Controls;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace PCChageTermialV3.TingRUI.ViewModel
 {
@@ -46,17 +47,12 @@ namespace PCChageTermialV3.TingRUI.ViewModel
                 Application.Current.MainWindow.Background = Brushes.AliceBlue;
             });
 
-            /* 软件首页的顶部TopView的相关模块操作 */ 
             LoadModuleCMD = new RelayCommand<int>(BtnParam =>
             {
-                // 选择具体的哪一个模块所对应的页面
-                var Info = BtnParam.ToJson();
-                var PageHome = Application.Current.MainWindow as MainWindow;
-                string originTitle = PageHome.Title;
-                PageHome.Title = Info;
-                var N = BtnParam;
-                MessageBox.Show($"用户选中TabItem:|{N}|");
-                PageHome.Title = originTitle;
+                /* 软件首页的顶部TopView的相关模块操作 把用户选中项目的TabControl的SelectedIndex传过去 */
+                
+                Messenger.Default.Send<String>(BtnParam.ToString(),
+                    /* 注意：token参数一致 */ "TopViewTokenAction"); 
             });
         }
 

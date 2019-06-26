@@ -19,24 +19,6 @@
         WindowStartupLocation="CenterScreen" WindowState="Maximized" 
         Cursor="Arrow" AllowDrop="True" Visibility="Visible" 
         BorderThickness="2.5" Background="{x:Null}">
-   
-    <!--为了使用MVVMLight中 EventToCommand-[事件转命令] 功能。-->
-    <Controls:MetroWindow.LeftWindowCommands>
-        <Controls:WindowCommands>
-            <Button Click="LaunchMahAppsOnGitHub" ToolTip="MahApps.Metro on GitHub">
-                <SVG:PackIconModern Width="22" Height="22" Kind="SocialGithubOctocat" />
-            </Button>
-        </Controls:WindowCommands>
-    </Controls:MetroWindow.LeftWindowCommands>
-    
-    <!--右上角系统标头附加按钮-->
-    <Controls:MetroWindow.RightWindowCommands>
-        <Controls:WindowCommands ShowLastSeparator="True">
-            <ToggleButton Content="确认弹窗" 
-                          IsChecked="{Binding QuitConfirmationEnabled}"
-                          ToolTip="在弹出框内部确认取消操作" />
-        </Controls:WindowCommands>
-    </Controls:MetroWindow.RightWindowCommands>
 
     <!-- 顶部菜单栏【模块化】这种UI在WPF的实现中以`样式Style`的方式实现 -->
     <Controls:MetroWindow.Resources>
@@ -50,37 +32,21 @@
         </Style>
 
         <!-- 核心模块化布局模板 - 对类型[ModulizedBtn].附加数据模板.DataTemplate -->
-        <DataTemplate DataType="{x:Type Data:ModulizedBtn}">
+        <!--<DataTemplate DataType="{x:Type Data:ModulizedBtn}">
             <Controls:DropDownButton Name="Setting" Margin="{StaticResource ItemViewsMargin}"
                                      Content="{Binding Path=Title}"
                                      Orientation="Vertical" 
-                                     Command="{Binding Path=DataContext.LoadModuleCMD,
-                RelativeSource={RelativeSource 
-                Mode=FindAncestor,
-                AncestorType=Controls:MetroTabControl}}"
-                                     CommandParameter="{Binding ElementName=TopView,Path=SelectedIndex}"
-                                     DisplayMemberPath="{Binding Path=OrderIndex}">
-                <!--命令的ICON图标-->
+                                     Command="{Binding Path=DataContext.LoadModuleCMD,RelativeSource={RelativeSource 
+                                     Mode=FindAncestor,AncestorType=Controls:MetroTabControl}}"
+                                     CommandParameter="{Binding ElementName=TopView,Path=SelectedIndex}">
+                --><!-- 一些非常好看的ICON图标 而且不依赖于二进制资源文件的SVG矢量图库 --><!--
                 <Controls:DropDownButton.Icon>
-                    <SVG:PackIconModern Margin="5" Kind="{Binding Path=SvgImage}" MinWidth="32" MinHeight="32"/>
+                    <SVG:PackIconModern Margin="5" Kind="{Binding Path=SvgImage}" 
+                                        MinWidth="32" MinHeight="32"/>
                 </Controls:DropDownButton.Icon>
-
-                <!--1.模块点击事件 - 1.触发器 2.参数的传递是底层DataModel-->
-                <!--<I:Interaction.Triggers>
-                    <I:EventTrigger EventName="Click">
-                        <MvvmLight:EventToCommand Command="{Binding Path=DataContext.LoadModuleCMD,
-                            RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Controls:MetroTabControl}}">
-                            <MvvmLight:EventToCommand.CommandParameter>
-                                <DK:PrettyModuel Title="...PrettyModuel..." 
-                                                 SubTitle="Mvvm分离UI与Data" 
-                                                 OrderIndex="5" />
-                            </MvvmLight:EventToCommand.CommandParameter>
-                        </MvvmLight:EventToCommand>
-                    </I:EventTrigger>
-                </I:Interaction.Triggers>-->
-
             </Controls:DropDownButton>
-        </DataTemplate>
+            
+        </DataTemplate>-->
     </Controls:MetroWindow.Resources>
 
     <!--首页不设置列定义 全部用1列N行 行内再嵌入复杂布局-->
@@ -193,4 +159,22 @@
         
     </Grid>
 
+    <!--为了使用MVVMLight中 EventToCommand-[事件转命令] 功能。-->
+    <Controls:MetroWindow.LeftWindowCommands>
+        <Controls:WindowCommands>
+            <Button Click="LaunchMahAppsOnGitHub" ToolTip="MahApps.Metro on GitHub">
+                <SVG:PackIconModern Width="22" Height="22" Kind="SocialGithubOctocat" />
+            </Button>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.LeftWindowCommands>
+
+    <!--右上角系统标头附加按钮-->
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands ShowLastSeparator="True">
+            <ToggleButton Content="确认弹窗" 
+                          IsChecked="{Binding QuitConfirmationEnabled}"
+                          ToolTip="在弹出框内部确认取消操作" />
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
+    
 </Controls:MetroWindow>
