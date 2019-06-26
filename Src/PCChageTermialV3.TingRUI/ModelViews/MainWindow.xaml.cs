@@ -57,13 +57,12 @@ namespace PCChageTermialV3.TingRUI
             * 旨在通过简单的设计模式来精简此场景：任何对象都可以是接收端；
             * 任何对象都可以是发送端；任何对象都可以是消息 
             */
-            {
-                string originTitle = this.Title;
-                this.Title = Token.ToJson();
-                // MessageBox.Show($"MVVM Light Messenger - 用户选中TabItem:|{UserSelectingIndex}|");
-                this.Title = originTitle;
-                TopView.SelectedIndex = UserSelectingIndex;
-            }
+            Random R = new Random();
+            string originTitle = this.Title;
+            this.Title = Token.ToJson();
+            // MessageBox.Show($"MVVM Light Messenger - 用户选中TabItem:|{UserSelectingIndex}|");
+            this.Title = originTitle;
+            TopView.SelectedIndex = R.Next(10);
         }
         #endregion
 
