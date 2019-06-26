@@ -8,6 +8,7 @@
         xmlns:Data="clr-namespace:TingRUI.Data.Models.DataTemplate;assembly=TingRUI.Data"
         xmlns:Pages="clr-namespace:PCChageTermialV3.TingRUI.ModelViews.Pages"
         x:Class="PCChageTermialV3.TingRUI.MainWindow"
+        FontFamily="微软雅黑" FontSize="16"
     
         xmlns:I="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:DK="clr-namespace:TingRUI.Data.Models.DataTemplate;assembly=TingRUI.Data"
