@@ -47,14 +47,14 @@ namespace PCChageTermialV3.TingRUI.ViewModel
             });
 
             /* 软件首页的顶部TopView的相关模块操作 */ 
-            LoadModuleCMD = new RelayCommand<PrettyModuel>(BtnParam =>
+            LoadModuleCMD = new RelayCommand<int>(BtnParam =>
             {
                 // 选择具体的哪一个模块所对应的页面
                 var Info = BtnParam.ToJson();
                 var PageHome = Application.Current.MainWindow as MainWindow;
                 string originTitle = PageHome.Title;
                 PageHome.Title = Info;
-                var N = BtnParam.OrderIndex;
+                var N = BtnParam;
                 MessageBox.Show($"用户选中TabItem:|{N}|");
                 PageHome.Title = originTitle;
             });
@@ -108,7 +108,7 @@ namespace PCChageTermialV3.TingRUI.ViewModel
         #region  WPF事件转命令
         // WPF按钮配合TabControl控件 模拟首页模块加载|切换 效果
         public RelayCommand<object> ChangeBgColorCMD { get; set; }
-        public RelayCommand<PrettyModuel> LoadModuleCMD { get; set; }
+        public RelayCommand<int> LoadModuleCMD { get; set; }
         #endregion
     }
 }
