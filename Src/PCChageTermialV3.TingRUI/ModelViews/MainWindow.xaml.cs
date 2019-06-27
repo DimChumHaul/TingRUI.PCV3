@@ -22,6 +22,7 @@ using System.Diagnostics;
 
 namespace PCChageTermialV3.TingRUI
 {
+
     /// <summary>
     /// MainWindow.xaml 代码隐藏 ：处理UI相关的交互逻辑 不关心底层谁在调用 UI&Data彻底分离 
     /// 按钮崩了500不会导致软件崩溃
@@ -37,6 +38,7 @@ namespace PCChageTermialV3.TingRUI
             {
                 // 初始化首页[顶部模组]
                 LoadBasicUI();
+
                 // 注册MVVMLight消息机订阅模式 上层模式：观察者 底层模式:static函数指针区插值
                 Messenger.Default.Register<string>(this, "TopViewTokenAction", BtnSelectedChange);
             };
@@ -45,6 +47,7 @@ namespace PCChageTermialV3.TingRUI
                 Messenger.Default.Unregister(this);
             };
         }
+
         #region 哈哈  用了TabControl之后甚至都没走这个方法 不过这段Demo留着 有用
         private void BtnSelectedChange(string Token)
         {
@@ -62,12 +65,14 @@ namespace PCChageTermialV3.TingRUI
             TopView.SelectedIndex = UserSelectingIndex;
         }
         #endregion
+
         private void LoadBasicUI()
         {
             // 1.找到应该加载的 首页TopView 索引数
-            UserSelectingIndex = 3;
-            // 2.异步|同步 ...加载页面...
+            UserSelectingIndex = 0;
+            TopView.SelectedIndex = UserSelectingIndex;
         }
+
         private void LaunchMahAppsOnGitHub(object sender, RoutedEventArgs e)
         {
             Process.Start("https://github.com/MahApps/MahApps.Metro");
@@ -76,6 +81,7 @@ namespace PCChageTermialV3.TingRUI
         {
             Process.Start("https://github.com/MahApps/MahApps.Metro.IconPacks");
         }
+
         private int UserSelectingIndex { get; set; }
     }
 }
