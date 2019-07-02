@@ -1,26 +1,24 @@
-﻿<Controls:MetroWindow
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:SVG ="http://metro.mahapps.com/winfx/xaml/iconpacks" 
-        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
-        xmlns:Data="clr-namespace:TingRUI.Data.Models.DataTemplate;assembly=TingRUI.Data"
-        xmlns:Pages="clr-namespace:PCChageTermialV3.TingRUI.ModelViews.Pages"
-        x:Class="PCChageTermialV3.TingRUI.MainWindow"
-        FontFamily="微软雅黑" FontSize="16"
+﻿<Controls:MetroWindow 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:SVG ="http://metro.mahapps.com/winfx/xaml/iconpacks" 
+    xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:Data="clr-namespace:TingRUI.Data.Models.DataTemplate;assembly=TingRUI.Data"
+    xmlns:Pages="clr-namespace:PCChageTermialV3.TingRUI.ModelViews.Pages"
+    xmlns:I="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:DK="clr-namespace:TingRUI.Data.Models.DataTemplate;assembly=TingRUI.Data"
+    xmlns:MvvmLight="http://www.galasoft.ch/mvvmlight" 
+    xmlns:Sys="clr-namespace:System;assembly=mscorlib"
     
-        xmlns:I="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-        xmlns:DK="clr-namespace:TingRUI.Data.Models.DataTemplate;assembly=TingRUI.Data"
-        xmlns:MvvmLight="http://www.galasoft.ch/mvvmlight"
-        xmlns:Sys="clr-namespace:System;assembly=mscorlib"
-    
-        DataContext="{Binding Source={StaticResource Locator},Path=Main}"
-        Title="{Binding Path=AppInfo}" Width="1024" Height="768"
-        mc:Ignorable="d" x:Name="WinMain"
-        WindowStartupLocation="CenterScreen" WindowState="Maximized" 
-        Cursor="Arrow" AllowDrop="True" Visibility="Visible" 
-        BorderThickness="2.5" Background="{x:Null}">
+    Width="1024" Height="768" Title="{Binding Path=AppInfo}" 
+    x:Class="PCChageTermialV3.TingRUI.MainWindow"
+    mc:Ignorable="d" x:Name="WinMain" FontFamily="微软雅黑" FontSize="16"
+    DataContext="{Binding Source={StaticResource Locator},Path=Main}"
+    WindowStartupLocation="CenterScreen" WindowState="Maximized" 
+    Cursor="Arrow" AllowDrop="True" Visibility="Visible" 
+    BorderThickness="2.5" Background="{x:Null}">
 
     <!-- 顶部菜单栏【模块化】这种UI在WPF的实现中以`样式Style`的方式实现 -->
     <Controls:MetroWindow.Resources>
@@ -45,7 +43,7 @@
                 </Controls:DropDownButton.Icon>
             </Controls:DropDownButton>
         </DataTemplate>
-            
+
     </Controls:MetroWindow.Resources>
 
     <!--首页不设置列定义 全部用1列N行 行内再嵌入复杂布局-->
@@ -55,7 +53,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="32" />
         </Grid.RowDefinitions>
-        
+
         <!--网格 Grid.Row[0] :系统菜单栏-->
         <Menu Grid.Row="0" Width="1024" HorizontalAlignment="Left" VerticalAlignment="Stretch">
             <MenuItem Header="主题设置"
@@ -146,7 +144,6 @@
             <TabItem Header="{Binding Path=AcceptModuels[11]}">
                 <TextBlock DataContext="{Binding SelectedIdxNo}" />
             </TabItem>
-            
         </Controls:MetroAnimatedTabControl>
 
         <!--底部实时状态栏跟踪-->
@@ -156,7 +153,6 @@
             <StatusBarItem>Selected Tab:</StatusBarItem>
             <StatusBarItem Content="{Binding ElementName=MainTabControl, Path=SelectedItem.Header, Mode=OneWay}" />
         </StatusBar>
-        
     </Grid>
 
     <!--为了使用MVVMLight中 EventToCommand-[事件转命令] 功能。-->
@@ -176,5 +172,5 @@
                           ToolTip="在弹出框内部确认取消操作" />
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>
-    
+
 </Controls:MetroWindow>
